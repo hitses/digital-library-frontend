@@ -1,5 +1,20 @@
-<p>Aquí va el componente de los libros destacados</p>
+<h2>Destacados</h2>
+@if (!featuredBooks() || featuredBooks().length === 0) {
+  Cargando libros destacados...
+} @else {
+  <book-list-component [books]="featuredBooks()" />
+}
 
-<p>Aquí va el componente de los libros nuevos</p>
+<h2>Nuevos</h2>
+@if (!featuredBooks() || featuredBooks().length === 0) {
+  Cargando libros nuevos...
+} @else {
+  <book-list-component [books]="newBooks()" />
+}
 
-<p>Aquí va el componente de los libros populares</p>
+<h2>Populares</h2>
+@if (!featuredBooks() || featuredBooks().length === 0) {
+  Cargando libros populares...
+} @else {
+  <book-list-component [books]="popularBooks()" />
+}
