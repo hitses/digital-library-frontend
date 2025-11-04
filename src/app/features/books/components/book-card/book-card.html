@@ -28,15 +28,7 @@
         {{ book().averageRating.toFixed() }}
       </p>
 
-      <div class="flex">
-        @for (star of filledStars(); track $index) {
-          <filled-star-icon />
-        }
-
-        @for (star of stars(); track $index) {
-          <star-icon />
-        }
-      </div>
+      <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
     </div>
   </main>
 </article>
