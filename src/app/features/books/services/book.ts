@@ -12,6 +12,7 @@ export class BookService {
   featuredBooks = signal<IBook[]>([]);
   newBooks = signal<IBook[]>([]);
   popularBooks = signal<IBook[]>([]);
+  book = signal<IBook | null>(null);
 
   private http = inject(HttpClient);
 
@@ -43,5 +44,19 @@ export class BookService {
         return this.popularBooks.set([]);
       },
     });
+  }
+
+  getBookById(id: string): void {
+    this.http.get<IBook>(`${this.apiUrl}/${id}`).subscribe({
+      next: (book) => this.book.set(book),
+      error: (err) => {
+        console.error(err);
+        return this.book.set(null);
+      },
+    });
+  }
+
+  clearBook(): void {
+    this.book.set(null);
   }
 }
