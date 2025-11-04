@@ -1,20 +1,15 @@
-<h2>Destacados</h2>
-@if (!featuredBooks() || featuredBooks().length === 0) {
-  Cargando libros destacados...
-} @else {
-  <book-list-component [books]="featuredBooks()" />
-}
+<main class="mx-auto max-w-5xl p-8">
+  <books-section-component
+    [title]="'Destacados'"
+    [books]="featuredBooks()"
+    [bookType]="'destacados'"
+  />
 
-<h2>Nuevos</h2>
-@if (!featuredBooks() || featuredBooks().length === 0) {
-  Cargando libros nuevos...
-} @else {
-  <book-list-component [books]="newBooks()" />
-}
+  <books-section-component [title]="'Nuevos'" [books]="newBooks()" [bookType]="'nuevos'" />
 
-<h2>Populares</h2>
-@if (!featuredBooks() || featuredBooks().length === 0) {
-  Cargando libros populares...
-} @else {
-  <book-list-component [books]="popularBooks()" />
-}
+  <books-section-component
+    [title]="'Populares'"
+    [books]="popularBooks()"
+    [bookType]="'populares'"
+  />
+</main>

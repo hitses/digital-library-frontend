@@ -1,0 +1,9 @@
+<section class="mb-8">
+  <h2>{{ title() }}</h2>
+
+  @if (!books() || books().length === 0) {
+    Cargando libros {{ bookType() }}...
+  } @else {
+    <book-list-component [books]="books()" />
+  }
+</section>

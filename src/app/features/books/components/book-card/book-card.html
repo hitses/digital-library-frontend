@@ -1,16 +1,41 @@
-<article class="flex w-44 flex-col items-center rounded-lg bg-white p-2 shadow-sm">
-  <div class="flex h-60 w-full items-center justify-center">
+<article
+  class="group flex min-h-[364px] w-48 flex-col rounded-lg bg-white p-2 shadow-sm transition-shadow duration-200 hover:shadow-lg"
+>
+  <div class="mb-2 flex h-60 w-full items-center justify-center">
     <img
       [src]="book().coverUrl || 'assets/placeholder.jpg'"
       [alt]="book().title"
-      class="h-full w-auto object-contain"
+      class="h-full w-auto object-contain transition-transform duration-200 ease-out group-hover:scale-105"
     />
   </div>
 
-  <h3 class="mt-2 line-clamp-2 w-full text-center text-sm font-semibold">
-    {{ book().title }}
-  </h3>
-  <p class="w-full text-center text-xs text-gray-500">
-    {{ book().author }}
-  </p>
+  <hr class="text-gray-200" />
+
+  <main class="flex flex-1 flex-col">
+    <div>
+      <h3 class="mt-2 line-clamp-2 w-full text-sm font-semibold uppercase">
+        {{ book().title }}
+      </h3>
+
+      <p class="w-full text-xs text-gray-500 uppercase">
+        {{ book().author }}
+      </p>
+    </div>
+
+    <div class="mt-auto flex items-center gap-1">
+      <p class="inline-flex items-center text-sm leading-none text-gray-500">
+        {{ book().averageRating.toFixed() }}
+      </p>
+
+      <div class="flex">
+        @for (star of filledStars(); track $index) {
+          <filled-star-icon />
+        }
+
+        @for (star of stars(); track $index) {
+          <star-icon />
+        }
+      </div>
+    </div>
+  </main>
 </article>
