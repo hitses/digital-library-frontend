@@ -1,185 +1,81 @@
 <main class="mx-auto mb-12 max-w-6xl p-4">
-  <!-- Cabecera libro -->
-  <header
-    class="flex flex-col items-center gap-2 text-center lg:col-span-2 lg:items-start lg:text-left"
-  >
-    <h1 class="text-2xl font-bold uppercase">Título del libro</h1>
+  @if (!book()) {
+    <p>Cargando libro...</p>
+  } @else if (book(); as currentBook) {
+    <section class="mt-6 grid grid-cols-1 gap-1 lg:grid-cols-3 lg:items-start">
+      <!-- Portada -->
+      <aside class="flex justify-center lg:col-span-1">
+        <img [src]="currentBook.coverUrl" alt="Portada libro" class="h-100 w-auto object-contain" />
+      </aside>
 
-    <div class="flex items-center gap-2">
-      <p class="text-sm leading-none text-gray-700">4.2</p>
-      <div class="flex">
-        <!-- estrellas -->
-      </div>
-      <p class="text-xs leading-none text-gray-500">(128 reseñas)</p>
-    </div>
-  </header>
+      <!-- Datos principales -->
+      <section class="flex flex-col gap-1 text-center lg:col-span-1 lg:text-left">
+        <h1 class="text-xl font-bold uppercase">{{ currentBook.title }}</h1>
 
-  <!-- Grid principal en desktop -->
-  <section class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start">
-    <!-- Portada -->
-    <aside class="flex justify-center lg:col-span-1">
-      <img src="#" alt="Portada libro" class="h-80 w-auto rounded-md object-contain shadow-sm" />
-    </aside>
+        <p class="text-sm font-semibold text-gray-400 uppercase">{{ currentBook.author }}</p>
 
-    <!-- Datos principales -->
-    <section class="flex flex-col gap-3 text-center lg:col-span-1 lg:text-left">
-      <p class="text-sm font-semibold uppercase">Autor del libro</p>
-      <p class="text-sm text-gray-600 uppercase">ISBN: 1234567890</p>
+        <p class="text-xs text-gray-400 uppercase">{{ currentBook.isbn }}</p>
 
-      <p class="mt-4 text-sm leading-relaxed text-gray-800">
-        Sinopsis del libro. Texto descriptivo más largo que puede ocupar varias líneas.
-      </p>
+        <div class="flex items-center gap-2">
+          <p class="text-sm leading-none text-gray-700">
+            {{ currentBook.averageRating.toFixed() }}
+          </p>
+          <!-- Estrellas -->
+          <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
+          <p class="text-xs leading-none text-gray-500">
+            ({{ currentBook.totalReviews }}
+            {{ +currentBook.totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
+          </p>
+        </div>
+
+        <p class="mt-4 text-sm leading-relaxed text-gray-800">
+          {{ currentBook.synopsis }}
+        </p>
+      </section>
+
+      <!-- Formulario reseña -->
+      <aside class="lg:sticky lg:top-24 lg:col-span-1">
+        <form class="rounded-lg border bg-white p-4 shadow-sm">
+          <p class="mb-2 font-semibold">Deja tu reseña</p>
+          <!-- campos -->
+        </form>
+      </aside>
     </section>
 
-    <!-- Formulario reseña: normal en móvil + sticky en desktop -->
-    <aside class="bg-amber-400 lg:sticky lg:top-24 lg:col-span-1">
-      <form class="rounded-lg border bg-white p-4 shadow-sm">
-        <p class="mb-2 font-semibold">Deja tu reseña</p>
-        <!-- campos -->
-      </form>
-    </aside>
-  </section>
+    <!-- Opiniones del libro -->
+    <section class="mx-auto mt-12 max-w-4xl px-4">
+      <!-- Título -->
+      <h2 class="text-center text-xl font-bold uppercase">
+        Opiniones sobre {{ currentBook.title }}
+      </h2>
 
-  <!-- SECCIÓN: Opiniones del libro -->
-  <section class="mx-auto mt-12 max-w-4xl px-4">
-    <!-- Título -->
-    <h2 class="text-center text-xl font-bold uppercase">Opiniones sobre TITLE BOOK</h2>
-
-    <!-- Estadísticas globales -->
-    <div class="mt-6 grid grid-cols-1 items-start justify-items-center gap-6 md:grid-cols-2">
-      <!-- Columna: rating general -->
-      <div class="flex flex-col items-center text-center">
-        <!-- Nota media con estrellas -->
-        <div class="flex items-center gap-2">
-          <p class="text-2xl font-bold">4.2</p>
-          <div class="flex">
-            <!-- estrellas -->
+      <!-- Estadísticas globales -->
+      <div class="mt-6">
+        <div class="flex flex-col items-center text-center">
+          <!-- Nota media con estrellas -->
+          <div class="flex items-center gap-2">
+            <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
+            <p class="text-sm leading-none text-gray-600">({{ currentBook.totalReviews }})</p>
           </div>
-          <p class="text-sm leading-none text-gray-600">(128)</p>
-        </div>
 
-        <!-- “4/5” -->
-        <p class="mt-1 text-sm font-semibold text-gray-700">4.2 / 5</p>
-      </div>
-
-      <!-- Columna: distribución de notas -->
-      <div class="w-full">
-        <!-- Repite fila 1-5 -->
-        <div class="mb-1 flex items-center justify-between text-sm">
-          <span class="flex items-center gap-1 text-gray-700">
-            5
-            <!-- estrellas completas -->
-          </span>
-          <span class="text-gray-500">75</span>
-        </div>
-
-        <div class="mb-1 flex items-center justify-between text-sm">
-          <span class="flex items-center gap-1 text-gray-700">
-            4
-            <!-- estrellas completas -->
-          </span>
-          <span class="text-gray-500">30</span>
-        </div>
-
-        <div class="mb-1 flex items-center justify-between text-sm">
-          <span class="flex items-center gap-1 text-gray-700"> 3 </span>
-          <span class="text-gray-500">15</span>
-        </div>
-
-        <div class="mb-1 flex items-center justify-between text-sm">
-          <span class="flex items-center gap-1 text-gray-700"> 2 </span>
-          <span class="text-gray-500">5</span>
-        </div>
-
-        <div class="mb-1 flex items-center justify-between text-sm">
-          <span class="flex items-center gap-1 text-gray-700"> 1 </span>
-          <span class="text-gray-500">3</span>
+          <p class="mt-1 text-3xl text-gray-700">
+            <span class="text-6xl font-bold">{{ currentBook.averageRating.toFixed() }}</span> / 5
+          </p>
         </div>
       </div>
-    </div>
 
-    <!-- Lista de reseñas -->
-    <div class="mt-10 space-y-6">
-      <!-- Reseña individual -->
-      <article class="border-b pb-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <!-- Info usuario -->
-          <div class="text-left md:col-span-1">
-            <p class="text-sm font-semibold">Nombre Usuario</p>
-            <p class="text-xs text-gray-500">12/11/2025</p>
-          </div>
-
-          <!-- Texto reseña -->
-          <div class="text-sm leading-relaxed text-gray-800 md:col-span-3">
-            Excelente libro. Se nota la evolución del autor y la historia engancha casi desde el
-            principio.
-          </div>
-        </div>
-      </article>
-
-      <article class="border-b pb-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <!-- Info usuario -->
-          <div class="text-left md:col-span-1">
-            <p class="text-sm font-semibold">Nombre Usuario</p>
-            <p class="text-xs text-gray-500">12/11/2025</p>
-          </div>
-
-          <!-- Texto reseña -->
-          <div class="text-sm leading-relaxed text-gray-800 md:col-span-3">
-            Excelente libro. Se nota la evolución del autor y la historia engancha casi desde el
-            principio.
-          </div>
-        </div>
-      </article>
-
-      <article class="border-b pb-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <!-- Info usuario -->
-          <div class="text-left md:col-span-1">
-            <p class="text-sm font-semibold">Nombre Usuario</p>
-            <p class="text-xs text-gray-500">12/11/2025</p>
-          </div>
-
-          <!-- Texto reseña -->
-          <div class="text-sm leading-relaxed text-gray-800 md:col-span-3">
-            Excelente libro. Se nota la evolución del autor y la historia engancha casi desde el
-            principio.
-          </div>
-        </div>
-      </article>
-
-      <article class="border-b pb-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <!-- Info usuario -->
-          <div class="text-left md:col-span-1">
-            <p class="text-sm font-semibold">Nombre Usuario</p>
-            <p class="text-xs text-gray-500">12/11/2025</p>
-          </div>
-
-          <!-- Texto reseña -->
-          <div class="text-sm leading-relaxed text-gray-800 md:col-span-3">
-            Excelente libro. Se nota la evolución del autor y la historia engancha casi desde el
-            principio.
-          </div>
-        </div>
-      </article>
-
-      <article class="border-b pb-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <!-- Info usuario -->
-          <div class="text-left md:col-span-1">
-            <p class="text-sm font-semibold">Nombre Usuario</p>
-            <p class="text-xs text-gray-500">12/11/2025</p>
-          </div>
-
-          <!-- Texto reseña -->
-          <div class="text-sm leading-relaxed text-gray-800 md:col-span-3">
-            Excelente libro. Se nota la evolución del autor y la historia engancha casi desde el
-            principio.
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
+      <!-- Lista de reseñas -->
+      <div class="mt-10 space-y-6">
+        <!-- Reseña individual -->
+        @for (review of currentBook.reviews; track $index) {
+          <review-component
+            [name]="review.name"
+            [date]="review.createdAt"
+            [rating]="review.rating"
+            [review]="review.review"
+          />
+        }
+      </div>
+    </section>
+  }
 </main>
