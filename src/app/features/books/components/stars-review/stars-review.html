@@ -1,0 +1,9 @@
+<div class="flex">
+  @for (star of filledStars(); track $index) {
+    <filled-star-icon />
+  }
+
+  @for (star of stars(); track $index) {
+    <star-icon />
+  }
+</div>
