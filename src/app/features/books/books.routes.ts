@@ -9,6 +9,10 @@ export const bookRoutes: Routes = [
         path: '',
         loadComponent: () => import('./pages/home/home'),
       },
+      {
+        path: ':id',
+        loadComponent: () => import('./pages/detail/detail'),
+      },
     ],
   },
   { path: '**', redirectTo: '' },
