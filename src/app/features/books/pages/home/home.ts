@@ -4,7 +4,7 @@ import { BookService } from '../../services/book';
 import { BooksSection } from '../../components/books-section/books-section';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home-page',
   imports: [BooksSection],
   templateUrl: './home.html',
   styles: ``,
