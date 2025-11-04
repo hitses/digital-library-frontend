@@ -2,10 +2,11 @@ import { Component, input, OnInit, signal, WritableSignal } from '@angular/core'
 import { IBook } from '../../models/book.interface';
 import { FilledStar } from '../../../../core/icons/filled-star/filled-star';
 import { Star } from '../../../../core/icons/star/star';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'book-card-component',
-  imports: [FilledStar, Star],
+  imports: [FilledStar, Star, RouterLink],
   templateUrl: './book-card.html',
   styles: ``,
 })
