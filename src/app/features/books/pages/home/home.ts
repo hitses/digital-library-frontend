@@ -10,8 +10,6 @@ import { BooksSection } from '../../components/books-section/books-section';
   styles: ``,
 })
 export default class Home implements OnInit {
-  books: WritableSignal<IBook[]> = signal<IBook[]>([]);
-
   protected readonly bookService = inject(BookService);
 
   featuredBooks: WritableSignal<IBook[]> = this.bookService.featuredBooks;
