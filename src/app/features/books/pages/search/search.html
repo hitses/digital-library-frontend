@@ -28,106 +28,11 @@
       <book-list-component [books]="results.data" />
 
       <!-- Paginación -->
-      @if (results.totalPages > 1) {
-        <div class="mt-6 flex items-center justify-center select-none">
-          <nav class="inline-flex -space-x-px text-sm" aria-label="Pagination">
-            <!-- Botón Anterior -->
-            <button
-              (click)="goToPage(results.page - 1)"
-              [disabled]="results.page === 1"
-              class="rounded-l-md border border-gray-300 bg-white px-2 py-2 text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
-              aria-label="Anterior"
-            >
-              <span class="sr-only">Previous</span>
-              <svg
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 19.5L8.25 12l7.5-7.5"
-                />
-              </svg>
-            </button>
-
-            <!-- Primera página -->
-            <button
-              (click)="goToPage(1)"
-              class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{
-                results.page === 1 ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
-              }}"
-              aria-current="{{ results.page === 1 ? 'page' : null }}"
-            >
-              1
-            </button>
-
-            <!-- “…” izquierda -->
-            @if (results.page > 3) {
-              <span class="border border-gray-300 bg-white px-4 py-2 text-gray-700">…</span>
-            }
-
-            <!-- Páginas intermedias dinámicas -->
-            @for (page of getMiddlePages(); track page) {
-              <button
-                (click)="goToPage(page)"
-                class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{
-                  page === results.page ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
-                }}"
-                aria-current="{{ page === results.page ? 'page' : null }}"
-              >
-                {{ page }}
-              </button>
-            }
-
-            <!-- “…” derecha -->
-            @if (results.page < results.totalPages - 2) {
-              <span class="border border-gray-300 bg-white px-4 py-2 text-gray-700">…</span>
-            }
-
-            <!-- Última página -->
-            @if (results.totalPages > 1) {
-              <button
-                (click)="goToPage(results.totalPages)"
-                class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{
-                  results.page === results.totalPages
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700'
-                }}"
-                aria-current="{{ results.page === results.totalPages ? 'page' : null }}"
-              >
-                {{ results.totalPages }}
-              </button>
-            }
-
-            <!-- Botón Siguiente -->
-            <button
-              (click)="goToPage(results.page + 1)"
-              [disabled]="results.page === results.totalPages"
-              class="rounded-r-md border border-gray-300 bg-white px-2 py-2 text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
-              aria-label="Siguiente"
-            >
-              <span class="sr-only">Next</span>
-              <svg
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
-          </nav>
-        </div>
-      }
+      <pagination-component
+        [page]="searchResults()!.page"
+        [totalPages]="searchResults()!.totalPages"
+        (pageChange)="goToPage($event)"
+      />
     }
   }
 </main>
