@@ -24,11 +24,12 @@
     </div>
 
     <div class="mt-auto flex items-center gap-1">
-      <p class="inline-flex items-center text-sm leading-none text-gray-500">
-        {{ book().averageRating.toFixed() }}
-      </p>
-
       <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
+
+      <p class="inline-flex items-center text-sm leading-none text-gray-500">
+        ({{ book().totalReviews }}
+        {{ +book().totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
+      </p>
     </div>
   </main>
 </article>

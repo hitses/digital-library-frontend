@@ -9,7 +9,7 @@
       </aside>
 
       <!-- Datos principales -->
-      <section class="flex flex-col gap-1 text-center lg:col-span-1 lg:text-left">
+      <section class="flex flex-col items-center gap-1 lg:col-span-1 lg:text-left">
         <h1 class="text-xl font-bold uppercase">{{ currentBook.title }}</h1>
 
         <p class="text-sm font-semibold text-gray-400 uppercase">{{ currentBook.author }}</p>
@@ -17,11 +17,9 @@
         <p class="text-xs text-gray-400 uppercase">{{ currentBook.isbn }}</p>
 
         <div class="flex items-center gap-2">
-          <p class="text-sm leading-none text-gray-700">
-            {{ currentBook.averageRating.toFixed() }}
-          </p>
           <!-- Estrellas -->
           <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
+
           <p class="text-xs leading-none text-gray-500">
             ({{ currentBook.totalReviews }}
             {{ +currentBook.totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
@@ -34,9 +32,9 @@
       </section>
 
       <!-- Formulario reseña -->
-      <aside class="lg:sticky lg:top-24 lg:col-span-1">
+      <aside class="mt-8 lg:sticky lg:top-24 lg:col-span-1 lg:mt-0">
         <form class="rounded-lg border bg-white p-4 shadow-sm">
-          <p class="mb-2 font-semibold">Deja tu reseña</p>
+          <p class="font-semibold">Deja tu reseña</p>
           <!-- campos -->
         </form>
       </aside>
@@ -55,7 +53,11 @@
           <!-- Nota media con estrellas -->
           <div class="flex items-center gap-2">
             <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
-            <p class="text-sm leading-none text-gray-600">({{ currentBook.totalReviews }})</p>
+
+            <p class="text-sm leading-none text-gray-600">
+              ({{ currentBook.totalReviews }}
+              {{ +currentBook.totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
+            </p>
           </div>
 
           <p class="mt-1 text-3xl text-gray-700">
