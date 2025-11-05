@@ -1,13 +1,11 @@
 import { Component, computed, effect, inject, input, OnDestroy } from '@angular/core';
 import { BookService } from '../../services/book';
-import { FilledStar } from '../../../../core/icons/filled-star/filled-star';
-import { Star } from '../../../../core/icons/star/star';
 import { StarsReview } from '../../components/stars-review/stars-review';
 import { Review } from '../../components/review/review';
 
 @Component({
   selector: 'detail-page',
-  imports: [FilledStar, Star, StarsReview, Review],
+  imports: [StarsReview, Review],
   templateUrl: './detail.html',
   styles: ``,
 })
