@@ -40,4 +40,18 @@ export default class Search implements OnDestroy {
   ngOnDestroy(): void {
     this.bookService.clearSearchResults();
   }
+
+  getMiddlePages(): number[] {
+    const current = this.searchResults()!.page;
+    const total = this.searchResults()!.totalPages;
+
+    const pages = [];
+
+    const start = Math.max(2, current - 1);
+    const end = Math.min(total - 1, current + 1);
+
+    for (let p = start; p <= end; p++) pages.push(p);
+
+    return pages;
+  }
 }
