@@ -1,0 +1,50 @@
+<main class="container mx-auto max-w-6xl p-4 py-8">
+  @if (q()) {
+    <h1 class="mb-6 text-2xl font-bold">
+      Resultados para: <span class="text-blue-600 uppercase">"{{ q() }}"</span>
+    </h1>
+  } @else {
+    <h1 class="mb-6 text-2xl font-bold">Mostrando todos los libros</h1>
+  }
+
+  @if (bookService.isSearching()) {
+    <div class="flex items-center justify-center py-12">
+      <div class="text-gray-600">Buscando libros...</div>
+    </div>
+  } @else if (searchResults(); as results) {
+    @if (results.data.length === 0) {
+      <div class="py-12 text-center">
+        <p class="text-lg text-gray-600">No se encontraron libros para tu búsqueda</p>
+        <a routerLink="/" class="mt-4 inline-block text-blue-600 hover:underline">
+          Volver al inicio
+        </a>
+      </div>
+    } @else {
+      <div class="mb-4 text-sm text-gray-600">
+        {{ results.total }}
+        {{ results.total === 1 ? 'libro encontrado' : 'libros encontrados' }}
+      </div>
+
+      <book-list-component [books]="results.data" />
+
+      <!-- Paginación básica -->
+      @if (results.totalPages > 1) {
+        <nav class="mt-8 flex justify-center gap-2" aria-label="Paginación de resultados">
+          @for (page of getPagesArray(results.totalPages); track page) {
+            <button
+              type="button"
+              (click)="goToPage(page)"
+              class="rounded px-4 py-2 transition-colors"
+              [class.bg-blue-600]="page === results.page"
+              [class.text-white]="page === results.page"
+              [class.bg-gray-200]="page !== results.page"
+              aria-current="{{ page === results.page ? 'page' : null }}"
+            >
+              {{ page }}
+            </button>
+          }
+        </nav>
+      }
+    }
+  }
+</main>

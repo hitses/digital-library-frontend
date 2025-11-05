@@ -10,6 +10,10 @@ export const bookRoutes: Routes = [
         loadComponent: () => import('./pages/home/home'),
       },
       {
+        path: 'search',
+        loadComponent: () => import('./pages/search/search'),
+      },
+      {
         path: ':id',
         loadComponent: () => import('./pages/detail/detail'),
       },

@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { IBook } from '../models/book.interface';
 import { environment } from '../../../../environments/environment';
+import { ISearchResponse } from '../models/search.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,8 @@ export class BookService {
   newBooks = signal<IBook[]>([]);
   popularBooks = signal<IBook[]>([]);
   book = signal<IBook | null>(null);
+  searchResults = signal<ISearchResponse<IBook> | null>(null);
+  isSearching = signal<boolean>(false);
 
   private http = inject(HttpClient);
 
@@ -54,6 +57,30 @@ export class BookService {
         return this.book.set(null);
       },
     });
+  }
+
+  searchBooks(query: string, page = 1, limit = 12): void {
+    this.isSearching.set(true);
+
+    const params = new HttpParams()
+      .set('q', query)
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    this.http.get<ISearchResponse<IBook>>(`${this.apiUrl}/search`, { params }).subscribe({
+      next: (response) => {
+        this.searchResults.set(response);
+        this.isSearching.set(false);
+      },
+      error: (error) => {
+        console.error(error);
+        this.isSearching.set(false);
+      },
+    });
+  }
+
+  clearSearchResults(): void {
+    this.searchResults.set(null);
   }
 
   clearBook(): void {
