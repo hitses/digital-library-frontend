@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { StarsReview } from '../stars-review/stars-review';
+import { StarsReview } from '../../../books/components/stars-review/stars-review';
 
 @Component({
   selector: 'review-component',
