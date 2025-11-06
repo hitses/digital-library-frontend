@@ -1,8 +1,9 @@
+import { NgClass } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'pagination-component',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './pagination.html',
   styles: ``,
 })

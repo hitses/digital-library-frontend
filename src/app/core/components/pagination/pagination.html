@@ -23,10 +23,11 @@
       <!-- Primera página -->
       <button
         (click)="goToPage(1)"
-        class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{
-          page() === 1 ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
-        }}"
-        aria-current="{{ page() === 1 ? 'page' : null }}"
+        [ngClass]="{
+          'bg-blue-600 text-white': page() === 1,
+          'bg-white text-gray-700 hover:bg-gray-50': page() !== 1,
+        }"
+        class="border border-gray-300 px-4 py-2"
       >
         1
       </button>
@@ -38,10 +39,11 @@
       @for (p of middlePages(); track trackByPage($index, p)) {
         <button
           (click)="goToPage(p)"
-          class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{
-            p === page() ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
-          }}"
-          aria-current="{{ p === page() ? 'page' : null }}"
+          [ngClass]="{
+            'bg-blue-600 text-white': p === page(),
+            'bg-white text-gray-700 hover:bg-gray-50': p !== page(),
+          }"
+          class="border border-gray-300 px-4 py-2"
         >
           {{ p }}
         </button>
@@ -55,10 +57,11 @@
       @if (totalPages() > 1) {
         <button
           (click)="goToPage(totalPages())"
-          class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{
-            page() === totalPages() ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
-          }}"
-          aria-current="{{ page() === totalPages() ? 'page' : null }}"
+          [ngClass]="{
+            'bg-blue-600 text-white': page() === totalPages(),
+            'bg-white text-gray-700 hover:bg-gray-50': page() !== totalPages(),
+          }"
+          class="border border-gray-300 px-4 py-2"
         >
           {{ totalPages() }}
         </button>
