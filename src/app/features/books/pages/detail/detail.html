@@ -21,8 +21,7 @@
           <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
           <p class="text-xs leading-none text-gray-500">
-            ({{ currentBook.totalReviews }}
-            {{ +currentBook.totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
+            ({{ reviews()?.total }} {{ reviews()?.total === 1 ? 'reseña' : 'reseñas' }})
           </p>
         </div>
 
@@ -55,27 +54,33 @@
             <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
             <p class="text-sm leading-none text-gray-600">
-              ({{ currentBook.totalReviews }}
-              {{ +currentBook.totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
+              ({{ reviews()?.total }} {{ reviews()?.total === 1 ? 'reseña' : 'reseñas' }})
             </p>
           </div>
 
           <p class="mt-1 text-3xl text-gray-700">
-            <span class="text-6xl font-bold">{{ currentBook.averageRating.toFixed() }}</span> / 5
+            <span class="text-6xl font-bold">{{
+              currentBook.averageRating?.toFixed() || '0'
+            }}</span>
+            / 5
           </p>
         </div>
       </div>
 
       <!-- Lista de reseñas -->
       <div class="mt-10 space-y-6">
-        <!-- Reseña individual -->
-        @for (review of currentBook.reviews; track $index) {
-          <review-component
-            [name]="review.name"
-            [date]="review.createdAt"
-            [rating]="review.rating"
-            [review]="review.review"
-          />
+        @if (reviews()?.data) {
+          @for (review of reviews().data; track $index) {
+            <!-- Reseña individual -->
+            <review-component
+              [name]="review.name"
+              [date]="review.createdAt"
+              [rating]="review.rating"
+              [review]="review.review"
+            />
+          }
+        } @else {
+          <p>Cargando reseñas...</p>
         }
       </div>
     </section>

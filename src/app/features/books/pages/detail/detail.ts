@@ -1,7 +1,8 @@
 import { Component, computed, effect, inject, input, OnDestroy } from '@angular/core';
 import { BookService } from '../../services/book';
 import { StarsReview } from '../../components/stars-review/stars-review';
-import { Review } from '../../components/review/review';
+import { Review } from '../../../review/components/review/review';
+import { ReviewService } from '../../../review/service/review';
 
 @Component({
   selector: 'detail-page',
@@ -13,8 +14,10 @@ export default class Detail implements OnDestroy {
   id = input.required<string>();
 
   private readonly bookService = inject(BookService);
+  private readonly reviewService = inject(ReviewService);
 
   book = this.bookService.book;
+  reviews = this.reviewService.reviews;
 
   filledStars = computed(() => {
     const currentBook = this.book();
@@ -37,11 +40,15 @@ export default class Detail implements OnDestroy {
   constructor() {
     effect(() => {
       const bookId = this.id();
+      if (!bookId) return;
+
       this.bookService.getBookById(bookId);
+      this.reviewService.getReviewsByBook(bookId, 1);
     });
   }
 
   ngOnDestroy(): void {
     this.bookService.clearBook();
+    this.reviewService.clearReviews();
   }
 }
