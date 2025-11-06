@@ -4,10 +4,11 @@ import { StarsReview } from '../../components/stars-review/stars-review';
 import { Review } from '../../../review/components/review/review';
 import { ReviewService } from '../../../review/service/review';
 import { Pagination } from '../../../../core/components/pagination/pagination';
+import { CreateReviewForm } from '../../../review/components/create-review-form/create-review-form';
 
 @Component({
   selector: 'detail-page',
-  imports: [StarsReview, Review, Pagination],
+  imports: [StarsReview, Review, Pagination, CreateReviewForm],
   templateUrl: './detail.html',
   styles: ``,
 })
