@@ -12,9 +12,9 @@
       <div class="text-gray-600">Buscando libros...</div>
     </div>
   } @else if (searchResults(); as results) {
-    @if (results.data.length === 0) {
+    @if (results.total === 0) {
       <div class="py-12 text-center">
-        <p class="text-lg text-gray-600">No se encontraron libros para tu búsqueda</p>
+        <p class="text-lg text-gray-600">No se encontraron libros</p>
         <a routerLink="/" class="mt-4 inline-block text-blue-600 hover:underline">
           Volver al inicio
         </a>
@@ -27,12 +27,13 @@
 
       <book-list-component [books]="results.data" />
 
-      <!-- Paginación -->
-      <pagination-component
-        [page]="searchResults()!.page"
-        [totalPages]="searchResults()!.totalPages"
-        (pageChange)="goToPage($event)"
-      />
+      @if (results.totalPages > 1) {
+        <pagination-component
+          [page]="results.page"
+          [totalPages]="results.totalPages"
+          (pageChange)="goToPage($event)"
+        />
+      }
     }
   }
 </main>
