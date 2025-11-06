@@ -1,5 +1,3 @@
-import { IReview } from '../../review/models/review.interface';
-
 export interface IBook {
   _id: string;
   title: string;
@@ -11,9 +9,8 @@ export interface IBook {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-  averageRating: number;
-  totalReviews: number;
   featured: boolean;
   featuredAt: Date;
-  reviews: IReview[];
+  averageRating?: number;
+  totalReviews?: number;
 }
