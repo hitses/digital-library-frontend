@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'star-icon',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './star.html',
   styles: ``,
 })
-export class Star {}
+export class Star {
+  size = input<number>(16);
+}
