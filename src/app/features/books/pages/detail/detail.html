@@ -21,7 +21,7 @@
           <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
           <p class="text-xs leading-none text-gray-500">
-            ({{ reviews()!.total }} {{ reviews()!.total === 1 ? 'reseña' : 'reseñas' }})
+            ({{ reviews()?.total }} {{ reviews()?.total === 1 ? 'reseña' : 'reseñas' }})
           </p>
         </div>
 
@@ -70,6 +70,12 @@
       <!-- Lista de reseñas -->
       <div class="mt-10 space-y-6">
         @if (reviews()) {
+          <pagination-component
+            [page]="reviews()!.page"
+            [totalPages]="reviews()!.totalPages"
+            (pageChange)="changePage($event)"
+          />
+
           @for (review of reviews()!.data; track $index) {
             <!-- Reseña individual -->
             <review-component

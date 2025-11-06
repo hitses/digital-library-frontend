@@ -3,10 +3,11 @@ import { BookService } from '../../services/book';
 import { StarsReview } from '../../components/stars-review/stars-review';
 import { Review } from '../../../review/components/review/review';
 import { ReviewService } from '../../../review/service/review';
+import { Pagination } from '../../../../core/components/pagination/pagination';
 
 @Component({
   selector: 'detail-page',
-  imports: [StarsReview, Review],
+  imports: [StarsReview, Review, Pagination],
   templateUrl: './detail.html',
   styles: ``,
 })
@@ -43,8 +44,19 @@ export default class Detail implements OnDestroy {
       if (!bookId) return;
 
       this.bookService.getBookById(bookId);
-      this.reviewService.getReviewsByBook(bookId, 1);
+      this.getReviewsByBook(bookId, 1);
     });
+  }
+
+  getReviewsByBook(bookId: string, page: number) {
+    this.reviewService.getReviewsByBook(bookId, page);
+  }
+
+  changePage(page: number) {
+    const bookId = this.id();
+    if (!bookId) return;
+
+    this.getReviewsByBook(bookId, page);
   }
 
   ngOnDestroy(): void {
