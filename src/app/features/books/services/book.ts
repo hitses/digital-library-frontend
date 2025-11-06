@@ -59,7 +59,7 @@ export class BookService {
     });
   }
 
-  searchBooks(query: string, page = 1, limit = 12): void {
+  searchBooks(query: string, page = 1, limit = 8): void {
     this.isSearching.set(true);
 
     const params = new HttpParams()
