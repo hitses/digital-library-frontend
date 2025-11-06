@@ -1,3 +1,11 @@
+export interface IReviews {
+  total: number;
+  totalPages: number;
+  page: number;
+  limit: number;
+  data: IReview[];
+}
+
 export interface IReview {
   _id: string;
   bookId: string;
@@ -6,7 +14,6 @@ export interface IReview {
   review: string;
   rating: number;
   verified: boolean;
-  delete: boolean;
   ipAddress: string;
   createdAt: Date;
   updatedAt: Date;
