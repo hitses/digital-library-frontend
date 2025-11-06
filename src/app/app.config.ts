@@ -7,11 +7,6 @@ import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from 
 
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import {
-  provideClientHydration,
-  withIncrementalHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +21,5 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideHttpClient(withFetch()),
-    provideClientHydration(withIncrementalHydration(), withEventReplay()),
   ],
 };
