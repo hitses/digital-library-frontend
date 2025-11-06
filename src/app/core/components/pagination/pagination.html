@@ -35,7 +35,7 @@
         <span class="border border-gray-300 bg-white px-4 py-2 text-gray-700">…</span>
       }
 
-      @for (p of getMiddlePages(); track p) {
+      @for (p of middlePages(); track trackByPage($index, p)) {
         <button
           (click)="goToPage(p)"
           class="border border-gray-300 px-4 py-2 hover:bg-gray-50 {{

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'pagination-component',
@@ -16,7 +16,7 @@ export class Pagination {
     this.pageChange.emit(p);
   }
 
-  getMiddlePages(): number[] {
+  middlePages = computed(() => {
     const current = this.page();
     const total = this.totalPages();
     const list: number[] = [];
@@ -24,5 +24,7 @@ export class Pagination {
     const end = Math.min(total - 1, current + 1);
     for (let i = start; i <= end; i++) list.push(i);
     return list;
-  }
+  });
+
+  trackByPage = (i: number, page: number) => page;
 }
