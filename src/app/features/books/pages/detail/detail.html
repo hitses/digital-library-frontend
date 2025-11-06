@@ -21,7 +21,7 @@
           <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
           <p class="text-xs leading-none text-gray-500">
-            ({{ reviews()?.total }} {{ reviews()?.total === 1 ? 'reseña' : 'reseñas' }})
+            ({{ reviews()!.total }} {{ reviews()!.total === 1 ? 'reseña' : 'reseñas' }})
           </p>
         </div>
 
@@ -54,7 +54,7 @@
             <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
             <p class="text-sm leading-none text-gray-600">
-              ({{ reviews()?.total }} {{ reviews()?.total === 1 ? 'reseña' : 'reseñas' }})
+              ({{ reviews()!.total }} {{ reviews()!.total === 1 ? 'reseña' : 'reseñas' }})
             </p>
           </div>
 
@@ -69,8 +69,8 @@
 
       <!-- Lista de reseñas -->
       <div class="mt-10 space-y-6">
-        @if (reviews()?.data) {
-          @for (review of reviews().data; track $index) {
+        @if (reviews()) {
+          @for (review of reviews()!.data; track $index) {
             <!-- Reseña individual -->
             <review-component
               [name]="review.name"
