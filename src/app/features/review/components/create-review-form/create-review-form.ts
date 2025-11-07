@@ -4,6 +4,7 @@ import { FilledStar } from '../../../../core/icons/filled-star/filled-star';
 import { Star } from '../../../../core/icons/star/star';
 import { EMAIL_PATTERN } from '../../../../core/patterns';
 import { ReviewService } from '../../service/review';
+import { ToastService } from '../../../../core/services/toast';
 
 @Component({
   selector: 'create-review-form-component',
@@ -16,17 +17,27 @@ export class CreateReviewForm {
 
   private readonly fb = inject(FormBuilder);
   private readonly reviewService = inject(ReviewService);
+  private readonly toastService = inject(ToastService);
 
   stars = [1, 2, 3, 4, 5];
   hovered = 0;
   rating = 0;
 
   reviewForm = this.fb.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
-    review: ['', Validators.required],
-    rating: [0, Validators.required],
+    review: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
+    rating: [0, [Validators.required, Validators.min(1)]],
   });
+
+  getControl(path: string) {
+    return this.reviewForm.get(path);
+  }
+
+  invalidAndTouched(path: string) {
+    const control = this.getControl(path);
+    return control?.invalid && (control.touched || control.dirty);
+  }
 
   onHover(star: number): void {
     this.hovered = star;
@@ -44,7 +55,7 @@ export class CreateReviewForm {
 
   onSubmit(): void {
     if (this.reviewForm.invalid) {
-      console.error('Formulario inválido:', this.reviewForm.errors, this.reviewForm.value);
+      this.reviewForm.markAllAsTouched();
 
       return;
     }
@@ -53,27 +64,33 @@ export class CreateReviewForm {
 
     const bookId = this.bookId();
 
-    console.log({
-      review: {
-        name,
-        email,
-        review,
-        rating,
-      },
-      bookId,
-    });
-
     this.reviewService.createReview(bookId, name!, email!, review!, rating!).subscribe({
       next: (res) => {
-        console.log('✅ Review creada:', res);
+        this.toastService.success(
+          'Reseña enviada correctamente',
+          'Tu reseña será revisada por la administración y pronto será publicada. ¡Gracias por colaborar!',
+        );
 
         this.reviewForm.reset();
+        this.rating = 0;
+        this.hovered = 0;
       },
       error: (err) => {
-        if (err.status === 400) console.error('❌ Error: datos inválidos');
+        if (err.status === 400)
+          this.toastService.warning(
+            'Datos inválidos',
+            'Revisa el formulario y vuelve a intentarlo.',
+          );
         else if (err.status === 429)
-          console.error('❌ Demsaiadas peticiones seguidas. Inténtalo de nuevo en unos minutos.');
-        else console.error('❌ Error al enviar reseña:', err);
+          this.toastService.error(
+            'Demasiadas peticiones seguidas',
+            'Inténtalo de nuevo más tarde.',
+          );
+        else
+          this.toastService.error(
+            'Error del servidor',
+            'Error al enviar reseña. Inténtalo más tarde.',
+          );
       },
     });
   }

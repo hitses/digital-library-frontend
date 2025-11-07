@@ -2,42 +2,82 @@
   <h2 class="text-center font-semibold">Dejar mi reseña</h2>
 
   <form [formGroup]="reviewForm" (submit)="onSubmit()" class="mx-auto flex max-w-xl flex-col p-4">
-    <div>
-      <label class="mb-2 w-full" for="name">Nombre</label>
+    <div class="mb-4">
+      <label class="w-full" for="name">Nombre</label>
       <input
-        class="mb-4 w-full rounded-lg border border-gray-300 p-1"
+        class="mt-2 w-full rounded-lg border border-gray-300 p-1"
         id="name"
         formControlName="name"
         type="text"
         required
       />
+
+      @if (reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched) {
+        @if (invalidAndTouched('name')) {
+          <p class="text-xs text-red-600">
+            @if (getControl('name')?.errors?.['required']) {
+              El nombre es obligatorio
+            } @else if (getControl('name')?.errors?.['minlength']) {
+              Mínimo 2 caracteres
+            } @else if (getControl('name')?.errors?.['maxlength']) {
+              Máximo 50 caracteres
+            }
+          </p>
+        }
+      }
     </div>
 
-    <div>
+    <div class="mb-4">
       <label class="mb-2 w-full" for="email">Email</label>
       <input
-        class="mb-4 w-full rounded-lg border border-gray-300 p-1"
+        class="mt-2 w-full rounded-lg border border-gray-300 p-1"
         id="email"
         formControlName="email"
         type="email"
         required
       />
+
+      @if (reviewForm.get('email')?.invalid && reviewForm.get('email')?.touched) {
+        @if (invalidAndTouched('email')) {
+          <p class="text-xs text-red-600">
+            @if (getControl('email')?.errors?.['required']) {
+              El email es obligatorio
+            } @else if (getControl('email')?.errors?.['pattern']) {
+              Email inválido
+            }
+          </p>
+        }
+      }
     </div>
 
-    <div>
+    <div class="mb-4">
       <label class="mb-2 w-full" for="review">Reseña</label>
       <textarea
-        class="mb-4 w-full resize-none rounded-lg border border-gray-300 p-1"
+        class="mt-2 w-full resize-none rounded-lg border border-gray-300 p-1"
         id="review"
         formControlName="review"
         rows="3"
         required
       ></textarea>
+
+      @if (reviewForm.get('review')?.invalid && reviewForm.get('review')?.touched) {
+        @if (invalidAndTouched('review')) {
+          <p class="text-xs text-red-600">
+            @if (getControl('review')?.errors?.['required']) {
+              La reseña es obligatoria
+            } @else if (getControl('review')?.errors?.['minlength']) {
+              Mínimo 10 caracteres
+            } @else if (getControl('review')?.errors?.['maxlength']) {
+              Máximo 1000 caracteres
+            }
+          </p>
+        }
+      }
     </div>
 
-    <div>
+    <div class="mb-4">
       <label class="mb-2 w-full" for="rating">Calificación</label>
-      <div class="mb-4 flex">
+      <div class="flex">
         @for (star of stars; track star) {
           <button
             type="button"
@@ -55,10 +95,14 @@
           </button>
         }
       </div>
+
+      @if (invalidAndTouched('rating')) {
+        <p class="text-xs text-red-600">Selecciona una calificación</p>
+      }
     </div>
 
     <button
-      class="rounded-lg bg-amber-500 py-1 transition-colors duration-200 hover:bg-amber-500/90"
+      class="rounded-lg bg-amber-500 py-1 transition-colors duration-200 hover:bg-amber-500/90 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
       type="submit"
       [disabled]="reviewForm.invalid"
     >
