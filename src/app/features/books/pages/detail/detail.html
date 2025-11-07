@@ -50,9 +50,11 @@
           <div class="flex items-center gap-2">
             <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
-            <p class="text-sm leading-none text-gray-600">
-              ({{ reviews()!.total }} {{ reviews()!.total === 1 ? 'reseña' : 'reseñas' }})
-            </p>
+            @if (reviews(); as r) {
+              <p class="text-sm leading-none text-gray-600">
+                ({{ r.total }} {{ r.total === 1 ? 'reseña' : 'reseñas' }})
+              </p>
+            }
           </div>
 
           <p class="mt-1 text-3xl text-gray-700">
