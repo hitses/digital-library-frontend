@@ -12,6 +12,7 @@ import { Error } from '../../icons/error/error';
   standalone: true,
   imports: [CommonModule, Success, Info, Warning, Error],
   templateUrl: './toast-container.component.html',
+  styleUrl: './toast-container.component.css',
 })
 export class ToastContainerComponent {
   private toastService = inject(ToastService);

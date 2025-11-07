@@ -5,6 +5,8 @@
 >
   @for (toast of toasts(); track toast.id) {
     <div
+      animate.enter="toast-enter"
+      animate.leave="toast-leave"
       class="pointer-events-auto relative w-80 max-w-full overflow-hidden rounded-md text-white shadow-lg"
       [ngClass]="styleMap[toast.type].box"
       role="alert"

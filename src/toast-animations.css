@@ -1,0 +1,12 @@
+@keyframes toastShrink {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+.toast-animate-shrink {
+  animation: toastShrink var(--toast-duration) linear forwards;
+}
