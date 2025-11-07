@@ -26,10 +26,13 @@
     <div class="mt-auto flex items-center gap-1">
       <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
-      <p class="inline-flex items-center text-sm leading-none text-gray-500">
-        ({{ book().totalReviews }}
-        {{ +book().totalReviews.toFixed() === 1 ? 'reseña' : 'reseñas' }})
-      </p>
+      @if (book() && book().totalReviews != null) {
+        @let total = book().totalReviews || 0;
+
+        <p class="inline-flex items-center text-sm leading-none text-gray-500">
+          ({{ total }} {{ total === 1 ? 'reseña' : 'reseñas' }})
+        </p>
+      }
     </div>
   </main>
 </article>
