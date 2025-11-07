@@ -1,0 +1,52 @@
+<div
+  class="pointer-events-none fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-3"
+  aria-live="polite"
+  role="status"
+>
+  @for (toast of toasts(); track toast.id) {
+    <div
+      class="pointer-events-auto relative w-80 max-w-full overflow-hidden rounded-md text-white shadow-lg"
+      [ngClass]="styleMap[toast.type].box"
+      role="alert"
+      [attr.aria-label]="toast.type + ': ' + toast.title"
+    >
+      <div class="flex items-center gap-3 p-3">
+        @switch (toast.type) {
+          @case ('success') {
+            <success-icon />
+          }
+          @case ('info') {
+            <info-icon />
+          }
+          @case ('warning') {
+            <warning-icon />
+          }
+          @case ('error') {
+            <error-icon />
+          }
+        }
+
+        <div class="flex-1">
+          <p class="text-sm font-semibold">{{ toast.title }}</p>
+          <p class="text-xs wrap-break-word opacity-90">{{ toast.body }}</p>
+        </div>
+
+        <button
+          (click)="remove(toast.id)"
+          class="ml-2 text-lg leading-none text-white/80 hover:text-white"
+          aria-label="Cerrar notificación"
+        >
+          ×
+        </button>
+      </div>
+
+      <!-- Barra de duración -->
+      <div
+        class="toast-animate-shrink absolute bottom-0 left-0 h-1"
+        [style.--toast-duration]="toast.duration + 'ms'"
+        [style.--var]="toast.duration + 'ms'"
+        [ngClass]="styleMap[toast.type].bar"
+      ></div>
+    </div>
+  }
+</div>
