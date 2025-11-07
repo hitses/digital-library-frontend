@@ -68,7 +68,11 @@
 
       <!-- Lista de reseñas -->
       <div class="mt-10 space-y-6">
-        @if (reviews()) {
+        @if (reviews() == null) {
+          <p>Cargando reseñas...</p>
+        } @else if (reviews()?.total === 0) {
+          <p class="text-sm text-gray-500">Aún no hay reseñas</p>
+        } @else {
           <pagination-component
             [page]="reviews()!.page"
             [totalPages]="reviews()!.totalPages"
@@ -76,7 +80,6 @@
           />
 
           @for (review of reviews()!.data; track $index) {
-            <!-- Reseña individual -->
             <review-component
               [name]="review.name"
               [date]="review.createdAt"
@@ -84,8 +87,6 @@
               [review]="review.review"
             />
           }
-        } @else {
-          <p>Cargando reseñas...</p>
         }
       </div>
     </section>
