@@ -1,5 +1,15 @@
 @import 'tailwindcss';
 
+/* Dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
+
+html.theme-transition *,
+html.theme-transition ::before,
+html.theme-transition ::after {
+  transition-property: background-color, color, border-color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+/* Dark mode */
 
 @import './toast-animations.css';
