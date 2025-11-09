@@ -35,6 +35,8 @@ export class Header {
 
   private applyTheme() {
     const htmlEl = document.documentElement;
+    htmlEl.classList.add('theme-transition');
+    setTimeout(() => htmlEl.classList.remove('theme-transition'), 200);
 
     if (this.theme() === 'dark') htmlEl.classList.add('dark');
     else htmlEl.classList.remove('dark');
