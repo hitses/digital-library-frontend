@@ -2,10 +2,11 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ForgotService } from '../../services/forgot';
 import { IForgotResponse } from '../../models/forgotResponse.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-forgot',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './forgot.html',
   styles: ``,
 })
