@@ -1,108 +1,65 @@
-<div
-  class="grid min-h-[500px] grid-cols-1 overflow-hidden rounded-[1.75rem] bg-white shadow-2xl md:grid-cols-2"
->
-  <div class="relative hidden h-full md:block">
-    <img
-      src="https://www.thisiscolossal.com/wp-content/uploads/2023/05/temple-of-books-6.jpg"
-      alt="Biblioteca"
-      class="absolute inset-0 h-full w-full object-cover"
+<h1 class="mb-8 text-3xl font-bold text-slate-800">Iniciar sesión</h1>
+
+<form class="space-y-6" [formGroup]="loginForm" (submit)="onSubmit()">
+  <!-- Email -->
+  <div class="relative">
+    <input
+      type="email"
+      formControlName="email"
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+      placeholder=" "
     />
+    <label
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+    >
+      Email
+    </label>
 
-    <!-- Capa de degradado para mejor lectura -->
-    <div class="absolute inset-0 bg-black/40"></div>
-
-    <!-- Contenido sobre la imagen -->
-    <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-      <h3 class="mb-3 max-w-96 text-2xl font-semibold text-pretty text-white">
-        Bienvenido a la Biblioteca Digital del I.E.S. Hermanos Amorós
-      </h3>
-
-      <p class="mb-6 max-w-60 text-sm text-pretty text-gray-200">
-        Accede a tu cuenta para administrar los libros y sus reseñas.
-      </p>
-
-      <a
-        routerLink="/"
-        class="rounded-md bg-white/90 px-5 py-2 text-sm font-medium text-slate-800 transition hover:bg-white"
-      >
-        Volver al inicio
-      </a>
-    </div>
+    @if (email.invalid && email.touched) {
+      <p class="mt-1 text-xs text-red-600">Email inválido</p>
+    }
   </div>
 
-  <!-- Form -->
-  <div class="flex flex-col justify-center px-10 py-14">
-    <!-- Link visible solo en pantallas pequeñas -->
-    <div class="mb-4 text-center md:hidden">
-      <a routerLink="/" class="text-sm text-blue-600 hover:underline"> Volver a la biblioteca </a>
-    </div>
+  <!-- Password -->
+  <div class="relative">
+    <input
+      type="password"
+      formControlName="password"
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+      placeholder=" "
+    />
+    <label
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+    >
+      Contraseña
+    </label>
 
-    <h1 class="mb-8 text-3xl font-bold text-slate-800">Iniciar sesión</h1>
+    @if (password.invalid && password.touched) {
+      <p class="mt-1 text-xs text-red-600">Contraseña requerida</p>
+    }
+  </div>
 
-    <form class="space-y-6" [formGroup]="loginForm" (submit)="onSubmit()">
-      <!-- Email -->
-      <div class="relative">
-        <input
-          type="email"
-          formControlName="email"
-          class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
-          placeholder=" "
-        />
-        <label
-          class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
-        >
-          Email
-        </label>
+  <!-- Forgot -->
+  <div class="flex justify-end text-sm">
+    <button type="button" class="text-blue-600 hover:underline">¿Olvidaste tu contraseña?</button>
+  </div>
 
-        @if (email.invalid && email.touched) {
-          <p class="mt-1 text-xs text-red-600">Email inválido</p>
-        }
-      </div>
+  <!-- Submit -->
+  <button
+    type="submit"
+    class="w-full rounded-lg bg-blue-600 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700 disabled:opacity-50"
+    [disabled]="loading()"
+  >
+    {{ loading() ? 'Cargando...' : 'Entrar' }}
+  </button>
 
-      <!-- Password -->
-      <div class="relative">
-        <input
-          type="password"
-          formControlName="password"
-          class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
-          placeholder=" "
-        />
-        <label
-          class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
-        >
-          Contraseña
-        </label>
-
-        @if (password.invalid && password.touched) {
-          <p class="mt-1 text-xs text-red-600">Contraseña requerida</p>
-        }
-      </div>
-
-      <!-- Forgot -->
-      <div class="flex justify-end text-sm">
-        <button type="button" class="text-blue-600 hover:underline">
-          ¿Olvidaste tu contraseña?
-        </button>
-      </div>
-
-      <!-- Submit -->
-      <button
-        type="submit"
-        class="w-full rounded-lg bg-blue-600 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700 disabled:opacity-50"
-        [disabled]="loading()"
-      >
-        {{ loading() ? 'Cargando...' : 'Entrar' }}
-      </button>
-
-      @if (error()) {
-        <p class="text-center text-sm text-red-600">
-          {{ error() }}
-        </p>
-      }
-    </form>
-
-    <p class="mt-8 text-center text-xs text-slate-500">
-      Si no tienes cuenta, contacta con la administración.
+  @if (error()) {
+    <p class="text-center text-sm text-red-600">
+      {{ error() }}
     </p>
-  </div>
-</div>
+  }
+</form>
+
+<p class="mt-8 text-center text-xs text-slate-500">
+  Si no tienes cuenta, contacta con la administración.
+</p>
