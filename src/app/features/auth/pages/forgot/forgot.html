@@ -1,0 +1,43 @@
+<h1 class="mb-8 text-3xl font-bold text-slate-800">Recuperar contraseña</h1>
+
+<form class="space-y-6" [formGroup]="forgotForm" (submit)="onSubmit()">
+  <div class="relative">
+    <input
+      type="email"
+      formControlName="email"
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+      placeholder=" "
+    />
+    <label
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+    >
+      Email
+    </label>
+
+    @if (email.invalid && email.touched) {
+      <p class="mt-1 text-xs text-red-600">Email inválido</p>
+    }
+  </div>
+
+  <button
+    type="submit"
+    class="w-full rounded-lg bg-blue-600 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700 disabled:opacity-50"
+    [disabled]="loading()"
+  >
+    {{ loading() ? 'Enviando...' : 'Enviar enlace' }}
+  </button>
+
+  @if (forgotResponse()) {
+    <p class="text-center text-sm text-pretty text-green-600">
+      Se ha enviado un email con las instrucciones de acceso a la correo indicado
+    </p>
+  }
+
+  @if (error() === 404) {
+    <p class="text-center text-sm text-red-600">No se encuentra la cuenta asociada a este email</p>
+  }
+</form>
+
+<p class="mt-8 text-center text-xs text-slate-500">
+  Si necesitas ayuda, contacta con la administración.
+</p>
