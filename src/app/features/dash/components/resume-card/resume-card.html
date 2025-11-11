@@ -1,5 +1,13 @@
-<article class="rounded-2xl bg-white p-6 shadow">
-  <p class="text-sm text-slate-500">{{ title() }}</p>
+@if (!metric()) {
+  <article class="rounded-2xl bg-white p-6 shadow">
+    <p class="text-sm text-slate-500">{{ title() }}</p>
 
-  <p class="mt-2 text-3xl font-bold">{{ metric() }}</p>
-</article>
+    <p class="mt-2 animate-pulse text-sm text-slate-500">Cargando datos...</p>
+  </article>
+} @else {
+  <article class="rounded-2xl bg-white p-6 shadow">
+    <p class="text-sm text-slate-500">{{ title() }}</p>
+
+    <p class="mt-2 text-3xl font-bold">{{ metric() }}</p>
+  </article>
+}

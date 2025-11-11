@@ -12,15 +12,16 @@ export class DashService {
   private readonly bookUrl = this.baseUrl + '/book';
   private readonly reviewUrl = this.baseUrl + '/review';
 
-  totalBooks: WritableSignal<number> = signal<number>(0);
-  totalReviews: WritableSignal<number> = signal<number>(0);
+  totalBooks: WritableSignal<number | null> = signal<number | null>(null);
+  totalReviews: WritableSignal<number | null> = signal<number | null>(null);
+  pendingReviews: WritableSignal<number | null> = signal<number | null>(null);
 
   getTotalBooks(): void {
     this.http.get<number>(`${this.bookUrl}/count`).subscribe({
       next: (total) => this.totalBooks.set(total),
       error: (err) => {
         console.error(err);
-        this.totalBooks.set(0);
+        this.totalBooks.set(null);
       },
     });
   }
@@ -30,7 +31,17 @@ export class DashService {
       next: (total) => this.totalReviews.set(total),
       error: (err) => {
         console.error(err);
-        this.totalReviews.set(0);
+        this.totalReviews.set(null);
+      },
+    });
+  }
+
+  getPendingReviews(): void {
+    this.http.get<number>(`${this.reviewUrl}/pendings`).subscribe({
+      next: (total) => this.pendingReviews.set(total),
+      error: (err) => {
+        console.error(err);
+        this.pendingReviews.set(null);
       },
     });
   }

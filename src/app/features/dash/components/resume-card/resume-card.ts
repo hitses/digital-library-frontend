@@ -8,5 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class ResumeCard {
   title = input.required<string>();
-  metric = input.required<number>();
+  metric = input.required<number | null>();
 }

@@ -16,11 +16,12 @@ export default class Dash {
   resumeData = computed(() => [
     { title: 'Total de libros', metric: this.dashService.totalBooks() },
     { title: 'Reseñas publicadas', metric: this.dashService.totalReviews() },
-    { title: 'Reseñas pendientes', metric: 532 },
+    { title: 'Reseñas pendientes', metric: this.dashService.pendingReviews() },
   ]);
 
   constructor() {
     this.dashService.getTotalBooks();
     this.dashService.getTotalReviews();
+    this.dashService.getPendingReviews();
   }
 }
