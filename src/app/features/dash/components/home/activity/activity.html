@@ -24,7 +24,23 @@
     <article class="rounded-2xl bg-white p-6 shadow">
       <h3 class="mb-4 text-lg font-medium">Últimas reseñas aprobadas</h3>
       <ul class="space-y-3 text-slate-700">
-        <li class="flex justify-between">
+        @for (review of latestsReviews(); track review._id) {
+          <li class="flex justify-between">
+            <span class="text-sm uppercase">
+              {{ typeof review.bookId === 'object' ? review.bookId.title : review.bookId }} -
+              <span class="text-xs">{{ review.name }}</span>
+            </span>
+
+            <span class="text-sm text-slate-500">
+              <relative-time
+                [datetime]="review.createdAt"
+                format="relative"
+                lang="es"
+              ></relative-time>
+            </span>
+          </li>
+        }
+        <!-- <li class="flex justify-between">
           <span>"El Quijote" — Ana G.</span>
           <span class="text-sm text-slate-500">hace 1 día</span>
         </li>
@@ -35,7 +51,7 @@
         <li class="flex justify-between">
           <span>"El Principito" — Marta R.</span>
           <span class="text-sm text-slate-500">hace 5 días</span>
-        </li>
+        </li> -->
       </ul>
     </article>
   </div>

@@ -60,5 +60,13 @@ export class HomeService {
     });
   }
 
-  getLatestReviews(): void {}
+  getLatestReviews(): void {
+    this.http.get<IReview[]>(`${this.reviewUrl}/latests?limit=3`).subscribe({
+      next: (reviews) => this.latestReviews.set(reviews),
+      error: (err) => {
+        console.error(err);
+        this.latestReviews.set(null);
+      },
+    });
+  }
 }

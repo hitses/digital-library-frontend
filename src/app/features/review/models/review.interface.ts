@@ -1,3 +1,5 @@
+import { IBook } from '../../books/models/book.interface';
+
 export interface IReviews {
   total: number;
   totalPages: number;
@@ -8,7 +10,7 @@ export interface IReviews {
 
 export interface IReview {
   _id: string;
-  bookId: string;
+  bookId: string | IBook;
   name: string;
   email: string;
   review: string;
