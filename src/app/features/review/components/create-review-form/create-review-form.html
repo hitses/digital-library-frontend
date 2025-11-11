@@ -104,9 +104,9 @@
     <button
       class="rounded-lg bg-amber-500 py-1 transition-colors duration-200 hover:bg-amber-500/90 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
       type="submit"
-      [disabled]="reviewForm.invalid"
+      [disabled]="reviewForm.invalid || loading()"
     >
-      Enviar
+      {{ loading() ? 'Cargando...' : 'Enviar' }}
     </button>
   </form>
 </section>

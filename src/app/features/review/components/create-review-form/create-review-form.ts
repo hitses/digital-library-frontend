@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilledStar } from '../../../../core/icons/filled-star/filled-star';
 import { Star } from '../../../../core/icons/star/star';
@@ -14,6 +14,8 @@ import { ToastService } from '../../../../core/services/toast';
 })
 export class CreateReviewForm {
   bookId = input.required<string>();
+
+  loading = signal(false);
 
   private readonly fb = inject(FormBuilder);
   private readonly reviewService = inject(ReviewService);
@@ -60,6 +62,8 @@ export class CreateReviewForm {
       return;
     }
 
+    this.loading.set(true);
+
     const { name, email, review, rating } = this.reviewForm.value;
 
     const bookId = this.bookId();
@@ -91,7 +95,10 @@ export class CreateReviewForm {
             'Error del servidor',
             'Error al enviar reseña. Inténtalo más tarde.',
           );
+
+        this.loading.set(false);
       },
+      complete: () => this.loading.set(false),
     });
   }
 }
