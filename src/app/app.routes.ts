@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
+import { canActivateAuthGuard } from './core/guards/can-activate-auth.guard';
 
 export const routes: Routes = [
   {
     path: 'dash',
+    canActivate: [canActivateAuthGuard],
     loadChildren: () => import('./features/dash/dash.routes').then((r) => r.dashRoutes),
   },
   {
