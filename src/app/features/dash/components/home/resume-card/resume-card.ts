@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'dash-resume-card-component',
+  selector: 'resume-card-component',
   imports: [],
   templateUrl: './resume-card.html',
   styles: ``,

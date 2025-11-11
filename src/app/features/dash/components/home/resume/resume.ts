@@ -1,14 +1,14 @@
 import { Component, computed, inject } from '@angular/core';
 import { ResumeCard } from '../resume-card/resume-card';
-import { DashService } from '../../services/dash';
+import { DashService } from '../../../services/dash';
 
 @Component({
-  selector: 'dash-home-resume-component',
+  selector: 'resume-component',
   imports: [ResumeCard],
-  templateUrl: './home-resume.html',
+  templateUrl: './resume.html',
   styles: ``,
 })
-export class HomeResume {
+export class Resume {
   private readonly dashService = inject(DashService);
 
   resumeData = computed(() => [
