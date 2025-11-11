@@ -6,25 +6,11 @@
     <!-- Sección de resumen -->
     <section>
       <h2 class="mb-4 text-xl font-semibold">Resumen general</h2>
+
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
-        <article class="rounded-2xl bg-white p-6 shadow">
-          <p class="text-sm text-slate-500">Total de libros</p>
-          <p class="mt-2 text-3xl font-bold">324</p>
-        </article>
-
-        <article class="rounded-2xl bg-white p-6 shadow">
-          <p class="text-sm text-slate-500">Reseñas publicadas</p>
-          <p class="mt-2 text-3xl font-bold">187</p>
-        </article>
-
-        <article class="relative rounded-2xl bg-white p-6 shadow">
-          <p class="text-sm text-slate-500">Pendientes de revisión</p>
-          <p class="mt-2 text-3xl font-bold">5</p>
-          <span
-            class="absolute top-5 right-5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs font-semibold text-white"
-            >5</span
-          >
-        </article>
+        @for (card of resumeData(); track card.title) {
+          <dash-resume-card-component [title]="card.title" [metric]="card.metric" />
+        }
       </div>
     </section>
 
