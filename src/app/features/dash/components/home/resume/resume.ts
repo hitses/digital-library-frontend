@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { ResumeCard } from '../resume-card/resume-card';
-import { DashService } from '../../../services/dash';
+import { HomeService } from '../../../services/home';
 
 @Component({
   selector: 'resume-component',
@@ -9,17 +9,17 @@ import { DashService } from '../../../services/dash';
   styles: ``,
 })
 export class Resume {
-  private readonly dashService = inject(DashService);
+  private readonly homeService = inject(HomeService);
 
   resumeData = computed(() => [
-    { title: 'Total de libros', metric: this.dashService.totalBooks() },
-    { title: 'Reseñas publicadas', metric: this.dashService.totalReviews() },
-    { title: 'Reseñas pendientes', metric: this.dashService.pendingReviews() },
+    { title: 'Total de libros', metric: this.homeService.totalBooks() },
+    { title: 'Reseñas publicadas', metric: this.homeService.totalReviews() },
+    { title: 'Reseñas pendientes', metric: this.homeService.pendingReviews() },
   ]);
 
   constructor() {
-    this.dashService.getTotalBooks();
-    this.dashService.getTotalReviews();
-    this.dashService.getPendingReviews();
+    this.homeService.getTotalBooks();
+    this.homeService.getTotalReviews();
+    this.homeService.getPendingReviews();
   }
 }

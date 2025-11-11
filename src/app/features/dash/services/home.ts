@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class DashService {
+export class HomeService {
   private readonly http = inject(HttpClient);
 
   private readonly baseUrl = environment.apiUrl;
