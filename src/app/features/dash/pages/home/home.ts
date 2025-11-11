@@ -1,25 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { DashService } from '../../services/dash';
-import { ResumeCard } from '../../components/resume-card/resume-card';
+import { HomeResume } from '../../components/home-resume/home-resume';
 
 @Component({
   selector: 'app-home',
-  imports: [ResumeCard],
+  imports: [HomeResume],
   templateUrl: './home.html',
   styles: ``,
 })
-export default class Home {
-  private readonly dashService = inject(DashService);
-
-  resumeData = computed(() => [
-    { title: 'Total de libros', metric: this.dashService.totalBooks() },
-    { title: 'Reseñas publicadas', metric: this.dashService.totalReviews() },
-    { title: 'Reseñas pendientes', metric: this.dashService.pendingReviews() },
-  ]);
-
-  constructor() {
-    this.dashService.getTotalBooks();
-    this.dashService.getTotalReviews();
-    this.dashService.getPendingReviews();
-  }
-}
+export default class Home {}
