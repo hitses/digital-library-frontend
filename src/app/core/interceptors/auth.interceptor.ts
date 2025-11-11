@@ -21,7 +21,11 @@ export const authInterceptor: HttpInterceptorFn = (
   return next(cloned).pipe(
     tap({
       error: (err) => {
-        if (err instanceof HttpErrorResponse && (err.status === 401 || err.status === 403)) {
+        if (
+          err instanceof HttpErrorResponse &&
+          (err.status === 401 || err.status === 403) &&
+          !req.url.includes('/auth/login')
+        ) {
           localStorage.removeItem('token');
           router.navigate(['/']);
         }
