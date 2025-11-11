@@ -3,78 +3,7 @@
 
   <!-- Contenido principal -->
   <main class="flex-1 space-y-10 p-8">
-    <!-- Sección de resumen -->
-    <section>
-      <h2 class="mb-4 text-xl font-semibold">Resumen general</h2>
-
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
-        @for (card of resumeData(); track card.title) {
-          <dash-resume-card-component [title]="card.title" [metric]="card.metric" />
-        }
-      </div>
-    </section>
-
-    <!-- Sección de acciones -->
-    <section>
-      <h2 class="mb-4 text-xl font-semibold">Acciones rápidas</h2>
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <button
-          class="rounded-2xl bg-blue-600 py-4 font-medium text-white shadow transition hover:bg-blue-700"
-        >
-          Añadir libro
-        </button>
-
-        <button
-          class="rounded-2xl bg-amber-500 py-4 font-medium text-white shadow transition hover:bg-amber-600"
-        >
-          Revisar reseñas (5)
-        </button>
-      </div>
-    </section>
-
-    <!-- Sección de actividad -->
-    <section>
-      <h2 class="mb-4 text-xl font-semibold">Actividad reciente</h2>
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <!-- Artículo: Libros añadidos -->
-        <article class="rounded-2xl bg-white p-6 shadow">
-          <h3 class="mb-4 text-lg font-medium">Últimos libros añadidos</h3>
-          <ul class="space-y-3 text-slate-700">
-            <li class="flex justify-between">
-              <span>"El Quijote"</span>
-              <span class="text-sm text-slate-500">hace 2 días</span>
-            </li>
-            <li class="flex justify-between">
-              <span>"Crimen y castigo"</span>
-              <span class="text-sm text-slate-500">hace 4 días</span>
-            </li>
-            <li class="flex justify-between">
-              <span>"1984"</span>
-              <span class="text-sm text-slate-500">hace 1 semana</span>
-            </li>
-          </ul>
-        </article>
-
-        <!-- Artículo: Reseñas aprobadas -->
-        <article class="rounded-2xl bg-white p-6 shadow">
-          <h3 class="mb-4 text-lg font-medium">Últimas reseñas aprobadas</h3>
-          <ul class="space-y-3 text-slate-700">
-            <li class="flex justify-between">
-              <span>"El Quijote" — Ana G.</span>
-              <span class="text-sm text-slate-500">hace 1 día</span>
-            </li>
-            <li class="flex justify-between">
-              <span>"Cien años de soledad" — Luis M.</span>
-              <span class="text-sm text-slate-500">hace 3 días</span>
-            </li>
-            <li class="flex justify-between">
-              <span>"El Principito" — Marta R.</span>
-              <span class="text-sm text-slate-500">hace 5 días</span>
-            </li>
-          </ul>
-        </article>
-      </div>
-    </section>
+    <router-outlet />
   </main>
 
   <dash-footer-component />

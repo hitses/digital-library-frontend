@@ -1,27 +1,12 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
-import { ResumeCard } from './components/resume-card/resume-card';
-import { DashService } from './services/dash';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dash',
-  imports: [Header, Footer, ResumeCard],
+  imports: [Header, Footer, RouterModule],
   templateUrl: './dash.html',
   styles: ``,
 })
-export default class Dash {
-  private readonly dashService = inject(DashService);
-
-  resumeData = computed(() => [
-    { title: 'Total de libros', metric: this.dashService.totalBooks() },
-    { title: 'Reseñas publicadas', metric: this.dashService.totalReviews() },
-    { title: 'Reseñas pendientes', metric: this.dashService.pendingReviews() },
-  ]);
-
-  constructor() {
-    this.dashService.getTotalBooks();
-    this.dashService.getTotalReviews();
-    this.dashService.getPendingReviews();
-  }
-}
+export default class Dash {}
