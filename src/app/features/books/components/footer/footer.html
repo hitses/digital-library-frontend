@@ -1,12 +1,15 @@
-<footer class="flex justify-around p-4">
-  <p>Aquí va el copy</p>
-
-  <ul class="flex gap-4">
-    <li>Link 1</li>
-    <li>Link 2</li>
-    <li>Link 3</li>
-    <li>Link 4</li>
+<footer class="flex flex-col items-center p-4">
+  <ul class="mb-4 flex divide-x divide-slate-300">
+    @for (item of navItems; track item.label) {
+      <li class="px-4 first:pl-0 last:pr-0">
+        <a class="hover:underline" [routerLink]="item.link">{{ item.label }}</a>
+      </li>
+    }
   </ul>
 
-  <p>Posibles logos</p>
+  <div class="flex">
+    <p>© 2025 Generalitat</p>
+
+    <p>Conselleria de Educación, Cultura, Universidades y Empleo</p>
+  </div>
 </footer>
