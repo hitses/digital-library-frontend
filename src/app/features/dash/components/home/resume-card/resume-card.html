@@ -1,4 +1,4 @@
-@if (!metric()) {
+@if (metric() === null) {
   <article class="rounded-2xl bg-white p-6 shadow">
     <p class="text-sm text-slate-500">{{ title() }}</p>
 
