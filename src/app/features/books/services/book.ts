@@ -17,7 +17,7 @@ export class BookService {
   searchResults = signal<ISearchResponse<IBook> | null>(null);
   isSearching = signal<boolean>(false);
 
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   getFeaturedBooks(): void {
     this.http.get<IBook[]>(`${this.apiUrl}/featured`).subscribe({
