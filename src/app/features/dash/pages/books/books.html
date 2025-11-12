@@ -1,1 +1,70 @@
-<p>books works!</p>
+<main class="flex-1 space-y-10 bg-gray-100 p-8 text-slate-800">
+  <!-- Sección resumen -->
+  <section>
+    <h2 class="mb-4 text-xl font-semibold">Resumen de libros</h2>
+
+    <button
+      class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+    >
+      Añadir libro
+    </button>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <resume-card-component title="Total de libros" [metric]="stats.totalBooks" />
+      <resume-card-component title="Libros destacados" [metric]="stats.featuredBooks" />
+      <resume-card-component title="Media de reseñas" [metric]="stats.avgRating" />
+    </div>
+  </section>
+
+  <!-- Sección listado -->
+  <section>
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="text-xl font-semibold">Listado de libros</h2>
+      <button
+        class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+      >
+        Añadir libro
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (book of books; track book._id) {
+        <article
+          class="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-md"
+        >
+          <div>
+            <img
+              [src]="book.coverUrl"
+              alt="{{ book.title }}"
+              class="mb-3 h-48 w-full rounded-lg object-cover"
+            />
+            <h3 class="text-lg font-semibold">{{ book.title }}</h3>
+            <p class="mb-2 text-sm text-slate-500">{{ book.author }}</p>
+            <p class="text-xs text-slate-400">
+              ISBN: <span class="font-medium">{{ book.isbn }}</span>
+            </p>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <span
+              class="rounded-full px-2 py-1 text-xs"
+              [class.bg-green-100]="book.featured"
+              [class.text-green-700]="book.featured"
+              [class.bg-slate-100]="!book.featured"
+              [class.text-slate-600]="!book.featured"
+            >
+              {{ book.featured ? 'Destacado' : 'Normal' }}
+            </span>
+
+            <button
+              class="text-sm font-medium text-blue-600 hover:underline"
+              (click)="editBook(book._id)"
+            >
+              Editar
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</main>
