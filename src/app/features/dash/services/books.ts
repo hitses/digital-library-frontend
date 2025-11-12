@@ -11,6 +11,8 @@ export class BooksService {
 
   books = signal<Book[]>([]);
   totalBooks = signal<number | null>(null);
+  totalPages = signal<number>(1);
+  page = signal<number>(1);
   featuredBooks = signal<Book[]>([]);
   reviewlessBooks = signal<Book[]>([]);
   totalReviewlessBooks = signal<number | null>(null);
@@ -18,11 +20,14 @@ export class BooksService {
 
   private readonly http = inject(HttpClient);
 
-  getTotalBooks(): void {
-    this.http.get<BooksResponse>(`${this.booksUrl}`).subscribe({
+  getBooks(page: number = 1, limit: number = 25): void {
+    const params = { page, limit };
+    this.http.get<BooksResponse>(`${this.booksUrl}`, { params }).subscribe({
       next: (bookResponse) => {
         this.books.set(bookResponse.data);
         this.totalBooks.set(bookResponse.total);
+        this.totalPages.set(bookResponse.totalPages);
+        this.page.set(bookResponse.page);
       },
       error: (err) => {
         console.error(err);
