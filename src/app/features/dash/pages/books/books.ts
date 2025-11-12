@@ -1,15 +1,18 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ResumeCard } from '../../components/home/resume-card/resume-card';
 import { BooksService } from '../../services/books';
+import { Pagination } from '../../../../core/components/pagination/pagination';
 
 @Component({
   selector: 'app-books',
-  imports: [ResumeCard],
+  imports: [ResumeCard, Pagination],
   templateUrl: './books.html',
   styles: ``,
 })
 export default class Books {
   books = computed(() => this.booksService.books());
+  page = computed(() => this.booksService.page());
+  totalPages = computed(() => this.booksService.totalPages());
   totalBooksCount = computed(() => this.booksService.totalBooks());
   featuredBooksCount = computed(() => this.booksService.featuredBooks().length);
   reviewlessBooksCount = computed(() => this.booksService.reviewlessBooks().length);
@@ -19,17 +22,17 @@ export default class Books {
   private readonly booksService = inject(BooksService);
 
   constructor() {
-    this.booksService.getTotalBooks();
+    this.booksService.getBooks(this.page(), 25);
     this.booksService.getFeaturedBooks();
     this.booksService.getReviewlessBooks();
     this.booksService.getRecentBooks();
   }
 
-  stats = {
-    totalBooks: 128,
-    featuredBooks: 9,
-    avgRating: 4.2,
-  };
+  onPageChange(p: number): void {
+    this.booksService.getBooks(p, 25);
+  }
 
   editBook(bookId: string) {}
+
+  deleteBook(bookId: string) {}
 }
