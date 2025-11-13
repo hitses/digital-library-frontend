@@ -6,7 +6,13 @@
   </article>
 } @else {
   <article class="rounded-2xl bg-white p-6 shadow">
-    <p class="text-sm text-slate-500">{{ title() }}</p>
+    <div class="flex items-center justify-between">
+      <p class="text-sm text-slate-500">{{ title() }}</p>
+
+      @if (link()) {
+        <a [routerLink]="link()" class="text-xs text-blue-600">Mostrar &#8594;</a>
+      }
+    </div>
 
     <p class="mt-2 text-3xl font-bold">{{ metric() }}</p>
   </article>

@@ -12,9 +12,21 @@ export class Resume {
   private readonly homeService = inject(HomeService);
 
   resumeData = computed(() => [
-    { title: 'Total de libros', metric: this.homeService.totalBooks() },
-    { title: 'Reseñas publicadas', metric: this.homeService.totalReviews() },
-    { title: 'Reseñas pendientes', metric: this.homeService.pendingReviews() },
+    {
+      title: 'Total de libros',
+      metric: this.homeService.totalBooks(),
+      link: '/dash/books',
+    },
+    {
+      title: 'Reseñas publicadas',
+      metric: this.homeService.totalReviews(),
+      link: '/dash/reviews',
+    },
+    {
+      title: 'Reseñas pendientes',
+      metric: this.homeService.pendingReviews(),
+      link: '/dash/reviews/pending',
+    },
   ]);
 
   constructor() {
