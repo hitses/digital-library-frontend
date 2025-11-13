@@ -1,0 +1,9 @@
+<section class="mx-auto max-w-xl p-4">
+  <h1 class="mb-6 text-2xl font-semibold">Añadir libro</h1>
+
+  <book-form-component
+    [loading]="loading()"
+    [error]="error()"
+    (submitForm)="handleCreate($event)"
+  />
+</section>

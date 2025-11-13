@@ -16,6 +16,16 @@ export const dashRoutes: Routes = [
         loadComponent: () => import('./pages/books/books'),
       },
       {
+        path: 'books/new',
+        title: 'Dashboard | Añadir libro',
+        loadComponent: () => import('./pages/books/new-book/new-book'),
+      },
+      {
+        path: 'books/edit/:id',
+        title: 'Dashboard | Editar libro',
+        loadComponent: () => import('./pages/books/edit-book/edit-book'),
+      },
+      {
         path: 'reviews',
         title: 'Dashboard | Reseñas',
         loadComponent: () => import('./pages/reviews/reviews'),

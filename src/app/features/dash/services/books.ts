@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Book, BooksResponse } from '../models/books.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,20 @@ export class BooksService {
   recentBooks = signal<number | null>(null);
 
   private readonly http = inject(HttpClient);
+
+  createBook(payload: any): Observable<Book> {
+    return this.http.post<Book>(`${this.booksUrl}`, payload);
+  }
+  // createBook(book: any): void {
+  //   this.http.post(`${this.booksUrl}`, book).subscribe({
+  //     next: () => {
+  //       this.getBooks();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error al crear libro:', err);
+  //     },
+  //   });
+  // }
 
   getBooks(page: number = 1, limit: number = 25): void {
     const params = { page, limit };
@@ -65,6 +80,17 @@ export class BooksService {
       error: (err) => {
         console.error(err);
         this.recentBooks.set(null);
+      },
+    });
+  }
+
+  updateBook(id: string, book: any): void {
+    this.http.put(`${this.booksUrl}/${id}`, book).subscribe({
+      next: () => {
+        this.getBooks();
+      },
+      error: (err) => {
+        console.error('Error al actualizar libro:', err);
       },
     });
   }

@@ -2,10 +2,11 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { ResumeCard } from '../../components/home/resume-card/resume-card';
 import { BooksService } from '../../services/books';
 import { Pagination } from '../../../../core/components/pagination/pagination';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-books',
-  imports: [ResumeCard, Pagination],
+  imports: [ResumeCard, Pagination, RouterLink],
   templateUrl: './books.html',
   styles: ``,
 })
@@ -31,8 +32,6 @@ export default class Books {
   onPageChange(p: number): void {
     this.booksService.getBooks(p, 25);
   }
-
-  editBook(bookId: string) {}
 
   deleteBook(bookId: string) {}
 }

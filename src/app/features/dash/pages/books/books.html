@@ -6,6 +6,7 @@
 
       <button
         class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        routerLink="/dash/books/new"
       >
         Añadir libro
       </button>
@@ -92,7 +93,7 @@
                 <div class="flex justify-end gap-4">
                   <button
                     class="cursor-pointer text-sm font-medium text-blue-600 hover:underline"
-                    (click)="editBook(book._id)"
+                    [routerLink]="['/dash/books/edit', book._id]"
                   >
                     Editar
                   </button>
