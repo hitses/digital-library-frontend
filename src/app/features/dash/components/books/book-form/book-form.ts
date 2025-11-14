@@ -41,6 +41,10 @@ export class BookForm {
     }
   }
 
+  public onReset() {
+    this.bookForm.reset();
+  }
+
   onSubmit() {
     if (this.bookForm.invalid) {
       this.bookForm.markAllAsTouched();
@@ -51,9 +55,5 @@ export class BookForm {
     const payload = this.bookForm.value;
 
     this.submitForm.emit(payload);
-  }
-
-  onReset() {
-    this.bookForm.reset();
   }
 }
