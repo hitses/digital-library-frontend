@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, SimpleChanges } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Book } from '../../../models/books.interface';
 import { RouterLink } from '@angular/router';
@@ -32,7 +32,11 @@ export class BookForm {
   });
 
   ngOnInit() {
-    if (this.book) {
+    if (this.book) this.bookForm.patchValue(this.book()!);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['book'] && this.book) {
       this.bookForm.patchValue(this.book()!);
     }
   }
