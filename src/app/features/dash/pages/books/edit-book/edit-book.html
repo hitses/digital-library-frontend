@@ -1,3 +1,24 @@
-<section class="mx-auto max-w-xl p-4">
-  <book-form-component />
+<section class="flex min-h-screen items-center justify-center bg-gray-100 p-4">
+  <div class="relative w-full max-w-3xl">
+    <div class="overflow-hidden rounded-2xl bg-white shadow-lg">
+      <div class="min-h-[300px] overflow-hidden rounded-[1.75rem] bg-white p-10 shadow-2xl">
+        <!-- Header -->
+        <h1 class="mb-6 text-2xl font-semibold">Editar libro</h1>
+
+        <!-- Form -->
+        @if (!loadingBook() && book()) {
+          <book-form-component
+            [book]="book()"
+            [loading]="loading()"
+            (submitForm)="handleEdit($event)"
+          />
+        }
+
+        @if (loadingBook()) {
+          <!-- Skeleton o spinner -->
+          <spinner-component text="Cargando libro" />
+        }
+      </div>
+    </div>
+  </div>
 </section>
