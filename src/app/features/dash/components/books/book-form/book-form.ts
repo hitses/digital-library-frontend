@@ -1,7 +1,6 @@
 import { Component, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Book } from '../../../models/books.interface';
-import { ISBN_PATTERN } from '../../../../../core/patterns';
 import { RouterLink } from '@angular/router';
 import { isbnFullValidator } from '../../../../../core/validators/isbn.validator';
 
@@ -22,11 +21,14 @@ export class BookForm {
   private readonly fb = inject(FormBuilder);
 
   bookForm = this.fb.nonNullable.group({
-    title: ['', [Validators.minLength(1), Validators.maxLength(200)]],
-    author: ['', [Validators.minLength(1), Validators.maxLength(150)]],
-    isbn: ['', [isbnFullValidator()]],
-    synopsis: ['', [Validators.minLength(10), Validators.maxLength(4000)]],
-    coverUrl: ['', [Validators.pattern(/^https?:\/\/.+/), Validators.maxLength(1000)]],
+    title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(200)]],
+    author: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(150)]],
+    isbn: ['', [Validators.required, isbnFullValidator()]],
+    synopsis: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(4000)]],
+    coverUrl: [
+      '',
+      [Validators.required, Validators.pattern(/^https?:\/\/.+/), Validators.maxLength(1000)],
+    ],
   });
 
   ngOnInit() {

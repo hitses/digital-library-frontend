@@ -58,10 +58,12 @@
     <textarea
       formControlName="synopsis"
       rows="4"
-      class="peer w-full resize-none rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      placeholder=" "
+      class="peer field-sizing-content w-full resize-none rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      style="line-height: 1.5"
     ></textarea>
     <label
-      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+      class="pointer-events-none absolute top-1.5 left-3 text-xs text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-blue-600"
     >
       Sinopsis
     </label>
@@ -125,8 +127,4 @@
       {{ loading() ? 'Guardando...' : 'Guardar' }}
     </button>
   </div>
-
-  @if (error()) {
-    <p class="mt-2 text-center text-sm text-red-600">{{ error() }}</p>
-  }
 </form>
