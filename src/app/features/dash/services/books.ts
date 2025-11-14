@@ -3,6 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Book, BooksResponse } from '../models/books.interface';
 import { Observable } from 'rxjs';
+import { INewBook } from '../../books/models/new-book.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class BooksService {
   private readonly booksUrl = environment.apiUrl + '/book';
 
   books = signal<Book[]>([]);
+  book = signal<Book | null>(null);
   totalBooks = signal<number | null>(null);
   totalPages = signal<number>(1);
   page = signal<number>(1);
@@ -18,22 +20,13 @@ export class BooksService {
   reviewlessBooks = signal<Book[]>([]);
   totalReviewlessBooks = signal<number | null>(null);
   recentBooks = signal<number | null>(null);
+  loading = signal(true);
 
   private readonly http = inject(HttpClient);
 
-  createBook(payload: any): Observable<Book> {
-    return this.http.post<Book>(`${this.booksUrl}`, payload);
+  createBook(payload: INewBook): Observable<INewBook> {
+    return this.http.post<INewBook>(`${this.booksUrl}`, payload);
   }
-  // createBook(book: any): void {
-  //   this.http.post(`${this.booksUrl}`, book).subscribe({
-  //     next: () => {
-  //       this.getBooks();
-  //     },
-  //     error: (err) => {
-  //       console.error('Error al crear libro:', err);
-  //     },
-  //   });
-  // }
 
   getBooks(page: number = 1, limit: number = 25): void {
     const params = { page, limit };
@@ -47,6 +40,22 @@ export class BooksService {
       error: (err) => {
         console.error(err);
         this.books.set([]);
+      },
+    });
+  }
+
+  getBookById(id: string): void {
+    this.loading.set(true);
+
+    this.http.get<Book>(`${this.booksUrl}/${id}`).subscribe({
+      next: (book) => {
+        this.book.set(book);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error(err);
+        this.book.set(null);
+        this.loading.set(false);
       },
     });
   }
@@ -84,14 +93,7 @@ export class BooksService {
     });
   }
 
-  updateBook(id: string, book: any): void {
-    this.http.put(`${this.booksUrl}/${id}`, book).subscribe({
-      next: () => {
-        this.getBooks();
-      },
-      error: (err) => {
-        console.error('Error al actualizar libro:', err);
-      },
-    });
+  updateBook(id: string, book: INewBook): Observable<INewBook> {
+    return this.http.patch<INewBook>(`${this.booksUrl}/${id}`, book);
   }
 }
