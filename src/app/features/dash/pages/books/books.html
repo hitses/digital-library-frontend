@@ -27,97 +27,103 @@
     </div>
 
     <div class="overflow-hidden rounded-xl border border-slate-200 bg-white pb-4 shadow-md">
-      <table class="min-w-full divide-y divide-slate-200">
-        <thead class="bg-slate-50">
-          <tr>
-            <th
-              class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
-            >
-              Portada
-            </th>
-            <th
-              class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
-            >
-              Título
-            </th>
-            <th
-              class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
-            >
-              Autor
-            </th>
-            <th
-              class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
-            >
-              ISBN
-            </th>
-            <th
-              class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
-            >
-              Estado
-            </th>
-            <th
-              class="px-4 py-3 text-right text-xs font-semibold tracking-wider text-slate-600 uppercase"
-            >
-              Acciones
-            </th>
-          </tr>
-        </thead>
-
-        <tbody class="divide-y divide-slate-100 bg-white">
-          @for (book of books(); track book._id) {
+      @if (!books() || books().length === 0) {
+        <div class="flex justify-center">
+          <spinner-component text="Cargando libros" />
+        </div>
+      } @else {
+        <table class="min-w-full divide-y divide-slate-200">
+          <thead class="bg-slate-50">
             <tr>
-              <td class="px-4 py-3">
-                <img
-                  [src]="book.coverUrl"
-                  alt="{{ book.title }}"
-                  class="h-12 w-9 rounded-md object-cover"
-                />
-              </td>
-              <td class="px-4 py-3 text-sm font-medium text-slate-800 uppercase">
-                {{ book.title }}
-              </td>
-              <td class="px-4 py-3 text-sm text-slate-600 uppercase">{{ book.author }}</td>
-              <td class="px-4 py-3 text-xs text-slate-500">{{ book.isbn }}</td>
-              <td class="px-4 py-3">
-                <span
-                  class="rounded-full px-2 py-1 text-xs font-semibold"
-                  [class.bg-green-100]="book.featured"
-                  [class.text-green-700]="book.featured"
-                  [class.bg-slate-100]="!book.featured"
-                  [class.text-slate-600]="!book.featured"
-                >
-                  {{ book.featured ? 'Destacado' : 'Normal' }}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                <div class="flex justify-end gap-4">
-                  <button
-                    class="cursor-pointer text-sm font-medium text-blue-600 hover:underline"
-                    [routerLink]="['/dash/books/edit', book._id]"
-                  >
-                    Editar
-                  </button>
-
-                  <button
-                    class="cursor-pointer text-sm font-medium text-red-600 hover:underline"
-                    (click)="deleteBook(book._id)"
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </td>
+              <th
+                class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
+              >
+                Portada
+              </th>
+              <th
+                class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
+              >
+                Título
+              </th>
+              <th
+                class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
+              >
+                Autor
+              </th>
+              <th
+                class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
+              >
+                ISBN
+              </th>
+              <th
+                class="px-4 py-3 text-left text-xs font-semibold tracking-wider text-slate-600 uppercase"
+              >
+                Estado
+              </th>
+              <th
+                class="px-4 py-3 text-right text-xs font-semibold tracking-wider text-slate-600 uppercase"
+              >
+                Acciones
+              </th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
 
-      <!-- Paginación -->
-      <pagination-component
-        class="border-t border-slate-200"
-        [page]="page()"
-        [totalPages]="totalPages()"
-        (pageChange)="onPageChange($event)"
-      />
+          <tbody class="divide-y divide-slate-100 bg-white">
+            @for (book of books(); track book._id) {
+              <tr>
+                <td class="px-4 py-3">
+                  <img
+                    [src]="book.coverUrl"
+                    alt="{{ book.title }}"
+                    class="h-12 w-9 rounded-md object-cover"
+                  />
+                </td>
+                <td class="px-4 py-3 text-sm font-medium text-slate-800 uppercase">
+                  {{ book.title }}
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-600 uppercase">{{ book.author }}</td>
+                <td class="px-4 py-3 text-xs text-slate-500">{{ book.isbn }}</td>
+                <td class="px-4 py-3">
+                  <span
+                    class="rounded-full px-2 py-1 text-xs font-semibold"
+                    [class.bg-green-100]="book.featured"
+                    [class.text-green-700]="book.featured"
+                    [class.bg-slate-100]="!book.featured"
+                    [class.text-slate-600]="!book.featured"
+                  >
+                    {{ book.featured ? 'Destacado' : 'Normal' }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-right">
+                  <div class="flex justify-end gap-4">
+                    <button
+                      class="cursor-pointer text-sm font-medium text-blue-600 hover:underline"
+                      [routerLink]="['/dash/books/edit', book._id]"
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      class="cursor-pointer text-sm font-medium text-red-600 hover:underline"
+                      (click)="deleteBook(book._id)"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- Paginación -->
+        <pagination-component
+          class="border-t border-slate-200"
+          [page]="page()"
+          [totalPages]="totalPages()"
+          (pageChange)="onPageChange($event)"
+        />
+      }
     </div>
   </section>
 </main>

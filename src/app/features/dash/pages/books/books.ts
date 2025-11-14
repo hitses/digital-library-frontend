@@ -1,12 +1,13 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ResumeCard } from '../../components/home/resume-card/resume-card';
 import { BooksService } from '../../services/books';
 import { Pagination } from '../../../../core/components/pagination/pagination';
 import { RouterLink } from '@angular/router';
+import { Spinner } from '../../../../core/components/spinner/spinner';
 
 @Component({
   selector: 'app-books',
-  imports: [ResumeCard, Pagination, RouterLink],
+  imports: [ResumeCard, Pagination, RouterLink, Spinner],
   templateUrl: './books.html',
   styles: ``,
 })
