@@ -1,10 +1,17 @@
-<section class="mx-auto max-w-xl p-4">
-  <h1 class="mb-6 text-2xl font-semibold">Añadir libro</h1>
+<section class="flex min-h-screen items-center justify-center bg-gray-100 p-4">
+  <div class="relative w-full max-w-3xl">
+    <div class="overflow-hidden rounded-2xl bg-white shadow-lg">
+      <div class="min-h-[300px] overflow-hidden rounded-[1.75rem] bg-white p-10 shadow-2xl">
+        <!-- Header -->
+        <h1 class="mb-6 text-2xl font-semibold">Añadir libro</h1>
 
-  <book-form-component
-    #form
-    [loading]="loading()"
-    [error]="error()"
-    (submitForm)="handleCreate($event)"
-  />
+        <!-- Form -->
+        <book-form-component
+          [loading]="loading()"
+          [error]="error()"
+          (submitForm)="handleCreate($event)"
+        />
+      </div>
+    </div>
+  </div>
 </section>
