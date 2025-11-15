@@ -3,6 +3,10 @@
 /* Dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --breakpoint-980bp: 980px;
+}
+
 html.theme-transition *,
 html.theme-transition ::before,
 html.theme-transition ::after {
