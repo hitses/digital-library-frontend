@@ -7,9 +7,11 @@
       <ul class="space-y-3 text-slate-700">
         @for (book of latestsBooks(); track book._id) {
           <li class="flex justify-between">
-            <a routerLink="/dash/books" class="text-sm uppercase underline hover:text-amber-600">{{
-              book.title
-            }}</a>
+            <a
+              [routerLink]="`/dash/books/${book._id}`"
+              class="text-sm uppercase underline hover:text-amber-600"
+              >{{ book.title }}</a
+            >
 
             <span class="text-sm text-slate-500">
               <relative-time
