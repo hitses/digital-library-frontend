@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Book } from '../../../models/books.interface';
 import { RouterLink } from '@angular/router';
 import { isbnFullValidator } from '../../../../../core/validators/isbn.validator';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'book-form-component',
@@ -19,6 +20,7 @@ export class BookForm {
   cancelForm = output<void>();
 
   private readonly fb = inject(FormBuilder);
+  private readonly location = inject(Location);
 
   bookForm = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(200)]],
@@ -43,6 +45,10 @@ export class BookForm {
 
   public onReset() {
     this.bookForm.reset();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   onSubmit() {
