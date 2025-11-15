@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginService } from '../../../auth/services/login';
+import { SearchBook } from '../../../books/components/search-book/search-book';
 
 @Component({
   selector: 'dash-header-component',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, SearchBook],
   templateUrl: './header.html',
   styles: ``,
 })
