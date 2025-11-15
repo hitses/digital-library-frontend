@@ -2,11 +2,11 @@ import { Component, computed, effect, inject, input, OnDestroy } from '@angular/
 import { BooksService } from '../../../services/books';
 import { RouterLink } from '@angular/router';
 import { Spinner } from '../../../../../core/components/spinner/spinner';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 
 @Component({
   selector: 'book-page',
-  imports: [RouterLink, Spinner],
+  imports: [RouterLink, Spinner, DatePipe],
   templateUrl: './book.html',
   styles: ``,
 })
