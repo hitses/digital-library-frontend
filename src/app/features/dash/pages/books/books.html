@@ -79,7 +79,9 @@
                   />
                 </td>
                 <td class="px-4 py-3 text-sm font-medium text-slate-800 uppercase">
-                  {{ book.title }}
+                  <a class="text-amber-600 underline" [routerLink]="`/dash/books/${book._id}`">{{
+                    book.title
+                  }}</a>
                 </td>
                 <td class="px-4 py-3 text-sm text-slate-600 uppercase">{{ book.author }}</td>
                 <td class="px-4 py-3 text-xs text-slate-500">{{ book.isbn }}</td>
