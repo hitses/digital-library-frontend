@@ -17,10 +17,14 @@
     }
   </button>
 
-  <button
-    routerLink="/auth/login"
-    class="rounded-lg bg-blue-600 px-2 py-1 text-sm text-white transition-colors duration-200 hover:bg-blue-500"
-  >
-    Iniciar sesión &#8594;
-  </button>
+  @if (!isAuthenticated()) {
+    <button
+      routerLink="/auth/login"
+      class="rounded-lg bg-blue-600 px-2 py-1 text-sm text-white transition-colors duration-200 hover:bg-blue-500"
+    >
+      Iniciar sesión &#8594;
+    </button>
+  } @else {
+    <a routerLink="/dash" class="text-black hover:underline dark:text-white">Panel de control</a>
+  }
 </header>

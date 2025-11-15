@@ -59,6 +59,8 @@ export default class Login {
       next: (res) => {
         localStorage.setItem('token', res.token);
 
+        this.loginService.isAuthenticated.set(true);
+
         this.router.navigateByUrl('/dash');
       },
       error: (err) => {

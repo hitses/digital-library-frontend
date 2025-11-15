@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { SearchBook } from '../search-book/search-book';
 import { RouterLink } from '@angular/router';
 import { Moon } from '../../../../core/icons/moon/moon';
 import { Sun } from '../../../../core/icons/sun/sun';
+import { LoginService } from '../../../auth/services/login';
 
 @Component({
   selector: 'books-header-component',
@@ -13,7 +14,10 @@ import { Sun } from '../../../../core/icons/sun/sun';
 export class Header {
   private readonly STORAGE_KEY = 'theme';
 
+  private readonly loginService = inject(LoginService);
+
   theme = signal<'light' | 'dark'>('light');
+  isAuthenticated = computed(() => this.loginService.isAuthenticated());
 
   constructor() {
     const saved = localStorage.getItem(this.STORAGE_KEY) as 'light' | 'dark' | null;

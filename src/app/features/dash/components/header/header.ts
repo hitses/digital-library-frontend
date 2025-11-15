@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { LoginService } from '../../../auth/services/login';
 
 @Component({
   selector: 'dash-header-component',
@@ -8,6 +9,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   styles: ``,
 })
 export class Header {
+  private readonly loginService = inject(LoginService);
+
   navLinks = [
     {
       label: 'Inicio',
@@ -31,6 +34,8 @@ export class Header {
 
   logout() {
     localStorage.removeItem('token');
+
+    this.loginService.isAuthenticated.set(false);
 
     this.router.navigate(['/']);
   }
