@@ -96,4 +96,8 @@ export class BooksService {
   updateBook(id: string, book: INewBook): Observable<INewBook> {
     return this.http.patch<INewBook>(`${this.booksUrl}/${id}`, book);
   }
+
+  clearBook(): void {
+    this.book.set(null);
+  }
 }
