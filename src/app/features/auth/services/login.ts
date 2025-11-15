@@ -12,6 +12,12 @@ export class LoginService {
 
   isAuthenticated = signal<boolean>(false);
 
+  constructor() {
+    const token = localStorage.getItem('token');
+
+    if (token) this.isAuthenticated.set(true);
+  }
+
   login(email: string, password: string) {
     return this.http.post<{ id: string; email: string; token: string }>(`${this.baseUrl}/login`, {
       email,
