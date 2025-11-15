@@ -2,6 +2,9 @@
   <h1 class="text-xl font-semibold">Panel de administración</h1>
   <nav>
     <ul class="flex gap-6 text-sm font-medium">
+      <li>
+        <a routerLink="/" class="cursor-pointer hover:underline">Biblioteca</a>
+      </li>
       @for (item of navLinks; track item.label) {
         <li>
           <a
