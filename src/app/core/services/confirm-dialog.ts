@@ -47,8 +47,8 @@ export class ConfirmDialogService {
 
   confirmDelete(itemName: string = 'este elemento'): Promise<boolean> {
     return this.confirm({
-      title: '¿Confirmar eliminación?',
-      message: `¿Estás seguro de que deseas eliminar ${itemName}? Esta acción no se puede deshacer.`,
+      title: 'Confirmar eliminación',
+      message: `Se va a eliminar ${itemName}. Esta acción no se puede deshacer.`,
       confirmText: 'Eliminar',
       cancelText: 'Cancelar',
       type: 'danger',
