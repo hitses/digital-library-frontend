@@ -1,3 +1,9 @@
 <router-outlet />
 
 <toast-container-component />
+<confirm-dialog-component
+  [isOpen]="confirmDialog.isOpen()"
+  [config]="confirmDialog.config()"
+  (confirmed)="onDialogResult($event)"
+  (closed)="onDialogClosed()"
+/>
