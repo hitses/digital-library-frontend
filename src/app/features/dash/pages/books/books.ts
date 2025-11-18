@@ -25,7 +25,7 @@ export default class Books {
 
   private readonly booksService = inject(BooksService);
   private readonly toastService = inject(ToastService);
-  private confirmDialog = inject(ConfirmDialogService);
+  private readonly confirmDialog = inject(ConfirmDialogService);
 
   constructor() {
     this.booksService.getBooks(this.page(), 25);

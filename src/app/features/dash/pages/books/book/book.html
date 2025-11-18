@@ -2,7 +2,7 @@
   @if (book() === null) {
     <spinner-component text="Cargando libro" />
   } @else {
-    <div class="w-full">
+    <div class="flex w-full flex-col gap-6">
       <article class="w-full space-y-6 rounded-2xl bg-white p-6 shadow-lg">
         <!-- Header -->
         <header class="flex justify-between">
@@ -20,6 +20,7 @@
 
             <button
               class="cursor-pointer text-sm font-medium text-red-600 hover:text-red-500 hover:underline"
+              (click)="onDeleteBook()"
             >
               Eliminar libro
             </button>
@@ -81,6 +82,13 @@
             </div>
           </div>
         </div>
+      </article>
+
+      <!-- Reviews -->
+      <article class="w-full space-y-6 rounded-2xl bg-white p-6 shadow-lg">
+        <p>Aquí van las reviews pendientes</p>
+
+        <p>Aquí las reviews publicadas</p>
       </article>
     </div>
   }
