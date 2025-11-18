@@ -97,6 +97,10 @@ export class BooksService {
     return this.http.patch<INewBook>(`${this.booksUrl}/${id}`, book);
   }
 
+  deleteBook(id: string): Observable<Book> {
+    return this.http.delete<Book>(`${this.booksUrl}/${id}`);
+  }
+
   clearBook(): void {
     this.book.set(null);
   }
