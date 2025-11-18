@@ -58,7 +58,7 @@ export class ConfirmDialogService {
   confirmLogout(): Promise<boolean> {
     return this.confirm({
       title: '¿Cerrar sesión?',
-      message: '¿Estás seguro de que deseas cerrar tu sesión?',
+      message: 'Seguro que deseas cerrar tu sesión?',
       confirmText: 'Cerrar sesión',
       cancelText: 'Cancelar',
       type: 'warning',

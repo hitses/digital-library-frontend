@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginService } from '../../../auth/services/login';
 import { SearchBook } from '../../../books/components/search-book/search-book';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
 
 @Component({
   selector: 'dash-header-component',
@@ -10,7 +11,9 @@ import { SearchBook } from '../../../books/components/search-book/search-book';
   styles: ``,
 })
 export class Header {
+  private readonly router = inject(Router);
   private readonly loginService = inject(LoginService);
+  private readonly confirmDialog = inject(ConfirmDialogService);
 
   navLinks = [
     {
@@ -31,13 +34,16 @@ export class Header {
     },
   ];
 
-  private readonly router = inject(Router);
+  async logout() {
+    const confirmed = await this.confirmDialog.confirmLogout();
 
-  logout() {
-    localStorage.removeItem('token');
+    if (!confirmed) return;
+    else {
+      localStorage.removeItem('token');
 
-    this.loginService.isAuthenticated.set(false);
+      this.loginService.isAuthenticated.set(false);
 
-    this.router.navigate(['/']);
+      this.router.navigate(['/']);
+    }
   }
 }
