@@ -1,0 +1,58 @@
+@if (isOpen()) {
+  <div
+    class="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+    (click)="onBackdropClick()"
+    (keydown.escape)="onCancel()"
+  >
+    <div
+      class="animate-scale-in relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
+      (click)="$event.stopPropagation()"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-labelledby]="'dialog-title'"
+    >
+      <!-- Close button -->
+      <button
+        (click)="onCancel()"
+        class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-gray-600"
+        aria-label="Cerrar"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
+      <!-- Content -->
+      <div class="mb-6">
+        <h2 id="dialog-title" class="mb-2 pr-8 text-xl font-semibold text-gray-900">
+          {{ config().title }}
+        </h2>
+        <p class="text-gray-600">
+          {{ config().message }}
+        </p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex justify-end gap-3">
+        <button
+          (click)="onCancel()"
+          class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+        >
+          {{ config().cancelText ?? 'Cancelar' }}
+        </button>
+        <button
+          (click)="onConfirm()"
+          [class]="getConfirmButtonClass()"
+          class="rounded-md px-4 py-2 text-sm font-medium text-white transition-colors"
+        >
+          {{ config().confirmText ?? 'Confirmar' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
