@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'book-form-component',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   templateUrl: './book-form.html',
 })
 export class BookForm {
