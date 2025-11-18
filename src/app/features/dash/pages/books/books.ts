@@ -4,6 +4,8 @@ import { BooksService } from '../../services/books';
 import { Pagination } from '../../../../core/components/pagination/pagination';
 import { RouterLink } from '@angular/router';
 import { Spinner } from '../../../../core/components/spinner/spinner';
+import { ToastService } from '../../../../core/services/toast';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
 
 @Component({
   selector: 'app-books',
@@ -22,6 +24,8 @@ export default class Books {
   recentBooks = computed(() => this.booksService.recentBooks());
 
   private readonly booksService = inject(BooksService);
+  private readonly toastService = inject(ToastService);
+  private confirmDialog = inject(ConfirmDialogService);
 
   constructor() {
     this.booksService.getBooks(this.page(), 25);
@@ -34,5 +38,25 @@ export default class Books {
     this.booksService.getBooks(p, 25);
   }
 
-  deleteBook(bookId: string) {}
+  async onDeleteBook(bookId: string, bookTitle: string): Promise<void> {
+    const confirmed = await this.confirmDialog.confirmDelete(bookTitle.toUpperCase());
+
+    if (!confirmed) return;
+    else {
+      this.booksService.deleteBook(bookId).subscribe({
+        next: (book) => {
+          this.toastService.success(
+            'Libro eliminado correctamente',
+            `El libro ${book.title.toUpperCase()} se ha eliminado correctamente`,
+          );
+
+          this.booksService.getBooks(this.page(), 25);
+          this.booksService.getRecentBooks();
+        },
+        error: (err) => {
+          console.error('Error deleting book:', err);
+        },
+      });
+    }
+  }
 }
