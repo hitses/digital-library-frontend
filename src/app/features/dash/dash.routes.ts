@@ -48,6 +48,10 @@ export const dashRoutes: Routes = [
         loadComponent: () => import('./pages/settings/settings'),
         children: [
           {
+            path: '',
+            loadComponent: () => import('./components/settings/home/home'),
+          },
+          {
             path: 'change-password',
             title: 'Dashboard | Cambiar Contraseña',
             loadComponent: () => import('./components/settings/change-password/change-password'),
