@@ -1,7 +1,6 @@
 import { Component, inject, input, output, SimpleChanges } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Book } from '../../../models/books.interface';
-import { RouterLink } from '@angular/router';
 import { isbnFullValidator } from '../../../../../core/validators/isbn.validator';
 import { Location } from '@angular/common';
 
