@@ -3,7 +3,7 @@ import { SearchBook } from '../search-book/search-book';
 import { RouterLink } from '@angular/router';
 import { Moon } from '../../../../core/icons/moon/moon';
 import { Sun } from '../../../../core/icons/sun/sun';
-import { LoginService } from '../../../auth/services/login';
+import { AuthService } from '../../../auth/services/auth';
 
 @Component({
   selector: 'books-header-component',
@@ -14,10 +14,10 @@ import { LoginService } from '../../../auth/services/login';
 export class Header {
   private readonly STORAGE_KEY = 'theme';
 
-  private readonly loginService = inject(LoginService);
+  private readonly authService = inject(AuthService);
 
   theme = signal<'light' | 'dark'>('light');
-  isAuthenticated = computed(() => this.loginService.isAuthenticated());
+  isAuthenticated = computed(() => this.authService.isAuthenticated());
 
   constructor() {
     const saved = localStorage.getItem(this.STORAGE_KEY) as 'light' | 'dark' | null;

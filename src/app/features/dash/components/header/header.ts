@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { LoginService } from '../../../auth/services/login';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth';
 import { SearchBook } from '../../../books/components/search-book/search-book';
 import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
 
@@ -11,8 +11,7 @@ import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
   styles: ``,
 })
 export class Header {
-  private readonly router = inject(Router);
-  private readonly loginService = inject(LoginService);
+  private readonly authService = inject(AuthService);
   private readonly confirmDialog = inject(ConfirmDialogService);
 
   navLinks = [
@@ -37,13 +36,8 @@ export class Header {
   async logout() {
     const confirmed = await this.confirmDialog.confirmLogout();
 
-    if (!confirmed) return;
-    else {
-      localStorage.removeItem('token');
-
-      this.loginService.isAuthenticated.set(false);
-
-      this.router.navigate(['/']);
+    if (confirmed) {
+      this.authService.logout();
     }
   }
 }

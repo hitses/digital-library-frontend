@@ -1,14 +1,16 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class AuthService {
   private readonly baseUrl = `${environment.apiUrl}/auth`;
 
   private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
 
   isAuthenticated = signal<boolean>(false);
 
@@ -23,5 +25,13 @@ export class LoginService {
       email,
       password,
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+
+    this.isAuthenticated.set(false);
+
+    this.router.navigate(['/']);
   }
 }

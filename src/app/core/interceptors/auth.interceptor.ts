@@ -5,30 +5,29 @@ import {
   HttpEvent,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { inject, Injector } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { AuthService } from '../../features/auth/services/auth';
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
   const token = localStorage.getItem('token');
-  const router = inject(Router);
+
+  const injector = inject(Injector);
 
   const cloned = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
 
   return next(cloned).pipe(
     tap({
       error: (err) => {
-        if (
-          err instanceof HttpErrorResponse &&
-          (err.status === 401 || err.status === 403) &&
-          !req.url.includes('/auth/login')
-        ) {
-          localStorage.removeItem('token');
-          router.navigate(['/']);
-        }
+        if (err instanceof HttpErrorResponse && (err.status === 401 || err.status === 403))
+          if (!req.url.includes('/auth/login')) {
+            const authService = injector.get(AuthService);
+
+            authService.logout();
+          }
       },
     }),
   );

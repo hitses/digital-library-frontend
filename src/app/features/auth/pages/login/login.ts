@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../services/login';
+import { AuthService } from '../../services/auth';
 import { PASSWORD_PATTERN } from '../../../../core/patterns';
 import { ToastService } from '../../../../core/services/toast';
 import { ClosedEye } from '../../../../core/icons/closed-eye/closed-eye';
@@ -20,7 +20,7 @@ export default class Login {
 
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
-  private readonly loginService = inject(LoginService);
+  private readonly authService = inject(AuthService);
   private readonly toastService = inject(ToastService);
 
   loginForm = this.fb.group({
@@ -55,11 +55,11 @@ export default class Login {
 
     if (!email || !password) return;
 
-    this.loginService.login(email, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.token);
 
-        this.loginService.isAuthenticated.set(true);
+        this.authService.isAuthenticated.set(true);
 
         this.router.navigateByUrl('/dash');
       },
