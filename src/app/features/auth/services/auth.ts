@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class AuthService {
     this.isAuthenticated.set(false);
 
     this.router.navigate(['/']);
+  }
+
+  checkSession(): Observable<void> {
+    return this.http.get<void>(`${this.baseUrl}/check-session`);
   }
 }
