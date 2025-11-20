@@ -28,18 +28,28 @@ export class BooksService {
     return this.http.post<INewBook>(`${this.booksUrl}`, payload);
   }
 
-  getBooks(page: number = 1, limit: number = 25): void {
-    const params = { page, limit };
-    this.http.get<BooksResponse>(`${this.booksUrl}`, { params }).subscribe({
+  getBooks(page: number = 1, limit: number = 25, q: string = ''): void {
+    const params = { page, limit, q };
+
+    this.http.get<BooksResponse>(`${this.booksUrl}/search`, { params }).subscribe({
       next: (bookResponse) => {
         this.books.set(bookResponse.data);
-        this.totalBooks.set(bookResponse.total);
         this.totalPages.set(bookResponse.totalPages);
         this.page.set(bookResponse.page);
       },
       error: (err) => {
         console.error(err);
         this.books.set([]);
+      },
+    });
+  }
+
+  getTotalBooks(): void {
+    this.http.get<number>(`${this.booksUrl}/count`).subscribe({
+      next: (total) => this.totalBooks.set(total),
+      error: (err) => {
+        console.error(err);
+        this.totalBooks.set(null);
       },
     });
   }

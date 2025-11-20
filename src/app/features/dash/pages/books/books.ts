@@ -1,12 +1,13 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { ResumeCard } from '../../components/home/resume-card/resume-card';
 import { BooksService } from '../../services/books';
 import { Pagination } from '../../../../core/components/pagination/pagination';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Spinner } from '../../../../core/components/spinner/spinner';
 import { ToastService } from '../../../../core/services/toast';
 import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
 import { Table } from '../../components/books/table/table';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-books',
@@ -15,6 +16,13 @@ import { Table } from '../../components/books/table/table';
   styles: ``,
 })
 export default class Books {
+  private readonly route = inject(ActivatedRoute);
+  private readonly booksService = inject(BooksService);
+  private readonly toastService = inject(ToastService);
+  private readonly confirmDialog = inject(ConfirmDialogService);
+
+  qParam = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
+
   books = computed(() => this.booksService.books());
   page = computed(() => this.booksService.page());
   totalPages = computed(() => this.booksService.totalPages());
@@ -23,16 +31,20 @@ export default class Books {
   reviewlessBooksCount = computed(() => this.booksService.reviewlessBooks().length);
   totalReviewlessBooksCount = computed(() => this.booksService.totalReviewlessBooks());
   recentBooks = computed(() => this.booksService.recentBooks());
-
-  private readonly booksService = inject(BooksService);
-  private readonly toastService = inject(ToastService);
-  private readonly confirmDialog = inject(ConfirmDialogService);
+  query = computed(() => (this.qParam().get('q') || '').trim());
 
   constructor() {
-    this.booksService.getBooks(this.page(), 25);
+    this.booksService.getTotalBooks();
     this.booksService.getFeaturedBooks();
     this.booksService.getReviewlessBooks();
     this.booksService.getRecentBooks();
+
+    effect(() => {
+      const q = this.query();
+      const p = this.page();
+
+      this.booksService.getBooks(p, 25, q);
+    });
   }
 
   onPageChange(p: number): void {
