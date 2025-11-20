@@ -1,12 +1,12 @@
 import { Component, effect, inject, input, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BookService } from '../../services/book';
 import { BookList } from '../../components/book-list/book-list';
 import { Pagination } from '../../../../core/components/pagination/pagination';
 
 @Component({
   selector: 'search-page',
-  imports: [BookList, Pagination],
+  imports: [BookList, Pagination, RouterLink],
   templateUrl: './search.html',
   styles: ``,
 })
