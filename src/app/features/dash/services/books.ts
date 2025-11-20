@@ -14,6 +14,7 @@ export class BooksService {
   books = signal<Book[]>([]);
   book = signal<Book | null>(null);
   totalBooks = signal<number | null>(null);
+  searchedTotalBooks = signal<number | null>(null);
   totalPages = signal<number>(1);
   page = signal<number>(1);
   featuredBooks = signal<Book[]>([]);
@@ -34,6 +35,7 @@ export class BooksService {
     this.http.get<BooksResponse>(`${this.booksUrl}/search`, { params }).subscribe({
       next: (bookResponse) => {
         this.books.set(bookResponse.data);
+        this.searchedTotalBooks.set(bookResponse.total);
         this.totalPages.set(bookResponse.totalPages);
         this.page.set(bookResponse.page);
       },

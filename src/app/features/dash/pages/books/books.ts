@@ -24,6 +24,7 @@ export default class Books {
   qParam = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
 
   books = computed(() => this.booksService.books());
+  searchedTotalBooks = computed(() => this.booksService.searchedTotalBooks());
   page = computed(() => this.booksService.page());
   totalPages = computed(() => this.booksService.totalPages());
   totalBooksCount = computed(() => this.booksService.totalBooks());
