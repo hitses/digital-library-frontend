@@ -18,7 +18,11 @@
         [metric]="totalBooksCount()"
         link="/dash/books"
       />
-      <resume-card-component title="Libros destacados" [metric]="featuredBooksCount()" />
+      <resume-card-component
+        title="Libros destacados"
+        [metric]="featuredBooksCount()"
+        (click)="showFeatured($event)"
+      />
       <resume-card-component title="Libros sin reseñas" [metric]="totalReviewlessBooksCount()" />
       <resume-card-component title="Nuevos libros del mes" [metric]="recentBooks()" />
     </div>

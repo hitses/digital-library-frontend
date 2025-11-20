@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,4 +11,10 @@ export class ResumeCard {
   title = input.required<string>();
   metric = input.required<number | null>();
   link = input<string>();
+
+  click = output<boolean>();
+
+  onClick() {
+    this.click.emit(true);
+  }
 }

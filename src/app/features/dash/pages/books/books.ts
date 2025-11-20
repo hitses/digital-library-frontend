@@ -52,6 +52,14 @@ export default class Books {
     this.booksService.getBooks(p, 25);
   }
 
+  showFeatured(event: boolean) {
+    this.booksService.books.set(this.booksService.featuredBooks());
+
+    this.booksService.page.set(1);
+    this.booksService.totalPages.set(1);
+    this.booksService.searchedTotalBooks.set(this.booksService.featuredBooks().length);
+  }
+
   async onDeleteBook(event: { bookId: string; bookTitle: string }): Promise<void> {
     const { bookId, bookTitle } = event;
 
