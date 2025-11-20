@@ -1,29 +1,22 @@
-<section>
-  <div class="grid grid-cols-1 gap-2 md:grid-cols-[250px_1fr]">
-    <!-- Tarjeta lateral -->
-    <aside class="rounded-xl bg-white p-6 shadow">
+<section class="flex h-full flex-1 flex-col">
+  <div class="grid flex-1 grid-cols-1 gap-2 md:grid-cols-[250px_1fr]">
+    <!-- Tarjeta lateral Sidebar -->
+    <aside class="flex h-full flex-col rounded-xl bg-white p-6 shadow">
       <h2 class="mb-4 text-lg font-semibold text-slate-800">Ajustes</h2>
 
       <nav class="space-y-2">
         <a
-          routerLink="change-password"
+          routerLink="./change-password"
           routerLinkActive="bg-blue-50 text-blue-600"
           class="block cursor-pointer rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-100"
         >
           Cambiar contraseña
         </a>
-
-        <!-- Más opciones aquí -->
-        <!--
-        <a routerLink="profile" class="block rounded-lg px-3 py-2 text-slate-700 hover:bg-slate-100">
-          Perfil
-        </a>
-        -->
       </nav>
     </aside>
 
-    <!-- Tarjeta principal donde irá el contenido -->
-    <main class="rounded-xl bg-white p-6 shadow">
+    <!-- Tarjeta principal -->
+    <main class="flex h-full flex-col rounded-xl bg-white p-6 shadow">
       <router-outlet />
     </main>
   </div>
