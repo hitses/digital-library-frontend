@@ -13,7 +13,11 @@
     </div>
 
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <resume-card-component title="Total de libros" [metric]="totalBooksCount()" />
+      <resume-card-component
+        title="Total de libros"
+        [metric]="totalBooksCount()"
+        link="/dash/books"
+      />
       <resume-card-component title="Libros destacados" [metric]="featuredBooksCount()" />
       <resume-card-component title="Libros sin reseñas" [metric]="totalReviewlessBooksCount()" />
       <resume-card-component title="Nuevos libros del mes" [metric]="recentBooks()" />
