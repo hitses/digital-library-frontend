@@ -18,9 +18,13 @@ export class SearchBook {
 
     const query = this.searchControl.value.trim();
 
+    const isDashboard = this.router.url.includes('/dash');
+    const targetRoute = isDashboard ? ['/dash', 'books'] : ['/search'];
+
     if (query || query === '')
-      this.router.navigate(['/search'], {
-        queryParams: { q: query || '' },
+      this.router.navigate(targetRoute, {
+        queryParams: { q: query },
+        replaceUrl: false,
       });
 
     this.searchControl.reset();
