@@ -6,10 +6,11 @@ import { RouterLink } from '@angular/router';
 import { Spinner } from '../../../../core/components/spinner/spinner';
 import { ToastService } from '../../../../core/services/toast';
 import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
+import { Table } from '../../components/books/table/table';
 
 @Component({
   selector: 'app-books',
-  imports: [ResumeCard, Pagination, RouterLink, Spinner],
+  imports: [ResumeCard, Pagination, RouterLink, Spinner, Table],
   templateUrl: './books.html',
   styles: ``,
 })
@@ -38,7 +39,9 @@ export default class Books {
     this.booksService.getBooks(p, 25);
   }
 
-  async onDeleteBook(bookId: string, bookTitle: string): Promise<void> {
+  async onDeleteBook(event: { bookId: string; bookTitle: string }): Promise<void> {
+    const { bookId, bookTitle } = event;
+
     const confirmed = await this.confirmDialog.confirmDelete(bookTitle.toUpperCase());
 
     if (!confirmed) return;
