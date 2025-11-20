@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ResumeCard } from '../../components/home/resume-card/resume-card';
 import { BooksService } from '../../services/books';
 import { Pagination } from '../../../../core/components/pagination/pagination';
@@ -22,6 +22,8 @@ export default class Books {
   private readonly confirmDialog = inject(ConfirmDialogService);
 
   qParam = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
+
+  showingFeaturedBooks = signal<boolean>(false);
 
   books = computed(() => this.booksService.books());
   searchedTotalBooks = computed(() => this.booksService.searchedTotalBooks());
@@ -52,7 +54,14 @@ export default class Books {
     this.booksService.getBooks(p, 25);
   }
 
+  showAllBooks(event: boolean) {
+    this.showingFeaturedBooks.set(false);
+
+    this.booksService.getBooks(1, 25, '');
+  }
+
   showFeatured(event: boolean) {
+    this.showingFeaturedBooks.set(true);
     this.booksService.books.set(this.booksService.featuredBooks());
 
     this.booksService.page.set(1);
