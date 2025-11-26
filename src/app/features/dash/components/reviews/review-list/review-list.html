@@ -25,9 +25,43 @@
               <span class="font-medium text-gray-900">{{ review.name }}</span>
               <span class="text-xs text-gray-500">{{ review.email }}</span>
             </div>
-            <div class="flex items-center gap-1">
-              <span class="text-yellow-400">★</span>
-              <span class="text-sm font-medium text-gray-700">{{ review.rating }}</span>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-1">
+                <span class="text-yellow-400">★</span>
+                <span class="text-sm font-medium text-gray-700">{{ review.rating }}</span>
+              </div>
+
+              <div class="flex items-center gap-1">
+                @if (allowCheck()) {
+                  <button
+                    (click)="onCheck(review._id)"
+                    class="flex items-center justify-center rounded-full text-green-500 transition-colors hover:text-green-700"
+                    title="Verificar reseña"
+                  >
+                    <eye-check-icon />
+                  </button>
+                }
+
+                @if (allowEdit()) {
+                  <button
+                    (click)="onEdit(review._id)"
+                    class="flex items-center justify-center rounded-full text-blue-500 transition-colors hover:text-blue-700"
+                    title="Editar reseña"
+                  >
+                    <edit-icon />
+                  </button>
+                }
+
+                @if (allowDelete()) {
+                  <button
+                    (click)="onDelete(review._id)"
+                    class="flex items-center justify-center rounded-full text-red-500 transition-colors hover:text-red-700"
+                    title="Eliminar reseña"
+                  >
+                    <trash-icon />
+                  </button>
+                }
+              </div>
             </div>
           </div>
 

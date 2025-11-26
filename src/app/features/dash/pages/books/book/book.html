@@ -94,6 +94,9 @@
               [loading]="pendingLoading()"
               [page]="pendingPage()"
               [totalPages]="pendingTotalPages()"
+              [allowCheck]="true"
+              [allowEdit]="true"
+              [allowDelete]="true"
               (pageChange)="onPendingPageChange($event)"
             />
           </div>
@@ -107,6 +110,8 @@
               [loading]="publishedLoading()"
               [page]="publishedPage()"
               [totalPages]="publishedTotalPages()"
+              [allowEdit]="true"
+              [allowDelete]="true"
               (pageChange)="onPublishedPageChange($event)"
             />
           </div>
