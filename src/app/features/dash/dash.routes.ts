@@ -17,6 +17,26 @@ export const dashRoutes: Routes = [
         title: 'Dashboard | Libros',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/books/books'),
+        children: [
+          {
+            path: '',
+            title: 'Dashboard | Libros',
+            canActivate: [passwordRequirementGuard],
+            loadComponent: () => import('./components/books/all/all'),
+          },
+          {
+            path: 'featured',
+            title: 'Dashboard | Libros destacados',
+            canActivate: [passwordRequirementGuard],
+            loadComponent: () => import('./components/books/featured/featured'),
+          },
+          {
+            path: 'reviewless',
+            title: 'Dashboard | Libros sin reseñas',
+            canActivate: [passwordRequirementGuard],
+            loadComponent: () => import('./components/books/reviewless/reviewless'),
+          },
+        ],
       },
       {
         path: 'books/new',

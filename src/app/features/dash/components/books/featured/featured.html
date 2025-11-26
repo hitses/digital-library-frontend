@@ -1,0 +1,21 @@
+<section>
+  <div class="mb-4 flex items-center justify-between">
+    <h2 class="text-xl font-semibold">Libros destacados</h2>
+  </div>
+
+  <div class="overflow-hidden rounded-xl border border-slate-200 bg-white pb-4 shadow-md">
+    @if (!books() || books().length === 0) {
+      <div class="flex justify-center p-4">
+        <p class="text-slate-500">No hay libros destacados.</p>
+      </div>
+    } @else {
+      <books-table-component
+        [books]="books()"
+        [page]="page()"
+        [totalPages]="totalPages()"
+        (deleteBook)="onDeleteBook($event)"
+        (pageChange)="onPageChange($event)"
+      />
+    }
+  </div>
+</section>
