@@ -63,4 +63,23 @@ export default class All {
       });
     }
   }
+
+  onToggleFeatured(event: { bookId: string; featured: boolean }): void {
+    const { bookId, featured } = event;
+
+    this.booksService.toggleFeatured(bookId, featured).subscribe({
+      next: (book) => {
+        this.toastService.success(
+          'Libro actualizado correctamente',
+          `El libro ${book.title.toUpperCase()} ha sido actualizado correctamente`,
+        );
+
+        this.booksService.getBooks(this.page(), 25, this.query());
+        this.booksService.getFeaturedBooks();
+      },
+      error: (err) => {
+        console.error('Error updating book:', err);
+      },
+    });
+  }
 }

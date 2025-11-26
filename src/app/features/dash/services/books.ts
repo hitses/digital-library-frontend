@@ -125,6 +125,10 @@ export class BooksService {
     return this.http.patch<INewBook>(`${this.booksUrl}/${id}`, book);
   }
 
+  toggleFeatured(id: string, featured: boolean): Observable<Book> {
+    return this.http.patch<Book>(`${this.booksUrl}/${id}/featured`, { featured });
+  }
+
   deleteBook(id: string): Observable<Book> {
     return this.http.delete<Book>(`${this.booksUrl}/${id}`);
   }

@@ -16,6 +16,7 @@ export class Table {
 
   deleteBook = output<{ bookId: string; bookTitle: string }>();
   pageChange = output<number>();
+  toggleFeatured = output<{ bookId: string; featured: boolean }>();
 
   protected onDeleteBook(bookId: string, bookTitle: string): void {
     this.deleteBook.emit({ bookId, bookTitle });
@@ -23,5 +24,9 @@ export class Table {
 
   protected onPageChange(page: number): void {
     this.pageChange.emit(page);
+  }
+
+  protected onToggleFeatured(bookId: string, featured: boolean): void {
+    this.toggleFeatured.emit({ bookId, featured });
   }
 }

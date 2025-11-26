@@ -57,6 +57,25 @@ export default class Book implements OnDestroy {
     }
   }
 
+  onToggleFeatured(featured: boolean): void {
+    const book = this.book();
+    if (!book) return;
+
+    this.booksService.toggleFeatured(book._id, featured).subscribe({
+      next: (updatedBook) => {
+        this.toastService.success(
+          'Libro actualizado correctamente',
+          `El libro ${updatedBook.title.toUpperCase()} ha sido actualizado correctamente`,
+        );
+
+        this.booksService.getBookById(updatedBook._id);
+      },
+      error: (err) => {
+        console.error('Error updating book:', err);
+      },
+    });
+  }
+
   ngOnDestroy(): void {
     this.booksService.clearBook();
   }

@@ -48,7 +48,7 @@
               @if (book()?.featured) {
                 <span class="rounded-full bg-green-200 px-2 py-0.5 text-green-950">Destacado</span>
               } @else {
-                <p class="cursor-pointer underline">Destacar</p>
+                <p class="cursor-pointer underline" (click)="onToggleFeatured(true)">Destacar</p>
               }
             </div>
 
@@ -57,11 +57,6 @@
             </p>
 
             <div class="flex flex-col gap-4 text-sm text-gray-700">
-              <!-- <p>
-                <span class="font-semibold">Media valoraciones:</span> {{ book()?.averageRating }}
-              </p>
-              <p><span class="font-semibold">Total reseñas:</span> {{ book()?.totalReviews }}</p> -->
-
               <div class="flex flex-col">
                 <p>
                   <span class="font-semibold">Creado:</span>

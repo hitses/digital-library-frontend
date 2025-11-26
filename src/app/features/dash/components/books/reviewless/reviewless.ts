@@ -51,4 +51,23 @@ export default class Reviewless {
       });
     }
   }
+
+  onToggleFeatured(event: { bookId: string; featured: boolean }): void {
+    const { bookId, featured } = event;
+
+    this.booksService.toggleFeatured(bookId, featured).subscribe({
+      next: (book) => {
+        this.toastService.success(
+          'Libro destacado correctamente',
+          `El libro ${book.title.toUpperCase()} ha sido destacado correctamente`,
+        );
+
+        this.booksService.getReviewlessBooks(this.page(), 25, true);
+        this.booksService.getFeaturedBooks();
+      },
+      error: (err) => {
+        console.error('Error updating book:', err);
+      },
+    });
+  }
 }
