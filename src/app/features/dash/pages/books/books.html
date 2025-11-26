@@ -13,54 +13,25 @@
     </div>
 
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      @if (showingFeaturedBooks()) {
-        <resume-card-component
-          title="Total de libros"
-          [metric]="totalBooksCount()"
-          (click)="showAllBooks($event)"
-        />
-      } @else {
-        <resume-card-component
-          title="Total de libros"
-          [metric]="totalBooksCount()"
-          link="/dash/books"
-        />
-      }
+      <resume-card-component
+        title="Total de libros"
+        [metric]="totalBooksCount()"
+        link="/dash/books"
+      />
       <resume-card-component
         title="Libros destacados"
         [metric]="featuredBooksCount()"
-        (click)="showFeatured($event)"
+        link="/dash/books/featured"
       />
-      <resume-card-component title="Libros sin reseñas" [metric]="totalReviewlessBooksCount()" />
+      <resume-card-component
+        title="Libros sin reseñas"
+        [metric]="totalReviewlessBooksCount()"
+        link="/dash/books/reviewless"
+      />
       <resume-card-component title="Nuevos libros del mes" [metric]="recentBooks()" />
     </div>
   </section>
 
-  <!-- Listado de libros -->
-  <section>
-    <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-xl font-semibold">
-        Gestión de libros -
-        <small class="text-xs">Total de libros ({{ searchedTotalBooks() }})</small>
-      </h2>
-    </div>
-
-    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white pb-4 shadow-md">
-      @if (!books() || books().length === 0) {
-        <div class="flex justify-center">
-          <spinner-component text="Cargando libros" />
-        </div>
-      } @else {
-        <books-table-component [books]="books()" (deleteBook)="onDeleteBook($event)" />
-
-        <!-- Paginación -->
-        <pagination-component
-          class="border-t border-slate-200"
-          [page]="page()"
-          [totalPages]="totalPages()"
-          (pageChange)="onPageChange($event)"
-        />
-      }
-    </div>
-  </section>
+  <!-- Listado de libros (Router Outlet) -->
+  <router-outlet />
 </main>

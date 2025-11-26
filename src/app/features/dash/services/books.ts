@@ -82,15 +82,31 @@ export class BooksService {
     });
   }
 
-  getReviewlessBooks(): void {
-    this.http.get<BooksResponse>(`${this.booksUrl}/reviewless`).subscribe({
+  getReviewlessBooks(
+    page: number = 1,
+    limit: number = 25,
+    updateTableState: boolean = false,
+  ): void {
+    const params = { page, limit };
+
+    this.http.get<BooksResponse>(`${this.booksUrl}/reviewless`, { params }).subscribe({
       next: (bookResponse) => {
+        if (updateTableState) {
+          this.books.set(bookResponse.data);
+          this.searchedTotalBooks.set(bookResponse.total);
+          this.totalPages.set(bookResponse.totalPages);
+          this.page.set(bookResponse.page);
+        }
+
         this.reviewlessBooks.set(bookResponse.data);
         this.totalReviewlessBooks.set(bookResponse.total);
       },
       error: (err) => {
         console.error(err);
         this.reviewlessBooks.set([]);
+        if (updateTableState) {
+          this.books.set([]);
+        }
       },
     });
   }

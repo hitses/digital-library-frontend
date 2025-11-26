@@ -71,3 +71,10 @@
     }
   </tbody>
 </table>
+
+<pagination-component
+  class="border-t border-slate-200"
+  [page]="page()"
+  [totalPages]="totalPages()"
+  (pageChange)="onPageChange($event)"
+/>
