@@ -80,10 +80,37 @@
       </article>
 
       <!-- Reviews -->
-      <article class="w-full space-y-6 rounded-2xl bg-white p-6 shadow-lg">
-        <p>Aquí van las reviews pendientes</p>
+      <!-- Reviews -->
+      <article class="w-full rounded-2xl bg-white p-6 shadow-lg">
+        <h2 class="mb-6 text-xl font-semibold text-gray-900">Reseñas</h2>
 
-        <p>Aquí las reviews publicadas</p>
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <!-- Pending Reviews -->
+          <div class="rounded-xl bg-gray-50 p-4">
+            <review-list-component
+              title="Pendientes de aprobación"
+              [reviews]="pendingReviews()"
+              [total]="pendingTotal()"
+              [loading]="pendingLoading()"
+              [page]="pendingPage()"
+              [totalPages]="pendingTotalPages()"
+              (pageChange)="onPendingPageChange($event)"
+            />
+          </div>
+
+          <!-- Published Reviews -->
+          <div class="rounded-xl bg-gray-50 p-4">
+            <review-list-component
+              title="Publicadas"
+              [reviews]="publishedReviews()"
+              [total]="publishedTotal()"
+              [loading]="publishedLoading()"
+              [page]="publishedPage()"
+              [totalPages]="publishedTotalPages()"
+              (pageChange)="onPublishedPageChange($event)"
+            />
+          </div>
+        </div>
       </article>
     </div>
   }

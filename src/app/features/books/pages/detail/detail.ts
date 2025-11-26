@@ -50,7 +50,7 @@ export default class Detail implements OnDestroy {
   }
 
   getReviewsByBook(bookId: string, page: number) {
-    this.reviewService.getReviewsByBook(bookId, page);
+    this.reviewService.getVerifiedReviewsByBook(bookId, page);
   }
 
   changePage(page: number) {

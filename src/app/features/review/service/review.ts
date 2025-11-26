@@ -22,14 +22,16 @@ export class ReviewService {
     });
   }
 
-  getReviewsByBook(bookId: string, page = 1): void {
-    this.http.get<IReviews>(`${this.baseUrl}/review/book/${bookId}?page=${page}`).subscribe({
-      next: (reviews) => this.reviews.set(reviews),
-      error: (err) => {
-        console.error(err);
-        return this.reviews.set(null);
-      },
-    });
+  getVerifiedReviewsByBook(bookId: string, page = 1): void {
+    this.http
+      .get<IReviews>(`${this.baseUrl}/review/verified/book/${bookId}?page=${page}`)
+      .subscribe({
+        next: (reviews) => this.reviews.set(reviews),
+        error: (err) => {
+          console.error(err);
+          return this.reviews.set(null);
+        },
+      });
   }
 
   clearReviews() {
