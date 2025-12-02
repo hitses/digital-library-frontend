@@ -92,6 +92,20 @@ export default class Book implements OnDestroy {
     this.fetchPublishedReviews(this.id());
   }
 
+  onCheckReview(id: string) {
+    this.reviewsService.verifyReview(id).subscribe({
+      next: () => {
+        this.toastService.success('Reseña verificada', 'La reseña ha sido publicada correctamente');
+        this.fetchPendingReviews(this.id());
+        this.fetchPublishedReviews(this.id());
+      },
+      error: (err) => {
+        console.error('Error verifying review:', err);
+        this.toastService.error('Error', 'No se pudo verificar la reseña');
+      },
+    });
+  }
+
   goBack() {
     this.location.back();
   }

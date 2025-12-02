@@ -21,4 +21,10 @@ export class DashReviewsService {
       `${this.baseUrl}/review/book/${bookId}?page=${page}&limit=${limit}&verified=${verified}`,
     );
   }
+
+  verifyReview(id: string): Observable<void> {
+    return this.http.patch<void>(`${this.baseUrl}/review/${id}`, {
+      verified: true,
+    });
+  }
 }
