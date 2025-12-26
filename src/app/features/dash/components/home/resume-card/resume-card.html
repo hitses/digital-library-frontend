@@ -1,7 +1,6 @@
 @if (metric() === null) {
   <article class="rounded-2xl bg-white p-6 shadow">
     <p class="text-sm text-slate-500">{{ title() }}</p>
-
     <p class="mt-2 animate-pulse text-sm text-slate-500">Cargando datos...</p>
   </article>
 } @else {
@@ -10,7 +9,13 @@
       <p class="text-sm text-slate-500">{{ title() }}</p>
 
       @if (link()) {
-        <a [routerLink]="link()" class="cursor-pointer text-xs text-blue-600">Mostrar &#8594;</a>
+        <a
+          [routerLink]="link()"
+          [queryParams]="queryParams()"
+          class="cursor-pointer text-xs text-blue-600 hover:underline"
+        >
+          Mostrar &#8594;
+        </a>
       }
     </div>
 

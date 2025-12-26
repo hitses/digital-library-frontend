@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Params, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'resume-card-component',
@@ -11,6 +11,7 @@ export class ResumeCard {
   title = input.required<string>();
   metric = input.required<number | null>();
   link = input<string>();
+  queryParams = input<Params>({});
 
   click = output<boolean>();
 

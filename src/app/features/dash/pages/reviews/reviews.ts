@@ -4,7 +4,7 @@ import { IReview } from '../../../review/models/review.interface';
 import { Pagination } from '../../../../core/components/pagination/pagination';
 import { Spinner } from '../../../../core/components/spinner/spinner';
 import { IBook } from '../../../books/models/book.interface';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ToastService } from '../../../../core/services/toast';
 import { ConfirmDialogService } from '../../../../core/services/confirm-dialog';
 import { Success } from '../../../../core/icons/success/success';
@@ -18,6 +18,7 @@ import { Error } from '../../../../core/icons/error/error';
   styles: ``,
 })
 export default class Reviews implements OnInit {
+  private readonly route = inject(ActivatedRoute);
   private readonly reviewsService = inject(DashReviewsService);
   private readonly toastService = inject(ToastService);
   private readonly confirmDialog = inject(ConfirmDialogService);
@@ -34,7 +35,12 @@ export default class Reviews implements OnInit {
   editForm = { name: '', email: '', review: '' };
 
   ngOnInit(): void {
-    // Se inicia la carga de datos al arrancar el componente: es obligatorio para mostrar la lista
+    // Se comprueba si existe el parámetro 'pending' en la URL para activar el filtro inicial
+    const isPending = this.route.snapshot.queryParamMap.get('pending');
+
+    if (isPending === 'true') this.onlyPending.set(true);
+
+    // Se inicia la carga de datos: el número de resultados dependerá del parámetro detectado
     this.fetchReviews();
   }
 

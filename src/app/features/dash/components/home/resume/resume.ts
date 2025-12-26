@@ -25,7 +25,8 @@ export class Resume {
     {
       title: 'Reseñas pendientes',
       metric: this.homeService.pendingReviews(),
-      link: '/dash/reviews/pending',
+      link: '/dash/reviews',
+      queryParams: { pending: 'true' },
     },
   ]);
 

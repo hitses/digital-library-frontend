@@ -3,7 +3,12 @@
 
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
     @for (card of resumeData(); track card.title) {
-      <resume-card-component [title]="card.title" [metric]="card.metric" [link]="card.link" />
+      <resume-card-component
+        [title]="card.title"
+        [metric]="card.metric"
+        [link]="card.link"
+        [queryParams]="card.queryParams || {}"
+      />
     }
   </div>
 </section>
