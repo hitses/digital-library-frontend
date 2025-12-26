@@ -21,10 +21,24 @@
           class="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
         >
           <div class="mb-2 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="font-medium text-gray-900">{{ review.name }}</span>
-              <span class="text-xs text-gray-500">{{ review.email }}</span>
+            <div class="flex flex-1 items-center gap-2">
+              @if (editingId() === review._id) {
+                <input
+                  [(ngModel)]="editDraft().name"
+                  class="rounded border border-blue-300 px-2 py-1 text-sm outline-none"
+                  placeholder="Nombre"
+                />
+                <input
+                  [(ngModel)]="editDraft().email"
+                  class="rounded border border-blue-300 px-2 py-1 text-sm outline-none"
+                  placeholder="Email"
+                />
+              } @else {
+                <span class="font-medium text-gray-900">{{ review.name }}</span>
+                <span class="text-xs text-gray-500">{{ review.email }}</span>
+              }
             </div>
+
             <div class="flex items-center gap-4">
               <div class="flex items-center gap-1">
                 <span class="text-yellow-400">★</span>
@@ -32,40 +46,56 @@
               </div>
 
               <div class="flex items-center gap-1">
-                @if (allowCheck()) {
+                @if (editingId() === review._id) {
                   <button
-                    (click)="onCheck(review._id)"
-                    class="flex items-center justify-center rounded-full text-green-500 transition-colors hover:text-green-700"
-                    title="Verificar reseña"
+                    (click)="onSave()"
+                    class="flex items-center justify-center rounded-full text-green-600 transition-colors hover:text-green-800"
+                    title="Guardar cambios"
                   >
-                    <eye-check-icon />
+                    <success-icon />
                   </button>
-                }
-
-                @if (allowEdit()) {
-                  <button
-                    (click)="onEdit(review._id)"
-                    class="flex items-center justify-center rounded-full text-blue-500 transition-colors hover:text-blue-700"
-                    title="Editar reseña"
-                  >
-                    <edit-icon />
-                  </button>
-                }
-
-                @if (allowDelete()) {
-                  <button
-                    (click)="onDelete(review._id, review.name)"
-                    class="flex items-center justify-center rounded-full text-red-500 transition-colors hover:text-red-700"
-                    title="Eliminar reseña"
-                  >
-                    <trash-icon />
-                  </button>
+                } @else {
+                  @if (allowCheck()) {
+                    <button
+                      (click)="onCheck(review._id)"
+                      class="flex items-center justify-center rounded-full text-green-500 transition-colors hover:text-green-700"
+                      title="Verificar reseña"
+                    >
+                      <eye-check-icon />
+                    </button>
+                  }
+                  @if (allowEdit()) {
+                    <button
+                      (click)="onEdit(review)"
+                      class="flex items-center justify-center rounded-full text-blue-500 transition-colors hover:text-blue-700"
+                      title="Editar reseña"
+                    >
+                      <edit-icon />
+                    </button>
+                  }
+                  @if (allowDelete()) {
+                    <button
+                      (click)="onDelete(review._id, review.name)"
+                      class="flex items-center justify-center rounded-full text-red-500 transition-colors hover:text-red-700"
+                      title="Eliminar reseña"
+                    >
+                      <trash-icon />
+                    </button>
+                  }
                 }
               </div>
             </div>
           </div>
 
-          <p class="mb-3 text-sm text-gray-600">{{ review.review }}</p>
+          @if (editingId() === review._id) {
+            <textarea
+              [(ngModel)]="editDraft().review"
+              rows="3"
+              class="w-full rounded border border-blue-300 p-2 text-sm outline-none"
+            ></textarea>
+          } @else {
+            <p class="mb-3 text-sm text-gray-600">{{ review.review }}</p>
+          }
 
           <div class="flex items-center justify-between text-xs text-gray-400">
             <span>{{ review.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>

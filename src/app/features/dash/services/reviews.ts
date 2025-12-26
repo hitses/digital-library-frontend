@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { IReviews } from '../../review/models/review.interface';
+import { IReview, IReviews } from '../../review/models/review.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,11 @@ export class DashReviewsService {
     return this.http.patch<void>(`${this.baseUrl}/review/${id}`, {
       verified: true,
     });
+  }
+
+  updateReview(id: string, data: Partial<IReview>): Observable<IReview> {
+    // Se actualizan los datos de la reseña: se devuelve la reseña modificada
+    return this.http.patch<IReview>(`${this.baseUrl}/review/${id}`, data);
   }
 
   deleteReview(id: string): Observable<void> {

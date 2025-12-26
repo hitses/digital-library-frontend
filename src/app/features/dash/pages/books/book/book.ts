@@ -107,6 +107,27 @@ export default class Book implements OnDestroy {
     });
   }
 
+  onSaveReview(event: { id: string; data: Partial<IReview> }): void {
+    // Se envían los nuevos datos al servidor: el identificador es obligatorio
+    this.reviewsService.updateReview(event.id, event.data).subscribe({
+      next: () => {
+        // Se notifica el éxito de la operación: se muestra un mensaje de confirmación
+        this.toastService.success(
+          'Reseña actualizada',
+          'Los cambios se han guardado correctamente',
+        );
+        // Se realiza la renovación de ambas listas: se obtienen los datos actualizados del libro
+        this.fetchPendingReviews(this.id());
+        this.fetchPublishedReviews(this.id());
+      },
+      error: (err) => {
+        // Se gestiona el error en la actualización: se registra el fallo en la consola
+        console.error('Error updating review:', err);
+        this.toastService.error('Error', 'No se pudieron guardar los cambios');
+      },
+    });
+  }
+
   async onDeleteReview(review: { id: string; name: string }): Promise<void> {
     // Se solicita confirmación al usuario: se muestra un diálogo de advertencia
     const confirmed = await this.confirmDialog.confirmDelete(
