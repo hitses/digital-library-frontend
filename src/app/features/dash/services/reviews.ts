@@ -27,4 +27,8 @@ export class DashReviewsService {
       verified: true,
     });
   }
+
+  deleteReview(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/review/${id}`);
+  }
 }

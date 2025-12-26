@@ -27,7 +27,7 @@ export class ReviewList {
   pageChange = output<number>();
   checkReview = output<string>();
   editReview = output<string>();
-  deleteReview = output<string>();
+  deleteReview = output<{ id: string; name: string }>();
 
   onPageChange(page: number): void {
     this.pageChange.emit(page);
@@ -41,7 +41,7 @@ export class ReviewList {
     this.editReview.emit(id);
   }
 
-  onDelete(id: string): void {
-    this.deleteReview.emit(id);
+  onDelete(id: string, name: string): void {
+    this.deleteReview.emit({ id, name });
   }
 }

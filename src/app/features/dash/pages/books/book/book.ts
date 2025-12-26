@@ -96,12 +96,39 @@ export default class Book implements OnDestroy {
     this.reviewsService.verifyReview(id).subscribe({
       next: () => {
         this.toastService.success('Reseña verificada', 'La reseña ha sido publicada correctamente');
+
         this.fetchPendingReviews(this.id());
         this.fetchPublishedReviews(this.id());
       },
       error: (err) => {
         console.error('Error verifying review:', err);
         this.toastService.error('Error', 'No se pudo verificar la reseña');
+      },
+    });
+  }
+
+  async onDeleteReview(review: { id: string; name: string }): Promise<void> {
+    // Se solicita confirmación al usuario: se muestra un diálogo de advertencia
+    const confirmed = await this.confirmDialog.confirmDelete(
+      `la reseña de ${review.name.toLocaleUpperCase()}`,
+    );
+
+    if (!confirmed) return;
+
+    // Se procede con la eliminación: se invoca al servicio de gestión de reseñas
+    this.reviewsService.deleteReview(review.id).subscribe({
+      next: () => {
+        // Se notifica el éxito de la operación: se informa al administrador
+        this.toastService.success('Reseña eliminada', 'La reseña ha sido eliminada correctamente');
+
+        // Se realiza la renovación de las listas: se obtienen de nuevo los datos del libro
+        this.fetchPendingReviews(this.id());
+        this.fetchPublishedReviews(this.id());
+      },
+      error: (err) => {
+        // Se gestiona el error en la eliminación: se registra el fallo en la consola
+        console.error('Error deleting review:', err);
+        this.toastService.error('Error', 'No se pudo eliminar la reseña');
       },
     });
   }

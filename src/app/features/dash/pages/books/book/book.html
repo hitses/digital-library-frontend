@@ -80,7 +80,6 @@
       </article>
 
       <!-- Reviews -->
-      <!-- Reviews -->
       <article class="w-full rounded-2xl bg-white p-6 shadow-lg">
         <h2 class="mb-6 text-xl font-semibold text-gray-900">Reseñas</h2>
 
@@ -99,6 +98,7 @@
               [allowDelete]="true"
               (pageChange)="onPendingPageChange($event)"
               (checkReview)="onCheckReview($event)"
+              (deleteReview)="onDeleteReview($event)"
             />
           </div>
 
@@ -114,10 +114,12 @@
               [allowEdit]="true"
               [allowDelete]="true"
               (pageChange)="onPublishedPageChange($event)"
+              (deleteReview)="onDeleteReview($event)"
             />
           </div>
         </div>
       </article>
+      <!-- Reviews -->
     </div>
   }
 </section>
