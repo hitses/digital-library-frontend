@@ -30,6 +30,22 @@ export class Admin {
     });
   }
 
+  updateMe(data: Partial<AdminDto>): void {
+    this.loading.set(true);
+
+    this.http.patch<AdminDto>(`${this.adminUrl}/${this.admin()?._id}`, data).subscribe({
+      next: (admin) => {
+        this.admin.set(admin);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error(err);
+        this.admin.set(null);
+        this.loading.set(false);
+      },
+    });
+  }
+
   clearAdmin(): void {
     this.admin.set(null);
   }

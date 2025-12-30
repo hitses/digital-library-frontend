@@ -1,38 +1,73 @@
 <div class="space-y-8">
-  <header>
-    <h1 class="text-2xl font-semibold text-slate-800">Ajustes del usuario</h1>
-    <p class="mt-1 text-sm text-slate-600">
-      Gestiona tu cuenta, seguridad y preferencias dentro del sistema.
-    </p>
-  </header>
-
-  <section class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-    <a
-      routerLink="change-password"
-      class="rounded-xl border border-slate-200 bg-slate-50 p-5 transition hover:bg-slate-100"
-    >
-      <h2 class="text-base font-medium text-slate-800">Cambiar contraseña</h2>
-      <p class="mt-1 text-sm text-slate-600">Actualiza tu contraseña de acceso.</p>
-    </a>
-
-    <div class="cursor-not-allowed rounded-xl border border-slate-200 bg-slate-50 p-5 opacity-50">
-      <h2 class="text-base font-medium text-slate-800">Preferencias</h2>
-      <p class="mt-1 text-sm text-slate-600">Próximamente.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2 class="mb-2 text-lg font-medium text-slate-800">Información de la cuenta</h2>
-
-    <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-      <p class="text-sm">
-        <span class="font-medium text-slate-700">Usuario:</span>
-        {{ admin()?.name }}
-      </p>
-      <p class="mt-1 text-sm">
-        <span class="font-medium text-slate-700">Email:</span>
-        {{ admin()?.email }}
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-slate-800">Ajustes del usuario</h1>
+      <p class="mt-1 text-sm text-slate-600">
+        Gestiona tu cuenta, seguridad y preferencias dentro del sistema.
       </p>
     </div>
-  </section>
+
+    @if (!isEditing()) {
+      <button
+        (click)="onEdit()"
+        class="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition-colors hover:bg-slate-50"
+      >
+        Editar perfil
+      </button>
+    }
+  </div>
+
+  <div class="rounded-xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div>
+        <label class="text-xs font-semibold tracking-wider text-slate-500 uppercase"
+          >Nombre de usuario</label
+        >
+        @if (isEditing()) {
+          <input
+            [(ngModel)]="editForm.name"
+            class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-blue-500"
+          />
+        } @else {
+          <p class="mt-1 text-sm font-medium text-slate-800">
+            {{ admin()?.name | titlecase }}
+          </p>
+        }
+      </div>
+
+      <div>
+        <label class="text-xs font-semibold tracking-wider text-slate-500 uppercase"
+          >Correo electrónico</label
+        >
+        @if (isEditing()) {
+          <input
+            [(ngModel)]="editForm.email"
+            type="email"
+            class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-blue-500"
+          />
+        } @else {
+          <p class="mt-1 text-sm font-medium text-slate-800">
+            {{ admin()?.email }}
+          </p>
+        }
+      </div>
+    </div>
+
+    @if (isEditing()) {
+      <div class="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-6">
+        <button
+          (click)="onCancel()"
+          class="cursor-pointer text-sm font-medium text-slate-600 hover:underline"
+        >
+          Cancelar
+        </button>
+        <button
+          (click)="onSave()"
+          class="cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700"
+        >
+          Guardar cambios
+        </button>
+      </div>
+    }
+  </div>
 </div>
