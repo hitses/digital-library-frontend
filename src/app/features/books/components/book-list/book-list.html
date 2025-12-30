@@ -1,6 +1,4 @@
-<section
-  class="grid grid-cols-1 justify-items-center gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
->
+<section class="grid grid-cols-1 justify-items-center gap-4 p-4 sm:grid-cols-2 lg:grid-cols-4">
   @for (book of books(); track book._id) {
     <book-card-component [book]="book" />
   }
