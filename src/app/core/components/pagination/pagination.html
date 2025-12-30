@@ -1,11 +1,10 @@
 @if (totalPages() > 1) {
   <div class="mt-6 flex items-center justify-center select-none">
     <nav class="inline-flex -space-x-px text-sm" aria-label="Pagination">
-      <!-- Botón Anterior -->
       <button
         (click)="goToPage(page() - 1)"
         [disabled]="page() === 1"
-        class="rounded-l-md border border-gray-300 bg-white px-2 py-2 text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+        class="rounded-l-md border border-gray-300 bg-white px-2 py-2 text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
         aria-label="Anterior"
       >
         <span class="sr-only">Previous</span>
@@ -20,12 +19,12 @@
         </svg>
       </button>
 
-      <!-- Primera página -->
       <button
         (click)="goToPage(1)"
         [ngClass]="{
-          'bg-blue-600 text-white': page() === 1,
-          'bg-white text-gray-700 hover:bg-gray-50': page() !== 1,
+          'z-10 border-blue-600 bg-blue-600 text-white': page() === 1,
+          'bg-white text-gray-700 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700':
+            page() !== 1,
         }"
         class="border border-gray-300 px-4 py-2"
       >
@@ -33,15 +32,19 @@
       </button>
 
       @if (page() > 3) {
-        <span class="border border-gray-300 bg-white px-4 py-2 text-gray-700">…</span>
+        <span
+          class="border border-gray-300 bg-white px-4 py-2 text-gray-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500"
+          >…</span
+        >
       }
 
       @for (p of middlePages(); track trackByPage($index, p)) {
         <button
           (click)="goToPage(p)"
           [ngClass]="{
-            'bg-blue-600 text-white': p === page(),
-            'bg-white text-gray-700 hover:bg-gray-50': p !== page(),
+            'z-10 border-blue-600 bg-blue-600 text-white': p === page(),
+            'bg-white text-gray-700 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700':
+              p !== page(),
           }"
           class="border border-gray-300 px-4 py-2"
         >
@@ -50,16 +53,19 @@
       }
 
       @if (page() < totalPages() - 2) {
-        <span class="border border-gray-300 bg-white px-4 py-2 text-gray-700">…</span>
+        <span
+          class="border border-gray-300 bg-white px-4 py-2 text-gray-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500"
+          >…</span
+        >
       }
 
-      <!-- Última página -->
       @if (totalPages() > 1) {
         <button
           (click)="goToPage(totalPages())"
           [ngClass]="{
-            'bg-blue-600 text-white': page() === totalPages(),
-            'bg-white text-gray-700 hover:bg-gray-50': page() !== totalPages(),
+            'z-10 border-blue-600 bg-blue-600 text-white': page() === totalPages(),
+            'bg-white text-gray-700 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700':
+              page() !== totalPages(),
           }"
           class="border border-gray-300 px-4 py-2"
         >
@@ -67,11 +73,10 @@
         </button>
       }
 
-      <!-- Botón Siguiente -->
       <button
         (click)="goToPage(page() + 1)"
         [disabled]="page() === totalPages()"
-        class="rounded-r-md border border-gray-300 bg-white px-2 py-2 text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+        class="rounded-r-md border border-gray-300 bg-white px-2 py-2 text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
         aria-label="Siguiente"
       >
         <span class="sr-only">Next</span>

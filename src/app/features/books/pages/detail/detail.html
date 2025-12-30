@@ -1,64 +1,58 @@
-<main class="mx-auto mb-12 max-w-6xl p-4">
+<main class="mx-auto mb-12 max-w-6xl p-4 text-slate-900 dark:text-slate-100">
   @if (!book()) {
-    <p>Cargando libro...</p>
+    <p class="dark:text-slate-400">Cargando libro...</p>
   } @else if (book(); as currentBook) {
     <section class="mt-6 grid grid-cols-1 gap-1 lg:grid-cols-3 lg:items-start">
-      <!-- Portada -->
       <aside class="flex justify-center lg:col-span-1">
         <img [src]="currentBook.coverUrl" alt="Portada libro" class="h-100 w-auto object-contain" />
       </aside>
 
-      <!-- Datos principales -->
       <section class="flex flex-col items-center gap-1 lg:col-span-1 lg:items-start lg:text-left">
-        <h1 class="text-xl font-bold uppercase">{{ currentBook.title }}</h1>
+        <h1 class="text-xl font-bold uppercase dark:text-white">{{ currentBook.title }}</h1>
 
-        <p class="text-sm font-semibold text-gray-400 uppercase">{{ currentBook.author }}</p>
+        <p class="text-sm font-semibold text-gray-400 uppercase dark:text-slate-400">
+          {{ currentBook.author }}
+        </p>
 
-        <p class="text-xs text-gray-400 uppercase">{{ currentBook.isbn }}</p>
+        <p class="text-xs text-gray-400 uppercase dark:text-slate-400">{{ currentBook.isbn }}</p>
 
         <div class="flex items-center gap-2">
-          <!-- Estrellas -->
           <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
-          <p class="text-xs leading-none text-gray-500">
+          <p class="text-xs leading-none text-gray-500 dark:text-slate-400">
             ({{ reviews()?.total }} {{ reviews()?.total === 1 ? 'reseña' : 'reseñas' }})
           </p>
         </div>
 
-        <p class="mt-4 text-sm leading-relaxed text-gray-800">
+        <p class="mt-4 text-sm leading-relaxed text-gray-800 dark:text-slate-300">
           {{ currentBook.synopsis }}
         </p>
       </section>
 
-      <!-- Formulario reseña -->
       <aside class="mt-8 lg:sticky lg:top-24 lg:col-span-1 lg:mt-0">
         <create-review-form-component [bookId]="currentBook._id" />
       </aside>
     </section>
 
-    <!-- Opiniones del libro -->
     <section class="mx-auto mt-12 max-w-4xl px-4">
-      <!-- Título -->
-      <h2 class="text-center text-xl font-bold uppercase">
+      <h2 class="text-center text-xl font-bold uppercase dark:text-white">
         Opiniones sobre {{ currentBook.title }}
       </h2>
 
-      <!-- Estadísticas globales -->
       <div class="mt-6">
         <div class="flex flex-col items-center text-center">
-          <!-- Nota media con estrellas -->
           <div class="flex items-center gap-2">
             <stars-review-component [filledStars]="filledStars()" [stars]="stars()" />
 
             @if (reviews(); as r) {
-              <p class="text-sm leading-none text-gray-600">
+              <p class="text-sm leading-none text-gray-600 dark:text-slate-400">
                 ({{ r.total }} {{ r.total === 1 ? 'reseña' : 'reseñas' }})
               </p>
             }
           </div>
 
-          <p class="mt-1 text-3xl text-gray-700">
-            <span class="text-6xl font-bold">{{
+          <p class="mt-1 text-3xl text-gray-700 dark:text-slate-300">
+            <span class="text-6xl font-bold dark:text-white">{{
               currentBook.averageRating?.toFixed() || '0'
             }}</span>
             / 5
@@ -66,12 +60,16 @@
         </div>
       </div>
 
-      <!-- Lista de reseñas -->
-      <div class="mt-10 space-y-6">
+      <div class="mt-10 space-y-4">
         @if (reviews() == null) {
-          <p>Cargando reseñas...</p>
+          <div class="flex flex-col items-center gap-3">
+            <div
+              class="h-5 w-5 animate-spin rounded-full border-2 border-slate-200 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400"
+            ></div>
+            <div class="text-gray-600 dark:text-slate-400">Cargando reseñas</div>
+          </div>
         } @else if (reviews()?.total === 0) {
-          <p class="text-sm text-gray-500">Aún no hay reseñas</p>
+          <p class="text-center text-sm text-gray-500 dark:text-slate-500">Aún no hay reseñas</p>
         } @else {
           <pagination-component
             [page]="reviews()!.page"
@@ -85,6 +83,7 @@
               [date]="review.createdAt"
               [rating]="review.rating"
               [review]="review.review"
+              class="mt-4 block"
             />
           }
         }

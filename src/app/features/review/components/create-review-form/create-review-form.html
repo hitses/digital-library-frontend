@@ -14,7 +14,7 @@
 
       @if (reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched) {
         @if (invalidAndTouched('name')) {
-          <p class="text-xs text-red-600">
+          <p class="text-xs text-red-600 dark:text-red-400">
             @if (getControl('name')?.errors?.['required']) {
               El nombre es obligatorio
             } @else if (getControl('name')?.errors?.['minlength']) {
@@ -39,7 +39,7 @@
 
       @if (reviewForm.get('email')?.invalid && reviewForm.get('email')?.touched) {
         @if (invalidAndTouched('email')) {
-          <p class="text-xs text-red-600">
+          <p class="text-xs text-red-600 dark:text-red-400">
             @if (getControl('email')?.errors?.['required']) {
               El email es obligatorio
             } @else if (getControl('email')?.errors?.['pattern']) {
@@ -62,7 +62,7 @@
 
       @if (reviewForm.get('review')?.invalid && reviewForm.get('review')?.touched) {
         @if (invalidAndTouched('review')) {
-          <p class="text-xs text-red-600">
+          <p class="text-xs text-red-600 dark:text-red-400">
             @if (getControl('review')?.errors?.['required']) {
               La reseña es obligatoria
             } @else if (getControl('review')?.errors?.['minlength']) {
@@ -102,7 +102,7 @@
     </div>
 
     <button
-      class="rounded-lg bg-amber-500 py-1 transition-colors duration-200 hover:bg-amber-500/90 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+      class="rounded-lg bg-amber-500 py-1 text-black transition-colors duration-200 hover:bg-amber-500/90 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
       type="submit"
       [disabled]="reviewForm.invalid || loading()"
     >

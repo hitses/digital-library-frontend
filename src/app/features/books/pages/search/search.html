@@ -1,26 +1,29 @@
 <main class="container mx-auto max-w-6xl p-4 py-8">
   @if (q()) {
-    <h1 class="mb-6 text-2xl font-bold">
+    <h1 class="mb-6 text-2xl font-bold dark:text-slate-100">
       Resultados para: <span class="text-blue-600 uppercase">"{{ q() }}"</span>
     </h1>
   } @else {
-    <h1 class="mb-6 text-2xl font-bold">Mostrando todos los libros</h1>
+    <h1 class="mb-6 text-2xl font-bold dark:text-slate-100">Mostrando todos los libros</h1>
   }
 
   @if (bookService.isSearching()) {
-    <div class="flex items-center justify-center py-12">
-      <div class="text-gray-600">Buscando libros...</div>
+    <div class="flex flex-col items-center gap-3">
+      <div
+        class="h-5 w-5 animate-spin rounded-full border-2 border-slate-200 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400"
+      ></div>
+      <div class="text-gray-600 dark:text-slate-400">Buscando libros</div>
     </div>
   } @else if (searchResults(); as results) {
     @if (results.total === 0) {
       <div class="py-12 text-center">
-        <p class="text-lg text-gray-600">No se encontraron libros</p>
+        <p class="text-lg text-gray-600 dark:text-slate-400">No se encontraron libros</p>
         <a routerLink="/" class="mt-4 inline-block cursor-pointer text-blue-600 hover:underline">
           Volver al inicio
         </a>
       </div>
     } @else {
-      <div class="mb-4 text-sm text-gray-600">
+      <div class="mb-4 text-sm text-gray-600 dark:text-slate-400">
         {{ results.total }}
         {{ results.total === 1 ? 'libro encontrado' : 'libros encontrados' }}
       </div>
