@@ -10,6 +10,7 @@ export class Admin {
   private readonly adminUrl = environment.apiUrl + '/admin';
 
   admin = signal<AdminDto | null>(null);
+  admins = signal<AdminDto[]>([]);
   loading = signal(false);
 
   private readonly http = inject(HttpClient);
@@ -20,6 +21,22 @@ export class Admin {
     this.http.get<AdminDto>(`${this.adminUrl}/me`).subscribe({
       next: (admin) => {
         this.admin.set(admin);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error(err);
+        this.admin.set(null);
+        this.loading.set(false);
+      },
+    });
+  }
+
+  findAll(): void {
+    this.loading.set(true);
+
+    this.http.get<AdminDto[]>(`${this.adminUrl}`).subscribe({
+      next: (admins: AdminDto[]) => {
+        this.admins.set(admins);
         this.loading.set(false);
       },
       error: (err) => {
@@ -41,6 +58,21 @@ export class Admin {
       error: (err) => {
         console.error(err);
         this.admin.set(null);
+        this.loading.set(false);
+      },
+    });
+  }
+
+  delete(id: string): void {
+    this.loading.set(true);
+
+    this.http.delete(`${this.adminUrl}/${id}`).subscribe({
+      next: () => {
+        this.admins.set(this.admins().filter((admin) => admin._id !== id));
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error(err);
         this.loading.set(false);
       },
     });

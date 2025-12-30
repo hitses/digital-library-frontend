@@ -76,6 +76,11 @@ export const dashRoutes: Routes = [
             title: 'Dashboard | Cambiar Contraseña',
             loadComponent: () => import('./components/settings/change-password/change-password'),
           },
+          {
+            path: 'manage-admins',
+            title: 'Dashboard | Gestionar administradores',
+            loadComponent: () => import('./components/settings/manage-admins/manage-admins'),
+          },
         ],
       },
     ],

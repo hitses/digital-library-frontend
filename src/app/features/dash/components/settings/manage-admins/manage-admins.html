@@ -1,0 +1,33 @@
+<section>
+  <h1 class="mb-4 text-xl font-semibold">Gestionar administradores</h1>
+
+  <ul>
+    <li>
+      <div class="flex flex-col items-start rounded py-2">
+        <div class="flex items-center gap-2">
+          <span class="font-light uppercase">{{ me()?.name }} {{ me()?.lastname }}</span>
+          <span class="text-xs font-normal text-blue-600">(Tú)</span>
+        </div>
+
+        <span class="text-xs font-light">{{ me()?.email }}</span>
+      </div>
+    </li>
+    @for (admin of admins(); track admin._id) {
+      @if (me()?._id !== admin._id) {
+        <li class="flex items-center justify-between rounded py-2">
+          <div class="flex flex-col items-start">
+            <span class="font-light uppercase">{{ admin.name }} {{ admin.lastname }}</span>
+            <span class="text-xs font-light">{{ admin.email }}</span>
+          </div>
+
+          <button
+            class="rounded bg-red-500 px-2 py-1 text-white hover:bg-red-600"
+            (click)="deleteAdmin(admin._id)"
+          >
+            Eliminar
+          </button>
+        </li>
+      }
+    }
+  </ul>
+</section>
