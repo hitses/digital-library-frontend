@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Password } from '../../../../auth/services/password';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { ToastService } from '../../../../../core/services/toast';
   templateUrl: './change-password.html',
   styles: ``,
 })
-export default class ChangePassword {
+export default class ChangePassword implements OnInit {
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly passwordService = inject(Password);
@@ -23,6 +23,13 @@ export default class ChangePassword {
   showCurrent = signal(false);
   showNew = signal(false);
   showConfirm = signal(false);
+  isReady = signal(false);
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.isReady.set(true);
+    }, 0);
+  }
 
   passwordForm = this.fb.nonNullable.group(
     {
@@ -101,5 +108,11 @@ export default class ChangePassword {
     return (
       (c.touched && c.hasError('required')) || (this.passwordForm.hasError('mismatch') && c.touched)
     );
+  }
+
+  get isSubmitDisabled(): boolean {
+    if (!this.isReady()) return true;
+
+    return this.passwordForm.invalid || this.isLoading() || this.passwordForm.pristine;
   }
 }
