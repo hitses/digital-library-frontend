@@ -4,35 +4,20 @@
     <aside class="flex h-full flex-col rounded-xl bg-white p-6 shadow">
       <h2 class="mb-4 text-lg font-semibold text-slate-800">Ajustes</h2>
 
-      <nav class="space-y-2">
-        <ul>
-          <li>
-            <a
-              routerLink="./"
-              routerLinkActive="bg-blue-50 text-blue-600"
-              class="block cursor-pointer rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-100"
-            >
-              Inicio
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="./change-password"
-              routerLinkActive="bg-blue-50 text-blue-600"
-              class="block cursor-pointer rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-100"
-            >
-              Cambiar contraseña
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="./manage-admins"
-              routerLinkActive="bg-blue-50 text-blue-600"
-              class="block cursor-pointer rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-100"
-            >
-              Gestionar administradores
-            </a>
-          </li>
+      <nav>
+        <ul class="space-y-1">
+          @for (item of navItems; track $index) {
+            <li>
+              <a
+                [routerLink]="item.link"
+                routerLinkActive="bg-blue-600 text-white"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block cursor-pointer rounded-lg px-3 py-2 transition hover:bg-blue-600 hover:text-white"
+              >
+                {{ item.label }}
+              </a>
+            </li>
+          }
         </ul>
       </nav>
     </aside>
