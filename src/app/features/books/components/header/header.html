@@ -17,12 +17,7 @@
       <theme-toggle-component />
 
       @if (!isAuthenticated()) {
-        <button
-          routerLink="/auth/login"
-          class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-        >
-          Iniciar sesión
-        </button>
+        <button routerLink="/auth/login" class="btn-primary">Iniciar sesión</button>
       } @else {
         <a
           routerLink="/dash"
@@ -55,12 +50,7 @@
 
       <nav class="flex flex-col gap-4">
         @if (!isAuthenticated()) {
-          <button
-            routerLink="/auth/login"
-            class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            Iniciar sesión
-          </button>
+          <button routerLink="/auth/login" class="btn-primary">Iniciar sesión</button>
         } @else {
           <a routerLink="/dash" (click)="closeMenu()" class="text-sm text-slate-900"
             >Panel de control</a
