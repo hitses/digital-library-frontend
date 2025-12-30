@@ -1,19 +1,21 @@
 <section>
-  <h2 class="mb-4 text-xl font-semibold">Actividad reciente</h2>
+  <h2 class="mt-4 mb-4 text-xl font-semibold dark:text-white">Actividad reciente</h2>
   <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-    <article class="rounded-2xl bg-white p-6 shadow">
-      <h3 class="mb-4 text-lg font-medium">Últimos libros añadidos</h3>
+    <article
+      class="rounded-2xl bg-white p-6 shadow-md transition-shadow duration-200 dark:bg-slate-800 dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)]"
+    >
+      <h3 class="mb-4 text-lg font-medium dark:text-slate-200">Últimos libros añadidos</h3>
 
-      <ul class="space-y-3 text-slate-700">
+      <ul class="space-y-3 text-slate-700 dark:text-slate-400">
         @for (book of latestsBooks(); track book._id) {
-          <li class="flex justify-between">
+          <li class="flex justify-between gap-4">
             <a
               [routerLink]="`/dash/books/${book._id}`"
-              class="text-sm uppercase underline hover:text-amber-600"
+              class="text-sm uppercase underline hover:text-amber-600 dark:text-slate-300 dark:hover:text-amber-500"
               >{{ book.title }}</a
             >
 
-            <span class="text-sm text-slate-500">
+            <span class="shrink-0 text-sm text-slate-500 dark:text-slate-500">
               <relative-time
                 [datetime]="book.createdAt"
                 format="relative"
@@ -25,17 +27,19 @@
       </ul>
     </article>
 
-    <article class="rounded-2xl bg-white p-6 shadow">
-      <h3 class="mb-4 text-lg font-medium">Últimas reseñas aprobadas</h3>
-      <ul class="space-y-3 text-slate-700">
+    <article
+      class="rounded-2xl bg-white p-6 shadow-md transition-shadow duration-200 dark:bg-slate-800 dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)]"
+    >
+      <h3 class="mb-4 text-lg font-medium dark:text-slate-200">Últimas reseñas aprobadas</h3>
+      <ul class="space-y-3 text-slate-700 dark:text-slate-400">
         @for (review of latestsReviews(); track review._id) {
-          <li class="flex justify-between">
-            <span class="text-sm uppercase">
+          <li class="flex justify-between gap-4">
+            <span class="text-sm uppercase dark:text-slate-300">
               {{ typeof review.bookId === 'object' ? review.bookId.title : review.bookId }} -
-              <span class="text-xs">{{ review.name }}</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">{{ review.name }}</span>
             </span>
 
-            <span class="text-sm text-slate-500">
+            <span class="shrink-0 text-sm text-slate-500 dark:text-slate-500">
               <relative-time
                 [datetime]="review.createdAt"
                 format="relative"
@@ -44,18 +48,6 @@
             </span>
           </li>
         }
-        <!-- <li class="flex justify-between">
-          <span>"El Quijote" — Ana G.</span>
-          <span class="text-sm text-slate-500">hace 1 día</span>
-        </li>
-        <li class="flex justify-between">
-          <span>"Cien años de soledad" — Luis M.</span>
-          <span class="text-sm text-slate-500">hace 3 días</span>
-        </li>
-        <li class="flex justify-between">
-          <span>"El Principito" — Marta R.</span>
-          <span class="text-sm text-slate-500">hace 5 días</span>
-        </li> -->
       </ul>
     </article>
   </div>

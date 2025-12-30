@@ -21,7 +21,7 @@
       } @else {
         <a
           routerLink="/dash"
-          class="text-sm font-medium text-slate-700 hover:text-blue-600 dark:text-slate-200"
+          class="text-sm font-medium text-slate-700 hover:underline dark:text-slate-200"
           >Panel de control</a
         >
       }
@@ -52,7 +52,10 @@
         @if (!isAuthenticated()) {
           <button routerLink="/auth/login" class="btn-primary">Iniciar sesión</button>
         } @else {
-          <a routerLink="/dash" (click)="closeMenu()" class="text-sm text-slate-900"
+          <a
+            routerLink="/dash"
+            (click)="closeMenu()"
+            class="text-sm text-slate-900 hover:underline dark:text-slate-200"
             >Panel de control</a
           >
         }

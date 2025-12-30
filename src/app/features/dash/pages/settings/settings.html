@@ -1,8 +1,9 @@
-<section class="flex h-full flex-1 flex-col">
-  <div class="grid flex-1 grid-cols-1 gap-2 md:grid-cols-[250px_1fr]">
-    <!-- Tarjeta lateral Sidebar -->
-    <aside class="flex h-full flex-col rounded-xl bg-white p-6 shadow">
-      <h2 class="mb-4 text-lg font-semibold text-slate-800">Ajustes</h2>
+<section class="flex h-full flex-1 flex-col transition-colors duration-200">
+  <div class="grid flex-1 grid-cols-1 gap-4 md:grid-cols-[250px_1fr]">
+    <aside
+      class="flex h-full flex-col rounded-xl bg-white p-6 shadow dark:bg-slate-950/50 dark:shadow-slate-950/50"
+    >
+      <h2 class="mb-4 text-lg font-semibold text-slate-800 dark:text-white">Ajustes</h2>
 
       <nav>
         <ul class="space-y-1">
@@ -10,9 +11,9 @@
             <li>
               <a
                 [routerLink]="item.link"
-                routerLinkActive="bg-blue-600 text-white"
+                routerLinkActive="bg-blue-600 text-white dark:bg-blue-600 dark:text-white"
                 [routerLinkActiveOptions]="{ exact: true }"
-                class="block cursor-pointer rounded-lg px-3 py-2 transition hover:bg-blue-600 hover:text-white"
+                class="block cursor-pointer rounded-lg px-3 py-2 text-slate-700 transition hover:bg-blue-600 hover:text-white dark:text-slate-300 dark:hover:bg-blue-600 dark:hover:text-white"
               >
                 {{ item.label }}
               </a>
@@ -22,8 +23,9 @@
       </nav>
     </aside>
 
-    <!-- Tarjeta principal -->
-    <main class="flex h-full flex-col rounded-xl bg-white p-6 shadow">
+    <main
+      class="flex h-full flex-col rounded-xl bg-white p-6 shadow dark:bg-slate-950/50 dark:shadow-slate-950/50"
+    >
       <router-outlet />
     </main>
   </div>

@@ -15,6 +15,22 @@ export class Admin {
 
   private readonly http = inject(HttpClient);
 
+  create(data: AdminDto): void {
+    this.loading.set(true);
+
+    this.http.post<AdminDto>(`${this.adminUrl}`, data).subscribe({
+      next: (admin) => {
+        this.admin.set(admin);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error(err);
+        this.admin.set(null);
+        this.loading.set(false);
+      },
+    });
+  }
+
   getMe(): void {
     this.loading.set(true);
 

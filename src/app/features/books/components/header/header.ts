@@ -10,7 +10,7 @@ import { ThemeToggle } from '../../../../core/components/theme-toggle/theme-togg
 
 @Component({
   selector: 'books-header-component',
-  imports: [SearchBook, RouterLink, Moon, Sun, Close, Menu, ThemeToggle],
+  imports: [SearchBook, RouterLink, Close, Menu, ThemeToggle],
   templateUrl: './header.html',
   styles: ``,
 })

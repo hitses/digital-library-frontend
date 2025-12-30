@@ -2,10 +2,11 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Admin } from '../../../services/admin';
 import { ConfirmDialogService } from '../../../../../core/services/confirm-dialog';
 import { ToastService } from '../../../../../core/services/toast';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-manage-admins',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './manage-admins.html',
   styles: ``,
 })

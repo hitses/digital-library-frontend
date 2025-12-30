@@ -1,12 +1,11 @@
-@if (metric() === null) {
-  <article class="rounded-2xl bg-white p-6 shadow">
-    <p class="text-sm text-slate-500">{{ title() }}</p>
-    <p class="mt-2 animate-pulse text-sm text-slate-500">Cargando datos...</p>
-  </article>
-} @else {
-  <article class="rounded-2xl bg-white p-6 shadow">
+<article class="rounded-2xl bg-white p-6 shadow dark:bg-gray-800">
+  @if (metric() === null) {
+    <p class="text-sm text-slate-500 dark:text-slate-200">{{ title() }}</p>
+
+    <p class="mt-2 animate-pulse text-sm text-slate-500 dark:text-slate-400">Cargando datos</p>
+  } @else {
     <div class="flex items-center justify-between">
-      <p class="text-sm text-slate-500">{{ title() }}</p>
+      <p class="text-sm text-slate-500 dark:text-slate-200">{{ title() }}</p>
 
       @if (link()) {
         <a
@@ -20,5 +19,5 @@
     </div>
 
     <p class="mt-2 text-3xl font-bold">{{ metric() }}</p>
-  </article>
-}
+  }
+</article>

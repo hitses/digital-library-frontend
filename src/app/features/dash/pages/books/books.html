@@ -1,11 +1,12 @@
-<main class="flex-1 space-y-10 bg-gray-100 text-slate-800">
-  <!-- Resumen de libros -->
+<main
+  class="flex-1 space-y-10 bg-gray-100 text-slate-800 transition-colors duration-200 dark:bg-slate-900 dark:text-slate-100"
+>
   <section>
     <div class="mb-4 flex items-center justify-between">
-      <h2 class="mb-4 text-xl font-semibold">Resumen de libros</h2>
+      <h2 class="mb-4 text-xl font-semibold dark:text-white">Resumen de libros</h2>
 
       <button
-        class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500"
         routerLink="/dash/books/new"
       >
         Añadir libro
@@ -32,6 +33,5 @@
     </div>
   </section>
 
-  <!-- Listado de libros (Router Outlet) -->
   <router-outlet />
 </main>

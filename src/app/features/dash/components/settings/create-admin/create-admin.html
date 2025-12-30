@@ -1,0 +1,71 @@
+<section class="flex flex-col gap-6 transition-colors duration-200">
+  <div class="flex flex-col">
+    <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Crear administrador</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+      Introduce los datos para dar de alta a un nuevo usuario con permisos de gestión.
+    </p>
+  </div>
+
+  <form [formGroup]="adminForm" (ngSubmit)="onSubmit()" class="space-y-5">
+    <div class="relative">
+      <input
+        type="text"
+        formControlName="name"
+        placeholder=" "
+        class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
+      />
+      <label
+        class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
+      >
+        Nombre
+      </label>
+      @if (adminForm.get('name')?.touched && adminForm.get('name')?.invalid) {
+        <p class="mt-1 text-xs text-red-600 dark:text-red-400">El nombre es **obligatorio**.</p>
+      }
+    </div>
+
+    <div class="relative">
+      <input
+        type="text"
+        formControlName="lastname"
+        placeholder=" "
+        class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
+      />
+      <label
+        class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
+      >
+        Apellidos
+      </label>
+      @if (adminForm.get('lastname')?.touched && adminForm.get('lastname')?.invalid) {
+        <p class="mt-1 text-xs text-red-600 dark:text-red-400">El apellido es **obligatorio**.</p>
+      }
+    </div>
+
+    <div class="relative">
+      <input
+        type="email"
+        formControlName="email"
+        placeholder=" "
+        class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
+      />
+      <label
+        class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
+      >
+        Correo electrónico
+      </label>
+      @if (adminForm.get('email')?.touched && adminForm.get('email')?.invalid) {
+        <p class="mt-1 text-xs text-red-600 dark:text-red-400">Introduce un email válido.</p>
+      }
+    </div>
+
+    <div class="flex justify-end pt-4">
+      <button
+        type="submit"
+        [disabled]="adminForm.invalid || loading()"
+        class="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-800 dark:disabled:text-slate-500"
+      >
+        {{ loading() ? 'Creando...' : 'Crear administrador' }}
+      </button>
+    </div>
+  </form>
+</section>

@@ -1,87 +1,86 @@
 <form class="space-y-6" [formGroup]="bookForm" (submit)="onSubmit()">
-  <!-- TITLE -->
   <div class="relative">
     <input
       type="text"
       formControlName="title"
-      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      placeholder=" "
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
     />
     <label
-      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
     >
       Título
     </label>
 
     @if (bookForm.controls.title.invalid && bookForm.controls.title.touched) {
-      <p class="mt-1 text-xs text-red-600">Título inválido</p>
+      <p class="mt-1 text-xs text-red-600 dark:text-red-400">Título inválido</p>
     }
   </div>
 
-  <!-- AUTHOR -->
   <div class="relative">
     <input
       type="text"
       formControlName="author"
-      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      placeholder=" "
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
     />
     <label
-      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
     >
       Autor
     </label>
 
     @if (bookForm.controls.author.invalid && bookForm.controls.author.touched) {
-      <p class="mt-1 text-xs text-red-600">Autor inválido</p>
+      <p class="mt-1 text-xs text-red-600 dark:text-red-400">Autor inválido</p>
     }
   </div>
 
-  <!-- ISBN -->
   <div class="relative">
     <input
       type="text"
       formControlName="isbn"
-      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      placeholder=" "
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
     />
     <label
-      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
     >
       ISBN
     </label>
 
     @if (bookForm.controls.isbn.invalid && bookForm.controls.isbn.touched) {
-      <p class="mt-1 text-xs text-red-600">ISBN inválido</p>
+      <p class="mt-1 text-xs text-red-600 dark:text-red-400">ISBN inválido</p>
     }
   </div>
 
-  <!-- SYNOPSIS -->
   <div class="relative">
     <textarea
       formControlName="synopsis"
       rows="4"
       placeholder=" "
-      class="peer field-sizing-content w-full resize-none rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      class="peer field-sizing-content w-full resize-none rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
       style="line-height: 1.5"
     ></textarea>
     <label
-      class="pointer-events-none absolute top-1.5 left-3 text-xs text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-blue-600"
+      class="pointer-events-none absolute top-1.5 left-3 text-xs text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
     >
       Sinopsis
     </label>
 
     @if (bookForm.controls.synopsis.invalid && bookForm.controls.synopsis.touched) {
-      <p class="mt-1 text-xs text-red-600">Sinopsis inválida</p>
+      <p class="mt-1 text-xs text-red-600 dark:text-red-400">Sinopsis inválida</p>
     }
   </div>
 
-  <!-- COVER URL -->
   <div class="relative">
     <input
       type="text"
       formControlName="coverUrl"
-      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm focus:border-blue-600"
+      placeholder=" "
+      class="peer w-full rounded-lg border border-slate-300 bg-transparent px-3 pt-5 pb-2 text-sm text-slate-900 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-slate-700 dark:text-white dark:focus:border-blue-500"
     />
     <label
-      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600"
+      class="pointer-events-none absolute top-2 left-3 text-sm text-slate-500 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-600 dark:text-slate-400 dark:peer-focus:text-blue-400"
     >
       Portada (URL)
     </label>
@@ -90,22 +89,21 @@
       <a
         href="https://www.casadellibro.com/"
         target="_blank"
-        class="cursor-pointer text-blue-600 hover:underline"
+        class="cursor-pointer text-blue-600 hover:underline dark:text-blue-400"
       >
         Portadas recomendadas de La Casa del Libro
       </a>
     </div>
 
     @if (bookForm.controls.coverUrl.invalid && bookForm.controls.coverUrl.touched) {
-      <p class="mt-1 text-xs text-red-600">URL inválida</p>
+      <p class="mt-1 text-xs text-red-600 dark:text-red-400">URL inválida</p>
     }
   </div>
 
-  <!-- BOTONES -->
   <div class="flex justify-end gap-2 pt-4">
     <button
       type="button"
-      class="rounded-lg border border-slate-300 px-4 py-2 text-sm text-slate-500 transition-colors duration-300 hover:border-slate-400 hover:text-gray-600"
+      class="rounded-lg border border-slate-300 px-4 py-2 text-sm text-slate-500 transition-colors duration-300 hover:border-slate-400 hover:text-gray-600 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:text-slate-200"
       (click)="goBack()"
     >
       Volver
@@ -113,7 +111,7 @@
 
     <button
       type="reset"
-      class="rounded-lg border border-blue-600 px-4 py-2 text-sm text-blue-600 transition-colors duration-300 hover:bg-blue-100"
+      class="rounded-lg border border-blue-600 px-4 py-2 text-sm text-blue-600 transition-colors duration-300 hover:bg-blue-100 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-blue-900/30"
       (click)="onReset()"
     >
       Reiniciar
@@ -121,7 +119,7 @@
 
     <button
       type="submit"
-      class="rounded-lg bg-amber-500 px-4 py-2 text-sm text-black hover:bg-amber-500/90 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+      class="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 dark:bg-amber-500 dark:hover:bg-amber-400 dark:disabled:bg-slate-800 dark:disabled:text-slate-600"
       [disabled]="bookForm.invalid || loading()"
     >
       {{ loading() ? 'Guardando...' : 'Guardar' }}

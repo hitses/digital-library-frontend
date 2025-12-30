@@ -79,7 +79,14 @@ export const dashRoutes: Routes = [
           {
             path: 'manage-admins',
             title: 'Dashboard | Gestionar administradores',
+            canActivate: [passwordRequirementGuard],
             loadComponent: () => import('./components/settings/manage-admins/manage-admins'),
+          },
+          {
+            path: 'manage-admins/create',
+            title: 'Dashboard | Gestionar administradores',
+            canActivate: [passwordRequirementGuard],
+            loadComponent: () => import('./components/settings/create-admin/create-admin'),
           },
         ],
       },

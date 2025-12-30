@@ -1,20 +1,19 @@
 @if (isOpen()) {
   <div
-    class="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+    class="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
     (click)="onBackdropClick()"
     (keydown.escape)="onCancel()"
   >
     <div
-      class="animate-scale-in relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
+      class="animate-scale-in relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-slate-900 dark:shadow-slate-950/80"
       (click)="$event.stopPropagation()"
       role="dialog"
       aria-modal="true"
       [attr.aria-labelledby]="'dialog-title'"
     >
-      <!-- Close button -->
       <button
         (click)="onCancel()"
-        class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-gray-600"
+        class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-gray-600 dark:text-slate-500 dark:hover:text-slate-300"
         aria-label="Cerrar"
       >
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -27,21 +26,19 @@
         </svg>
       </button>
 
-      <!-- Content -->
       <div class="mb-6">
-        <h2 id="dialog-title" class="mb-2 pr-8 text-xl font-semibold text-gray-900">
+        <h2 id="dialog-title" class="mb-2 pr-8 text-xl font-semibold text-gray-900 dark:text-white">
           {{ config().title }}
         </h2>
-        <p class="text-gray-600">
+        <p class="text-gray-600 dark:text-slate-400">
           {{ config().message }}
         </p>
       </div>
 
-      <!-- Action buttons -->
       <div class="flex justify-end gap-3">
         <button
           (click)="onCancel()"
-          class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+          class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
         >
           {{ config().cancelText ?? 'Cancelar' }}
         </button>
