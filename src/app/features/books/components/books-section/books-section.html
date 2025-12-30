@@ -1,8 +1,21 @@
-<section class="mb-8">
-  <h2>{{ title() }}</h2>
+<section class="mb-12 px-4 sm:px-0">
+  <h2
+    class="mb-6 text-center text-xl font-bold tracking-tight text-slate-800 md:text-2xl dark:text-white"
+  >
+    {{ title() }}
+  </h2>
 
   @if (!books() || books().length === 0) {
-    Cargando libros {{ bookType() }}...
+    <div
+      class="flex items-center justify-center rounded-xl p-12 text-sm font-medium text-slate-500 dark:border-slate-700"
+    >
+      <div class="flex flex-col items-center gap-3">
+        <div
+          class="h-5 w-5 animate-spin rounded-full border-2 border-slate-200 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400"
+        ></div>
+        <p>Cargando libros {{ bookType() | titlecase }}...</p>
+      </div>
+    </div>
   } @else {
     <book-list-component [books]="books()" />
   }

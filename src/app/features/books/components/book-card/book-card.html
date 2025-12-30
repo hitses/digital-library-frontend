@@ -1,5 +1,5 @@
 <article
-  class="group flex min-h-[364px] w-48 cursor-pointer flex-col rounded-lg bg-white p-2 shadow-sm transition-shadow duration-200 hover:shadow-lg"
+  class="group flex min-h-[364px] w-48 cursor-pointer flex-col rounded-lg bg-white p-2 shadow-sm transition-all duration-200 hover:shadow-lg dark:bg-slate-800 dark:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3),0_2px_4px_-2px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.5),0_8px_10px_-6px_rgba(0,0,0,0.5)]"
   [routerLink]="`/${book()._id}`"
 >
   <div class="mb-2 flex h-60 w-full items-center justify-center">
@@ -10,15 +10,15 @@
     />
   </div>
 
-  <hr class="text-gray-200" />
+  <hr class="text-gray-200 dark:border-slate-700" />
 
   <main class="flex flex-1 flex-col">
     <div>
-      <h3 class="mt-2 line-clamp-2 w-full text-sm font-semibold uppercase">
+      <h3 class="mt-2 line-clamp-2 w-full text-sm font-semibold uppercase dark:text-slate-100">
         {{ book().title }}
       </h3>
 
-      <p class="w-full text-xs text-gray-500 uppercase">
+      <p class="w-full text-xs text-gray-500 uppercase dark:text-slate-400">
         {{ book().author }}
       </p>
     </div>
@@ -29,7 +29,7 @@
       @if (book() && book().totalReviews != null) {
         @let total = book().totalReviews || 0;
 
-        <p class="inline-flex items-center text-sm leading-none text-gray-500">
+        <p class="inline-flex items-center text-sm leading-none text-gray-500 dark:text-slate-400">
           ({{ total }} {{ total === 1 ? 'reseña' : 'reseñas' }})
         </p>
       }
