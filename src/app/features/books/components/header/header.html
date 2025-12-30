@@ -1,30 +1,72 @@
 <header
-  class="flex items-center justify-around gap-8 bg-white px-12 py-4 text-black dark:bg-slate-800 dark:text-amber-50"
+  class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 px-4 py-3 backdrop-blur-md sm:px-8 dark:border-slate-700 dark:bg-slate-900/80"
 >
-  <div class="flex cursor-pointer items-center gap-2" routerLink="/">
-    <img class="h-12 w-12" src="logo.png" alt="Logotipo I.E.S. Hermanos Amorós" />
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
+    <div class="flex cursor-pointer items-center gap-2" routerLink="/" (click)="closeMenu()">
+      <img class="h-10 w-10" src="logo.png" alt="Logotipo I.E.S. Hermanos Amorós" />
+      <h1 class="hidden text-xl font-bold text-slate-900 sm:block dark:text-white">
+        Biblioteca Digital
+      </h1>
+    </div>
 
-    <h1 class="text-2xl text-black dark:text-white">Biblioteca Digital</h1>
+    <div class="flex-1">
+      <search-book-component />
+    </div>
+
+    <div class="hidden items-center gap-6 md:flex">
+      <theme-toggle-component />
+
+      @if (!isAuthenticated()) {
+        <button
+          routerLink="/auth/login"
+          class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
+          Iniciar sesión
+        </button>
+      } @else {
+        <a
+          routerLink="/dash"
+          class="text-sm font-medium text-slate-700 hover:text-blue-600 dark:text-slate-200"
+          >Panel de control</a
+        >
+      }
+    </div>
+
+    <button (click)="toggleMenu()" class="block p-2 text-slate-600 md:hidden dark:text-slate-300">
+      @if (isMenuOpen()) {
+        <close-icon />
+      } @else {
+        <menu-icon />
+      }
+    </button>
   </div>
 
-  <search-book-component class="flex-1" />
-
-  <button (click)="toggle()">
-    @if (theme() === 'dark') {
-      <sun-icon class="h-5 w-5 text-yellow-400" />
-    } @else {
-      <moon-icon class="h-5 w-5 text-slate-700 dark:text-slate-200" />
-    }
-  </button>
-
-  @if (!isAuthenticated()) {
-    <button
-      routerLink="/auth/login"
-      class="rounded-lg bg-blue-600 px-2 py-1 text-sm text-white transition-colors duration-200 hover:bg-blue-500"
+  @if (isMenuOpen()) {
+    <div
+      class="animate-in fade-in slide-in-from-top-2 absolute inset-x-0 top-full flex flex-col gap-4 border-b border-slate-200 bg-white p-6 shadow-xl md:hidden dark:border-slate-700 dark:bg-slate-900"
     >
-      Iniciar sesión &#8594;
-    </button>
-  } @else {
-    <a routerLink="/dash" class="text-black hover:underline dark:text-white">Panel de control</a>
+      <div
+        class="flex items-center justify-between border-b border-slate-100 pb-4 dark:border-slate-800"
+      >
+        <span class="text-sm font-semibold text-slate-500">Opciones</span>
+
+        <theme-toggle-component />
+      </div>
+
+      <nav class="flex flex-col gap-4">
+        @if (!isAuthenticated()) {
+          <button
+            routerLink="/auth/login"
+            class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            Iniciar sesión
+          </button>
+        } @else {
+          <a routerLink="/dash" (click)="closeMenu()" class="text-sm text-slate-900"
+            >Panel de control</a
+          >
+        }
+      </nav>
+    </div>
   }
 </header>

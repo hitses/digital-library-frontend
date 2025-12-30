@@ -1,0 +1,7 @@
+<button (click)="toggle()" class="flex items-center text-slate-700 dark:text-slate-200">
+  @if (theme() === 'dark') {
+    <sun-icon />
+  } @else {
+    <moon-icon />
+  }
+</button>
