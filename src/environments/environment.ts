@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'http://production:3000/api',
+  apiUrl: 'https://ha-biblioteca-digital.duckdns.org',
 };
