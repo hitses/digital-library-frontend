@@ -9,7 +9,12 @@ import { RouterLink } from '@angular/router';
   styles: ``,
 })
 export class Footer {
+  date = () => new Date().getFullYear();
   navItems: IFooterNavItem[] = [
+    {
+      label: 'Protección de datos',
+      link: '/gdpr',
+    },
     {
       label: 'Aviso legal',
       link: '/legal',
@@ -17,14 +22,6 @@ export class Footer {
     {
       label: 'Política de privacidad',
       link: '/privacy',
-    },
-    {
-      label: 'Política de cookies',
-      link: '/cookies',
-    },
-    {
-      label: 'Accesibilidad',
-      link: '/accessibility',
     },
   ];
 }

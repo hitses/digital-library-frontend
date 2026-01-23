@@ -12,6 +12,21 @@ export const routes: Routes = [
     loadChildren: () => import('./features/auth/auth.routes').then((r) => r.authRoutes),
   },
   {
+    path: 'gdpr',
+    title: 'Protección de datos | I.E.S. Hermanos Amorós',
+    loadComponent: () => import('./pages/gdpr/gdpr'),
+  },
+  {
+    path: 'legal',
+    title: 'Aviso Legal | I.E.S. Hermanos Amorós',
+    loadComponent: () => import('./pages/legal/legal'),
+  },
+  {
+    path: 'privacy',
+    title: 'Política de privacidad | I.E.S. Hermanos Amorós',
+    loadComponent: () => import('./pages/privacy/privacy'),
+  },
+  {
     path: '',
     title: 'Biblioteca Digital | I.E.S. Hermanos Amorós',
     loadChildren: () => import('./features/books/books.routes').then((r) => r.bookRoutes),
