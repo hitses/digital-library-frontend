@@ -5,10 +5,11 @@ import { Star } from '../../../../core/icons/star/star';
 import { EMAIL_PATTERN } from '../../../../core/patterns';
 import { ReviewService } from '../../service/review';
 import { ToastService } from '../../../../core/services/toast';
+import { ExternalLink } from '../../../../core/icons/external-link/external-link';
 
 @Component({
   selector: 'create-review-form-component',
-  imports: [ReactiveFormsModule, FilledStar, Star],
+  imports: [ReactiveFormsModule, FilledStar, Star, ExternalLink],
   templateUrl: './create-review-form.html',
   styles: ``,
 })
