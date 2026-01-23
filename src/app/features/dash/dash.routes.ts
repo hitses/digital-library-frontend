@@ -8,31 +8,33 @@ export const dashRoutes: Routes = [
     children: [
       {
         path: '',
-        title: 'Dashboard | Inicio',
+        title: 'Biblioteca Digital - Panel de control - Inicio | I.E.S. Hermanos Amorós',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/home/home'),
       },
       {
         path: 'books',
-        title: 'Dashboard | Libros',
+        title: 'Biblioteca Digital - Panel de control - Libros | I.E.S. Hermanos Amorós',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/books/books'),
         children: [
           {
             path: '',
-            title: 'Dashboard | Libros',
+            title: 'Biblioteca Digital - Panel de control - Libros | I.E.S. Hermanos Amorós',
             canActivate: [passwordRequirementGuard],
             loadComponent: () => import('./components/books/all/all'),
           },
           {
             path: 'featured',
-            title: 'Dashboard | Libros destacados',
+            title:
+              'Biblioteca Digital - Panel de control - Libros destacados | I.E.S. Hermanos Amorós',
             canActivate: [passwordRequirementGuard],
             loadComponent: () => import('./components/books/featured/featured'),
           },
           {
             path: 'reviewless',
-            title: 'Dashboard | Libros sin reseñas',
+            title:
+              'Biblioteca Digital - Panel de control - Libros sin reseñas | I.E.S. Hermanos Amorós',
             canActivate: [passwordRequirementGuard],
             loadComponent: () => import('./components/books/reviewless/reviewless'),
           },
@@ -40,51 +42,55 @@ export const dashRoutes: Routes = [
       },
       {
         path: 'books/new',
-        title: 'Dashboard | Añadir libro',
+        title: 'Biblioteca Digital - Panel de control - Añadir libro | I.E.S. Hermanos Amorós',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/books/new-book/new-book'),
       },
       {
         path: 'books/edit/:id',
-        title: 'Dashboard | Editar libro',
+        title: 'Biblioteca Digital - Panel de control - Editar libro | I.E.S. Hermanos Amorós',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/books/edit-book/edit-book'),
       },
       {
         path: 'books/:id',
-        title: 'Dashboard | Libro',
+        title: 'Biblioteca Digital - Panel de control - Libro | I.E.S. Hermanos Amorós',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/books/book/book'),
       },
       {
         path: 'reviews',
-        title: 'Dashboard | Reseñas',
+        title: 'Biblioteca Digital - Panel de control - Reseñas | I.E.S. Hermanos Amorós',
         canActivate: [passwordRequirementGuard],
         loadComponent: () => import('./pages/reviews/reviews'),
       },
       {
         path: 'settings',
-        title: 'Dashboard | Ajustes',
+        title: 'Biblioteca Digital - Panel de control - Ajustes | I.E.S. Hermanos Amorós',
         loadComponent: () => import('./pages/settings/settings'),
         children: [
           {
             path: '',
+            title: 'Biblioteca Digital - Panel de control - Ajustes | I.E.S. Hermanos Amorós',
             loadComponent: () => import('./components/settings/home/home'),
           },
           {
             path: 'change-password',
-            title: 'Dashboard | Cambiar Contraseña',
+            title:
+              'Biblioteca Digital - Panel de control - Cambiar Contraseña | I.E.S. Hermanos Amorós',
             loadComponent: () => import('./components/settings/change-password/change-password'),
           },
           {
             path: 'manage-admins',
-            title: 'Dashboard | Gestionar administradores',
+            title:
+              'Biblioteca Digital - Panel de control - Gestionar administradores | I.E.S. Hermanos Amorós',
             canActivate: [passwordRequirementGuard],
             loadComponent: () => import('./components/settings/manage-admins/manage-admins'),
           },
           {
             path: 'manage-admins/create',
-            title: 'Dashboard | Gestionar administradores',
+            title:
+              'Biblioteca Digital - Panel de control - Crear administrador | I.E.S. Hermanos Amorós',
             canActivate: [passwordRequirementGuard],
             loadComponent: () => import('./components/settings/create-admin/create-admin'),
           },

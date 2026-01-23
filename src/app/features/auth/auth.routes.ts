@@ -7,10 +7,12 @@ export const authRoutes: Routes = [
     children: [
       {
         path: 'login',
+        title: 'Biblioteca Digital - Iniciar Sesión | I.E.S. Biblioteca Digital',
         loadComponent: () => import('./pages/login/login'),
       },
       {
         path: 'forgot',
+        title: 'Biblioteca Digital - Recuperar Contraseña | I.E.S. Biblioteca Digital',
         loadComponent: () => import('./pages/forgot/forgot'),
       },
     ],

@@ -13,6 +13,7 @@ export const routes: Routes = [
   },
   {
     path: '',
+    title: 'Biblioteca Digital | I.E.S. Hermanos Amorós',
     loadChildren: () => import('./features/books/books.routes').then((r) => r.bookRoutes),
   },
   { path: '**', redirectTo: '' },
