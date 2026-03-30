@@ -1,59 +1,52 @@
-# DigitalLibrary
+# Digital Library Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+Este proyecto es el frontend de la Digital Library, desarrollado con [Angular](https://angular.io/).
 
-## Development server
+## Requisitos previos
 
-To start a local development server, run:
+- [Node.js](https://nodejs.org/) (recomendado v18 o superior)
+- [npm](https://www.npmjs.com/) (se instala junto con Node.js)
 
-```bash
-ng serve
-```
+## Pasos para ejecutar el proyecto en local
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. **Clona el repositorio y accede a la carpeta del frontend:**
 
-## Code scaffolding
+   ```bash
+   git clone <url-del-repositorio>
+   cd digital-library-frontend
+   ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+2. **Instala las dependencias:**
 
-```bash
-ng generate component component-name
-```
+   ```bash
+   npm install
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+3. **Arranca la aplicación en modo desarrollo:**
 
-```bash
-ng generate --help
-```
+   ```bash
+   npm start
+   ```
 
-## Building
+   O bien, si prefieres que se abra automáticamente en el navegador:
 
-To build the project run:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-ng build
-```
+   La aplicación estará disponible en `http://localhost:4200`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Scripts útiles
 
-## Running unit tests
+- `npm start`: Inicia la aplicación en modo desarrollo.
+- `npm run dev`: Inicia la aplicación y abre el navegador automáticamente.
+- `npm run build`: Compila la aplicación para producción.
+- `npm test`: Ejecuta los tests.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Notas
 
-```bash
-ng test
-```
+- Asegúrate de que el backend esté ejecutándose en `http://localhost:3000` para el funcionamiento completo.
 
-## Running end-to-end tests
+## Contacto
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para dudas o problemas, contacta con el responsable del proyecto jerogassan@gmail.com
