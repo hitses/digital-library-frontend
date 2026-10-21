@@ -3,13 +3,17 @@
     [title]="'Destacados'"
     [books]="featuredBooks()"
     [bookType]="'destacados'"
+    [loading]="loadingFeatured()"
   />
 
-  <books-section-component [title]="'Nuevos'" [books]="newBooks()" [bookType]="'nuevos'" />
+  <books-section-component [title]="'Nuevos'" [books]="newBooks()" [bookType]="'nuevos'"
+    [loading]="loadingNew()"
+  />
 
   <books-section-component
     [title]="'Populares'"
     [books]="popularBooks()"
     [bookType]="'populares'"
+    [loading]="loadingPopular()"
   />
 </main>

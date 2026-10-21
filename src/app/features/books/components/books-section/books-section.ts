@@ -13,4 +13,5 @@ export class BooksSection {
   title = input.required<string>();
   books = input.required<IBook[]>();
   bookType = input.required<string>();
+  loading = input<boolean>(false);
 }

@@ -16,6 +16,10 @@ export default class Home implements OnInit {
   newBooks: WritableSignal<IBook[]> = this.bookService.newBooks;
   popularBooks: WritableSignal<IBook[]> = this.bookService.popularBooks;
 
+  loadingFeatured = this.bookService.loadingFeatured;
+  loadingNew = this.bookService.loadingNew;
+  loadingPopular = this.bookService.loadingPopular;
+
   ngOnInit(): void {
     this.bookService.getFeaturedBooks();
     this.bookService.getNewBooks();

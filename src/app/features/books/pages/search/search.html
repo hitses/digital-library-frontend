@@ -14,10 +14,17 @@
       ></div>
       <div class="text-gray-600 dark:text-slate-400">Buscando libros</div>
     </div>
+  } @else if (searchError()) {
+    <div class="py-12 text-center">
+      <p class="text-lg text-gray-600 dark:text-slate-400">No hay libros disponibles ahora mismo.</p>
+      <a routerLink="/" class="mt-4 inline-block cursor-pointer text-blue-600 hover:underline">
+        Volver al inicio
+      </a>
+    </div>
   } @else if (searchResults(); as results) {
     @if (results.total === 0) {
       <div class="py-12 text-center">
-        <p class="text-lg text-gray-600 dark:text-slate-400">No se encontraron libros</p>
+        <p class="text-lg text-gray-600 dark:text-slate-400">No hay libros disponibles ahora mismo.</p>
         <a routerLink="/" class="mt-4 inline-block cursor-pointer text-blue-600 hover:underline">
           Volver al inicio
         </a>
