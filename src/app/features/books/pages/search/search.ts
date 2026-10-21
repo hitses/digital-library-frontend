@@ -17,6 +17,7 @@ export default class Search implements OnDestroy {
   private readonly router = inject(Router);
 
   searchResults = this.bookService.searchResults;
+  searchError = this.bookService.searchError;
   currentPage = 1;
 
   constructor() {

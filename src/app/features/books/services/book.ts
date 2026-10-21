@@ -13,38 +13,57 @@ export class BookService {
   featuredBooks = signal<IBook[]>([]);
   newBooks = signal<IBook[]>([]);
   popularBooks = signal<IBook[]>([]);
+  loadingFeatured = signal<boolean>(true);
+  loadingNew = signal<boolean>(true);
+  loadingPopular = signal<boolean>(true);
   book = signal<IBook | null>(null);
   searchResults = signal<ISearchResponse<IBook> | null>(null);
   isSearching = signal<boolean>(false);
+  searchError = signal<boolean>(false);
 
   private readonly http = inject(HttpClient);
 
   getFeaturedBooks(): void {
+    this.loadingFeatured.set(true);
     this.http.get<IBook[]>(`${this.apiUrl}/featured`).subscribe({
-      next: (books) => this.featuredBooks.set(books),
+      next: (books) => {
+        this.featuredBooks.set(books);
+        this.loadingFeatured.set(false);
+      },
       error: (err) => {
         console.error(err);
-        return this.featuredBooks.set([]);
+        this.featuredBooks.set([]);
+        this.loadingFeatured.set(false);
       },
     });
   }
 
   getNewBooks(): void {
+    this.loadingNew.set(true);
     this.http.get<IBook[]>(`${this.apiUrl}/new`).subscribe({
-      next: (books) => this.newBooks.set(books),
+      next: (books) => {
+        this.newBooks.set(books);
+        this.loadingNew.set(false);
+      },
       error: (err) => {
         console.error(err);
-        return this.newBooks.set([]);
+        this.newBooks.set([]);
+        this.loadingNew.set(false);
       },
     });
   }
 
   getPopularBooks(): void {
+    this.loadingPopular.set(true);
     this.http.get<IBook[]>(`${this.apiUrl}/popular`).subscribe({
-      next: (books) => this.popularBooks.set(books),
+      next: (books) => {
+        this.popularBooks.set(books);
+        this.loadingPopular.set(false);
+      },
       error: (err) => {
         console.error(err);
-        return this.popularBooks.set([]);
+        this.popularBooks.set([]);
+        this.loadingPopular.set(false);
       },
     });
   }
@@ -61,6 +80,7 @@ export class BookService {
 
   searchBooks(query: string, page = 1, limit = 8): void {
     this.isSearching.set(true);
+    this.searchError.set(false);
 
     const params = new HttpParams()
       .set('q', query)
@@ -74,6 +94,7 @@ export class BookService {
       },
       error: (error) => {
         console.error(error);
+        this.searchError.set(true);
         this.isSearching.set(false);
       },
     });
